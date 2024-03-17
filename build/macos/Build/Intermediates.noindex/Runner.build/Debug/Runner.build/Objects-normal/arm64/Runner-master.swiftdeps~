@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "23d91a23503160373006450e7c039dc1c96022342e84105e92e39a1b01fd0c7f"
+build_start_time: [1710319883, 254265000]
+build_end_time: [1710319883, 283580000]
+inputs:
+  "/Users/isaacng/Developer/StayIndie/stay_indie/macos/Flutter/GeneratedPluginRegistrant.swift": !private [1710319865, 981855201]
+  "/Users/isaacng/Developer/StayIndie/stay_indie/macos/Runner/AppDelegate.swift": !private [1703940544, 0]
+  "/Users/isaacng/Developer/StayIndie/stay_indie/macos/Runner/MainFlutterWindow.swift": !private [1703940544, 0]
