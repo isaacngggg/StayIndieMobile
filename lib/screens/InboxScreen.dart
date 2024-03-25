@@ -10,6 +10,7 @@ class InboxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(pageIndex: 3),
       appBar: AppBar(
         title: Text('Inbox'),
         actions: <Widget>[
@@ -51,7 +52,6 @@ class InboxScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(pageIndex: 3),
     );
   } // Add this closing brace
 }

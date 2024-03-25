@@ -9,6 +9,7 @@ import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/widgets/ProjectTile.dart';
 import 'package:stay_indie/objects/SocialMetric.dart';
 import 'package:stay_indie/widgets/BottomNavBar.dart';
+import 'package:stay_indie/widgets/SocialMetricPill.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -124,7 +125,7 @@ class ProfileScreen extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 Container(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     color: kBackgroundColour,
                     borderRadius: BorderRadius.only(
@@ -159,6 +160,7 @@ class ProfileScreen extends StatelessWidget {
                             SizedBox(
                               height: 36,
                               child: ListView(
+                                  padding: EdgeInsets.all(0),
                                   scrollDirection: Axis.horizontal,
                                   children: [
                                     for (var socialMetric in socialMetrics) ...[
@@ -188,9 +190,10 @@ class ProfileScreen extends StatelessWidget {
                                   child: TabBarView(
                                     children: [
                                       Container(
-                                        child: Column(
+                                        child: ListView(
+                                          padding: EdgeInsets.all(0),
                                           children: [
-                                            SizedBox(height: 20),
+                                            SizedBox(height: 10),
                                             MyJourneyWidget(),
                                           ],
                                         ),
@@ -204,24 +207,23 @@ class ProfileScreen extends StatelessWidget {
                                           Expanded(
                                             child: SizedBox(
                                                 child: ListView(
-                                                    padding: EdgeInsets.all(10),
+                                                    padding: EdgeInsets.all(0),
                                                     shrinkWrap: true,
                                                     scrollDirection:
                                                         Axis.vertical,
                                                     children: [
                                                   for (var project
                                                       in userProjects) ...[
+                                                    SizedBox(height: 10),
                                                     ProjectTile(
                                                         project: project),
-                                                    SizedBox(height: 10),
                                                   ]
                                                 ])),
                                           ),
-                                          SizedBox(height: 20),
                                         ],
                                       ),
-                                      Container(
-                                        child: Text('Activity'),
+                                      Center(
+                                        child: Text('No Activities'),
                                       ),
                                     ],
                                   ),
@@ -236,39 +238,6 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class SocialMetricPill extends StatelessWidget {
-  final SocialMetric socialMetric;
-
-  const SocialMetricPill({
-    required this.socialMetric,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color: kAccentColour10,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Row(
-        children: [
-          SizedBox(width: 2),
-          CircleAvatar(
-            radius: 12,
-            backgroundColor: Colors.transparent,
-            child: Image.asset('assets/socialIcons/${socialMetric.name}.png'),
-          ),
-          SizedBox(width: 5),
-          Text('${socialMetric.value} ${socialMetric.unit}', style: kCaption1),
-          SizedBox(width: 10),
         ],
       ),
     );

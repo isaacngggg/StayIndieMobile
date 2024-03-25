@@ -30,17 +30,39 @@ class BottomNavBar extends StatelessWidget {
       ],
       onDestinationSelected: (index) {
         if (index == 0) {
-          Navigator.pushNamed(context, HomeScreen.id);
+          Navigator.pushReplacement(
+              context, NoAnimationRoute(builder: (context) => HomeScreen()));
         } else if (index == 1) {
-          Navigator.pushNamed(context, SearchScreen.id);
+          Navigator.pushReplacement(
+              context, NoAnimationRoute(builder: (context) => SearchScreen()));
         } else if (index == 2) {
-          Navigator.pushNamed(context, AddScreen.id);
+          Navigator.pushReplacement(
+              context, NoAnimationRoute(builder: (context) => AddScreen()));
         } else if (index == 3) {
-          Navigator.pushNamed(context, InboxScreen.id);
+          Navigator.pushReplacement(
+              context, NoAnimationRoute(builder: (context) => InboxScreen()));
         } else if (index == 4) {
-          Navigator.pushNamed(context, ProfileScreen.id);
+          Navigator.pushReplacement(
+              context, NoAnimationRoute(builder: (context) => ProfileScreen()));
         }
       },
     );
+  }
+}
+
+class NoAnimationRoute<T> extends MaterialPageRoute<T> {
+  NoAnimationRoute({
+    required WidgetBuilder builder,
+    RouteSettings? settings,
+  }) : super(builder: builder, settings: settings);
+
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return child;
   }
 }

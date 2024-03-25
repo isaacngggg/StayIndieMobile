@@ -12,7 +12,7 @@ class ConnectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: -50,
+      top: -60,
       right: 30,
       child: ClipRect(
         child: BackdropFilter(

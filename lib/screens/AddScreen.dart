@@ -10,6 +10,7 @@ class AddScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(pageIndex: 2),
       appBar: AppBar(
         title: Text('Stay Indie'),
         actions: <Widget>[
@@ -24,7 +25,6 @@ class AddScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(pageIndex: 2),
       body: Center(
           child: ListView(
         children: [

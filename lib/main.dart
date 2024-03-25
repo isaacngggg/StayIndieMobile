@@ -4,6 +4,7 @@ import 'package:stay_indie/screens/InboxScreen.dart';
 import 'package:stay_indie/screens/ConnectionsScreen.dart';
 import 'package:stay_indie/screens/OpportunitiesScreen.dart';
 import 'package:stay_indie/screens/HomeScreen.dart';
+import 'package:stay_indie/screens/SearchScreen.dart';
 import 'package:stay_indie/screens/profilescreen.dart';
 import 'package:stay_indie/screens/story_screen.dart';
 import 'package:stay_indie/screens/LoginScreen.dart';
@@ -49,6 +50,7 @@ class MainApp extends StatelessWidget {
         IndustryScreen.id: (context) => IndustryScreen(),
         ChatScreen.id: (context) => ChatScreen(),
         InboxScreen.id: (context) => InboxScreen(),
+        SearchScreen.id: (context) => SearchScreen(),
       },
     );
   }
