@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:stay_indie/screens/add_screen.dart';
-import 'package:stay_indie/screens/connectionsscreen.dart';
-import 'package:stay_indie/screens/opportunities_screen.dart';
-import 'package:stay_indie/screens/homescreen.dart';
+import 'package:stay_indie/screens/AddScreen.dart';
+import 'package:stay_indie/screens/InboxScreen.dart';
+import 'package:stay_indie/screens/ConnectionsScreen.dart';
+import 'package:stay_indie/screens/OpportunitiesScreen.dart';
+import 'package:stay_indie/screens/HomeScreen.dart';
 import 'package:stay_indie/screens/profilescreen.dart';
 import 'package:stay_indie/screens/story_screen.dart';
-import 'package:stay_indie/screens/loginscreen.dart';
-import 'package:stay_indie/screens/signupscreen.dart';
+import 'package:stay_indie/screens/LoginScreen.dart';
+import 'package:stay_indie/screens/SignUpScreen.dart';
+import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:stay_indie/screens/ChatScreen.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Supabase.initialize(
     url: 'https://egawjjsxibcluqdgfyvd.supabase.co',
     anonKey:
@@ -25,7 +30,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
-      initialRoute: ProfileScreen.id, // Set the initial route to LoginScreen
+      initialRoute: InboxScreen.id, // Set the initial route to LoginScreen
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
         ProfileScreen.id: (context) => ProfileScreen(),
@@ -41,6 +46,9 @@ class MainApp extends StatelessWidget {
             ),
         LoginScreen.id: (context) => LoginScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
+        IndustryScreen.id: (context) => IndustryScreen(),
+        ChatScreen.id: (context) => ChatScreen(),
+        InboxScreen.id: (context) => InboxScreen(),
       },
     );
   }

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:stay_indie/widgets/navbar.dart';
-import 'package:stay_indie/fields/search_bar.dart';
 
-class AddScreen extends StatelessWidget {
-  const AddScreen({super.key});
-  static String id = 'add_screen';
+import 'package:stay_indie/fields/search_bar.dart';
+import 'package:stay_indie/widgets/BottomNavBar.dart';
+import 'package:stay_indie/widgets/profile_card.dart';
+
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
+  static String id = 'searchscreen';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(pageIndex: 1),
       appBar: AppBar(
         title: Text('Stay Indie'),
         actions: <Widget>[
@@ -25,12 +28,14 @@ class AddScreen extends StatelessWidget {
       ),
       body: Center(
           child: ListView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.all(10),
         children: [
-          Text('Hello World'),
-          Text('Hello World'),
+          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
+          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
+          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
         ],
       )),
-      bottomNavigationBar: NavBar(),
     );
   }
 }

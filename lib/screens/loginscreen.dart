@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/fields/PrimaryTextField.dart';
-import 'signupscreen.dart';
+import 'SignUpScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 class LoginForm extends StatelessWidget {
-  String? userEmail;
-  String? userPassword;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   LoginForm({
     super.key,
@@ -67,23 +67,28 @@ class LoginForm extends StatelessWidget {
           ),
           SizedBox(height: 16.0),
           PrimaryTextField(
-              labelText: 'Email ',
-              onChanged: (value) {
-                userEmail = value;
-                print(value);
-              }),
+            controller: emailController,
+            labelText: 'Email ',
+          ),
           SizedBox(height: 16.0),
           PrimaryTextField(
-              labelText: 'Password',
-              obscureText: true,
-              onChanged: (value) {
-                userEmail = value;
-                print(value);
-              }),
+            controller: passwordController,
+            labelText: 'Password',
+            obscureText: true,
+          ),
           SizedBox(height: 16.0),
           PrimaryButton(
             text: "Login",
-            onPressed: () => print("login"),
+            onPressed: () async {
+              final authResponse = await supabase.auth.signInWithPassword(
+                  email: emailController.text,
+                  password: passwordController.text);
+              print(authResponse.toString());
+
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(authResponse.user!.email!),
+              ));
+            },
             buttonType: PrimaryButtonType.defaultButton,
           ),
           SizedBox(height: 5.0),

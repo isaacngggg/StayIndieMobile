@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
-import 'loginscreen.dart';
+import 'LoginScreen.dart';
 import 'package:stay_indie/fields/PrimaryTextField.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:stay_indie/constants.dart';
+import 'dart:async';
 
 class SignUpScreen extends StatelessWidget {
   static const String id = 'signupscreen'; // Add page id here
   String? userEmail;
   String? userPassword;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,24 +32,26 @@ class SignUpScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             PrimaryTextField(
-                labelText: 'Email ',
-                onChanged: (value) {
-                  userEmail = value;
-                  print(value);
-                }),
+              controller: emailController,
+              labelText: 'Email ',
+            ),
             SizedBox(height: 16.0),
             PrimaryTextField(
-                labelText: 'Password',
-                obscureText: true,
-                onChanged: (value) {
-                  userEmail = value;
-                  print(value);
-                }),
+              controller: passwordController,
+              labelText: 'Password',
+              obscureText: true,
+            ),
             SizedBox(height: 16.0),
             PrimaryButton(
               text: "Sign Up",
-              onPressed: () {
-                print("Sign Up");
+              onPressed: () async {
+                final authResponse = await supabase.auth.signUp(
+                    email: emailController.text,
+                    password: passwordController.text);
+
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(authResponse.user!.email!),
+                ));
               },
               buttonType: PrimaryButtonType.defaultButton,
             ),

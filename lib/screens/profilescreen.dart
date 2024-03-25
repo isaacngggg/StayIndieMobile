@@ -1,38 +1,55 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:stay_indie/buttons/PrimaryButton.dart';
-import 'package:stay_indie/buttons/PrimarySmallButton.dart';
+import 'package:stay_indie/objects/Project.dart';
 import 'package:stay_indie/widgets/MyJourneyWidget.dart';
 import 'package:stay_indie/widgets/ConnectionWidget.dart';
 import 'package:stay_indie/constants.dart';
+import 'package:stay_indie/widgets/ProjectTile.dart';
+import 'package:stay_indie/objects/SocialMetric.dart';
+import 'package:stay_indie/widgets/BottomNavBar.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
   static String id = 'profilescreen';
 
-  final List<Map> userJourneyItems = [
-    {
-      'title': 'My first gig',
-      'date': '2021-10-10',
-      'description': 'I got my first gig today!',
-    },
-    {
-      'title': 'My first gig',
-      'date': '2021-10-10',
-      'description': 'I got my first gig today!',
-    },
-    {
-      'title': 'My first gig',
-      'date': '2021-10-10',
-      'description': 'I got my first gig today!',
-    },
+  List userProjects = [
+    Project(
+        title: 'Heading Styles to GoodNotes5',
+        description:
+            'A quicker way to navigate through notes and generate table of content',
+        date: '10/2/2023',
+        collaborators: ['GoodNotes', '2 others'],
+        tags: ['Design', 'Productivity']),
+    Project(
+        title: 'Heading Styles to GoodNotes5',
+        description:
+            'A quicker way to navigate through notes and generate table of content',
+        date: '10/2/2023',
+        collaborators: ['GoodNotes', '2 others'],
+        tags: ['Design', 'Productivity']),
+    Project(
+        title: 'Heading Styles to GoodNotes5',
+        description:
+            'A quicker way to navigate through notes and generate table of content',
+        date: '10/2/2023',
+        collaborators: ['GoodNotes', '2 others'],
+        tags: ['Design', 'Productivity']),
+  ];
+
+  List socialMetrics = [
+    SocialMetric(name: 'facebook', value: '14k', unit: 'followers'),
+    SocialMetric(name: 'instagram', value: '14k', unit: 'followers'),
+    SocialMetric(name: 'twitter', value: '14k', unit: 'followers'),
+    SocialMetric(name: 'facebook', value: '14k', unit: 'followers'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColour,
+      bottomNavigationBar: BottomNavBar(pageIndex: 4),
       body: Stack(
         children: [
           // Profile Image
@@ -134,10 +151,23 @@ class ProfileScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Text('Product Designer', style: kHeading3),
                             Text('London, UK', style: kBody2),
+                            SizedBox(height: 10),
+                            SizedBox(
+                              height: 36,
+                              child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    for (var socialMetric in socialMetrics) ...[
+                                      SocialMetricPill(
+                                          socialMetric: socialMetric),
+                                      SizedBox(width: 5),
+                                    ]
+                                  ]),
+                            ),
                           ],
                         ),
                       ),
@@ -165,39 +195,31 @@ class ProfileScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      Container(
-                                          child: Column(
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.stretch,
                                         children: [
-                                          SizedBox(height: 20),
-                                          Container(
-                                            padding: EdgeInsets.all(15),
-                                            decoration: kOutlineBorder,
-                                            child: Row(
-                                              children: [
-                                                Flexible(
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                          Expanded(
+                                            child: SizedBox(
+                                                child: ListView(
+                                                    padding: EdgeInsets.all(10),
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
                                                     children: [
-                                                      Text(
-                                                        'Heading Styles to GoodNotes5',
-                                                        style: kHeading3,
-                                                      ),
-                                                      Text(
-                                                        'A quicker way to navigate through notes and generate table of content',
-                                                        style: kBody2,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )
+                                                  for (var project
+                                                      in userProjects) ...[
+                                                    ProjectTile(
+                                                        project: project),
+                                                    SizedBox(height: 10),
+                                                  ]
+                                                ])),
+                                          ),
+                                          SizedBox(height: 20),
                                         ],
-                                      )),
+                                      ),
                                       Container(
                                         child: Text('Activity'),
                                       ),
@@ -214,6 +236,39 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class SocialMetricPill extends StatelessWidget {
+  final SocialMetric socialMetric;
+
+  const SocialMetricPill({
+    required this.socialMetric,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: kAccentColour10,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(
+        children: [
+          SizedBox(width: 2),
+          CircleAvatar(
+            radius: 12,
+            backgroundColor: Colors.transparent,
+            child: Image.asset('assets/socialIcons/${socialMetric.name}.png'),
+          ),
+          SizedBox(width: 5),
+          Text('${socialMetric.value} ${socialMetric.unit}', style: kCaption1),
+          SizedBox(width: 10),
         ],
       ),
     );

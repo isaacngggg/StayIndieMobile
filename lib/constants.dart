@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 const kIsWeb = false;
+
+final supabase = Supabase.instance.client;
 
 Color kPrimaryColour = Colors.grey.shade900;
 
@@ -14,6 +17,11 @@ Color kPrimaryColour20 = Colors.grey.shade200;
 Color kBackgroundColour = Colors.white;
 
 Color kAccentColour = Colors.purple.shade600;
+Color kAccentColour20 = Colors.purple.shade200;
+Color kAccentColour10 = Colors.purple.shade100.withAlpha(50);
+
+const preloader =
+    Center(child: CircularProgressIndicator(color: Colors.deepPurpleAccent));
 
 TextStyle kButtonTextStyle = TextStyle(
   fontSize: 20,
@@ -70,4 +78,29 @@ BoxDecoration kOutlineBorder = BoxDecoration(
   borderRadius: BorderRadius.all(Radius.circular(10)),
 );
 
+BoxDecoration kSelectedOutlineBorder = BoxDecoration(
+  border: kOutlineBold,
+  borderRadius: BorderRadius.all(Radius.circular(10)),
+);
+
 Border kOutlineLight = Border.all(color: kPrimaryColour20, width: 1);
+
+Border kOutlineBold = Border.all(color: kPrimaryColour, width: 2);
+
+extension ShowSnackBar on BuildContext {
+  /// Displays a basic snackbar
+  void showSnackBar({
+    required String message,
+    Color backgroundColor = Colors.white,
+  }) {
+    ScaffoldMessenger.of(this).showSnackBar(SnackBar(
+      content: Text(message),
+      backgroundColor: backgroundColor,
+    ));
+  }
+
+  /// Displays a red snackbar indicating error
+  void showErrorSnackBar({required String message}) {
+    showSnackBar(message: message, backgroundColor: Colors.red);
+  }
+}

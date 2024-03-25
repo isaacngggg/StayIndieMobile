@@ -3,19 +3,21 @@ import 'package:stay_indie/constants.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String labelText;
-  final Function onChanged;
+  final Function? onChanged;
   final bool obscureText; // Add the obscureText option
+  final TextEditingController? controller;
 
   const PrimaryTextField({
     required this.labelText,
-    required this.onChanged,
+    this.onChanged,
+    this.controller,
     this.obscureText = false, // Set the default value to false
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      onChanged: (value) => onChanged(value),
+      controller: controller,
       obscureText: obscureText, // Pass the obscureText value to the TextField
       decoration: InputDecoration(
         labelText: labelText,

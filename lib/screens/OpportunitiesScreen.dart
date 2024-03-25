@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stay_indie/widgets/navbar.dart';
+
 import 'package:stay_indie/fields/search_bar.dart';
 
 class OpportunityScreen extends StatelessWidget {
@@ -30,7 +30,6 @@ class OpportunityScreen extends StatelessWidget {
           Text('Hello World'),
         ],
       )),
-      bottomNavigationBar: NavBar(),
     );
   }
 }

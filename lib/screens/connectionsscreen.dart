@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stay_indie/widgets/navbar.dart';
+
 import 'package:stay_indie/fields/search_bar.dart';
 
 import 'package:stay_indie/widgets/profile_card.dart';
@@ -35,7 +35,6 @@ class ConnectionsScreen extends StatelessWidget {
           ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
         ],
       )),
-      bottomNavigationBar: NavBar(),
     );
   }
 }

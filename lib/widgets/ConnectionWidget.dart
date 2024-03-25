@@ -32,11 +32,11 @@ class ConnectionWidget extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 14.0,
-                      backgroundImage: AssetImage('assets/amazon.jpeg'),
+                      backgroundImage: AssetImage('assets/amazon.png'),
                     ),
                     CircleAvatar(
                       radius: 14.0,
-                      backgroundImage: AssetImage('assets/amazon.jpeg'),
+                      backgroundImage: AssetImage('assets/amazon.png'),
                     ),
                   ],
                 ),
