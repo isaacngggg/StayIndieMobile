@@ -1,15 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stay_indie/constants.dart';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:stay_indie/objects/Project.dart';
 import 'package:stay_indie/widgets/MyJourneyWidget.dart';
 import 'package:stay_indie/widgets/ConnectionWidget.dart';
-import 'package:stay_indie/constants.dart';
+
 import 'package:stay_indie/widgets/ProjectTile.dart';
 import 'package:stay_indie/objects/SocialMetric.dart';
 import 'package:stay_indie/widgets/BottomNavBar.dart';
 import 'package:stay_indie/widgets/SocialMetricPill.dart';
+
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:stay_indie/modals/SettingsModal.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -76,13 +82,32 @@ class ProfileScreen extends StatelessWidget {
                       alignment: Alignment.topCenter),
                 ),
                 Positioned(
-                  top: 20,
-                  left: 20,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                  top: 50,
+                  right: 20,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.share,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            showCupertinoModalBottomSheet(
+                                expand: false,
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                builder: (context) => SettingsModal());
+                          },
+                          icon: Icon(
+                            Icons.settings,
+                            color: Colors.white,
+                          )),
+                    ],
                   ),
                 ),
                 Positioned(

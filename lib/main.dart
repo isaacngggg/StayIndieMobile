@@ -5,6 +5,7 @@ import 'package:stay_indie/screens/ConnectionsScreen.dart';
 import 'package:stay_indie/screens/OpportunitiesScreen.dart';
 import 'package:stay_indie/screens/HomeScreen.dart';
 import 'package:stay_indie/screens/SearchScreen.dart';
+import 'package:stay_indie/screens/SplashScreen.dart';
 import 'package:stay_indie/screens/profilescreen.dart';
 import 'package:stay_indie/screens/story_screen.dart';
 import 'package:stay_indie/screens/LoginScreen.dart';
@@ -12,6 +13,8 @@ import 'package:stay_indie/screens/SignUpScreen.dart';
 import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stay_indie/screens/ChatScreen.dart';
+import 'package:stay_indie/screens/testLoginPage.dart';
+import 'package:stay_indie/screens/testRegisterPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +34,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
-      initialRoute: InboxScreen.id, // Set the initial route to LoginScreen
+      initialRoute: RegisterPage.id, // Set the initial route to LoginScreen
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
         ProfileScreen.id: (context) => ProfileScreen(),
@@ -51,6 +54,9 @@ class MainApp extends StatelessWidget {
         ChatScreen.id: (context) => ChatScreen(),
         InboxScreen.id: (context) => InboxScreen(),
         SearchScreen.id: (context) => SearchScreen(),
+        SplashScreen.id: (context) => SplashScreen(),
+        LoginPage.id: (context) => LoginPage(),
+        RegisterPage.id: (context) => RegisterPage(isRegistering: false),
       },
     );
   }

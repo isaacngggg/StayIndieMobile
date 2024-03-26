@@ -44,7 +44,7 @@ class PrimaryButton extends StatelessWidget {
         overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour80),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
         ),
       ),
@@ -64,19 +64,19 @@ class PrimaryButton extends StatelessWidget {
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
           EdgeInsets.symmetric(vertical: 20.0),
         ),
-        foregroundColor: MaterialStateProperty.all<Color>(kPrimaryColour),
+        foregroundColor: MaterialStateProperty.all<Color>(kPrimaryColour70),
         backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
         overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour80),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
         ),
       ),
       child: Container(
         child: Text(
           text,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
         ),
       ),
     );
@@ -93,7 +93,7 @@ class PrimaryButton extends StatelessWidget {
         overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour20),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
         ),
       ),

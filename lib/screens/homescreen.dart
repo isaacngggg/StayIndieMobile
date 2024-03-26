@@ -9,7 +9,7 @@ import 'package:stay_indie/widgets/TopAppBar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  static String id = 'homescreen';
+  static String id = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +28,8 @@ class HomeScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavBar(pageIndex: 0),
       body: Center(
-          child: ListView(
-        children: [
-          Text('Hello World'),
-          Text('Hello World'),
-        ],
-      )),
+        child: Text('NO CONTENT YET!'),
+      ),
     );
   }
 }

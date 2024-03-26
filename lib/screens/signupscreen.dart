@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
+import 'package:stay_indie/screens/HomeScreen.dart';
 import 'LoginScreen.dart';
 import 'package:stay_indie/fields/PrimaryTextField.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -52,6 +53,7 @@ class SignUpScreen extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(authResponse.user!.email!),
                 ));
+                Navigator.pushReplacementNamed(context, HomeScreen.id);
               },
               buttonType: PrimaryButtonType.defaultButton,
             ),

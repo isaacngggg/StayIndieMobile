@@ -4,6 +4,7 @@ import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/fields/PrimaryTextField.dart';
 import 'SignUpScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:stay_indie/screens/HomeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginscreen';
@@ -88,12 +89,14 @@ class LoginForm extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(authResponse.user!.email!),
               ));
+              Navigator.pushReplacementNamed(context, HomeScreen.id);
             },
             buttonType: PrimaryButtonType.defaultButton,
           ),
           SizedBox(height: 5.0),
           PrimaryButton(
             text: "Sign Up Instead",
+            buttonType: PrimaryButtonType.textButton,
             onPressed: () {
               Navigator.pushReplacement(
                   context,
@@ -103,7 +106,6 @@ class LoginForm extends StatelessWidget {
                     transitionDuration: Duration(seconds: 0),
                   ));
             },
-            buttonType: PrimaryButtonType.textButton,
           ),
         ],
       ),

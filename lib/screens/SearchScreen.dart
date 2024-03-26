@@ -13,29 +13,43 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomNavBar(pageIndex: 1),
       appBar: AppBar(
-        title: Text('Stay Indie'),
+        title: Text('Search'),
         actions: <Widget>[
           SizedBox(
             width: 10,
           ),
-          TopSearchBar(),
           IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
-          IconButton(icon: Icon(Icons.chat_bubble_rounded), onPressed: () {}),
           SizedBox(
             width: 10,
           ),
         ],
       ),
-      body: Center(
-          child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.all(10),
-        children: [
-          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-        ],
-      )),
+      body: Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TopSearchBar(),
+            SizedBox(
+              height: 300,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.all(10),
+                children: [
+                  ProfileCard(
+                      'Isaac Ng', 'Product Manager', 'American Express'),
+                  ProfileCard(
+                      'Isaac Ng', 'Product Manager', 'American Express'),
+                  ProfileCard(
+                      'Isaac Ng', 'Product Manager', 'American Express'),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 200,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
