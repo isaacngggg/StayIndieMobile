@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:stay_indie/fields/search_bar.dart';
 
-import 'package:stay_indie/widgets/profile_card.dart';
+import 'package:stay_indie/widgets/profile/profile_card.dart';
 
 class ConnectionsScreen extends StatelessWidget {
   const ConnectionsScreen({super.key});

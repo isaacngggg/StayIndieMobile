@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		/N1BwMutw+rHnaUr6jIqq7YFsLY=
+		URZ9Tz+xK5P7tJ3DEEeqhEO5P+Q=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		J6ATCsu1pqXo8RCYsZt4L3A+ye4=
+		2oCVdFzMiLRKYHrbXpStoDAJTK8=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		/+jlW10nfVn6ZQJKQxcLflG3Kp0=
+		BYvKeYBYKF5Qo8scuwsyRPVPIL8=
 		</data>
 		<key>flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
 		<data>
@@ -59,6 +59,10 @@
 		<key>flutter_assets/assets/image3.png</key>
 		<data>
 		lUUsd03dS1PWDRMPUC4OElppvSk=
+		</data>
+		<key>flutter_assets/assets/marias_profile.png</key>
+		<data>
+		0JTHl43he5JOyes0HM89cr5KCaE=
 		</data>
 		<key>flutter_assets/assets/music.png</key>
 		<data>
@@ -114,7 +118,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		H80JFthllHJkhb0aqzDzn4kDIWg=
+		n9y3+VAxffZMzfjhivJo3tgON6E=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -131,14 +135,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7LUbDWJUxe1HBhCzOfm9agPAKTVlyRaittO5XfR6L+o=
+			G4piK9/W1ijm5RSk4gR8x1dx2l9Ogms7vEWy1OipGLc=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			O9QGjuD9H/2qJCaHNEpKsf7VTxUdrXv5jGjR88r2VwE=
+			Y1Q2R93tEyaL0AXAKNkBFD2l1Hww9E1Irxz1zGnDOHQ=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -152,7 +156,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			NlZ4BtBmG5aoVUGsv5v1fD+Z64AaCOnMseuN7ZI5O/A=
+			a9qaUcOwMuSFcJ9ar4uHJG2oEfAGRcnfRyxlRYByUIY=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
@@ -216,6 +220,13 @@
 			<key>hash2</key>
 			<data>
 			fwzp2KHmqppNX7bEcm3AiectRtzIvbeT3Y1tWLxsMck=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/marias_profile.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Q4u7T/Lx7hhWIUkFenR30d+7PSeZSG9V03JreKPrBtc=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/music.png</key>
@@ -313,7 +324,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			c0RjwsyFA/M0igQ9OO2BhIn2SNKaPXwgYbZl4JMiLM0=
+			K2aTESyuH+1jKQtvoe9z44IgbD/JH9tMApDKgYlTo4o=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>

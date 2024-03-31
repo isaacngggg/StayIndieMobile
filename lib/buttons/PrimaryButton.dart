@@ -10,7 +10,7 @@ enum PrimaryButtonType {
 
 class PrimaryButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final onPressed;
   final PrimaryButtonType buttonType;
 
   const PrimaryButton({

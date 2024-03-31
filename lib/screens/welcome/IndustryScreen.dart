@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/widgets/ImageTile.dart';
+import 'package:stay_indie/widgets/images/ImageTile.dart';
 
 class IndustryScreen extends StatelessWidget {
   IndustryScreen({super.key});

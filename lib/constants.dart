@@ -16,9 +16,18 @@ Color kPrimaryColour20 = Colors.grey.shade200;
 
 Color kBackgroundColour = Colors.white;
 
-Color kAccentColour = Colors.purple.shade600;
-Color kAccentColour20 = Colors.purple.shade200;
-Color kAccentColour10 = Colors.purple.shade100.withAlpha(50);
+Color kAccentColour = Colors.deepPurple.shade400;
+Color kAccentColour20 = Colors.deepPurple.shade200;
+Color kAccentColour10 = Colors.deepPurple.shade100.withAlpha(50);
+
+ButtonStyle kSecondaryButtonStyle = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(kAccentColour10),
+  shape: MaterialStateProperty.all(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
+);
 
 const preloader =
     Center(child: CircularProgressIndicator(color: Colors.deepPurpleAccent));

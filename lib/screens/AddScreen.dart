@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:stay_indie/fields/search_bar.dart';
-import 'package:stay_indie/widgets/BottomNavBar.dart';
+import 'package:stay_indie/widgets/navigation/BottomNavBar.dart';
 
 class AddScreen extends StatelessWidget {
   const AddScreen({super.key});
