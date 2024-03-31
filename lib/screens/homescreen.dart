@@ -3,7 +3,6 @@ import 'package:stay_indie/widgets/navigation/BottomNavBar.dart';
 import 'package:stay_indie/fields/search_bar.dart';
 import 'package:stay_indie/screens/AddScreen.dart';
 import 'package:stay_indie/screens/OpportunitiesScreen.dart';
-import 'package:stay_indie/screens/profilescreen.dart';
 import 'package:stay_indie/screens/ConnectionsScreen.dart';
 import 'package:stay_indie/widgets/navigation/TopAppBar.dart';
 

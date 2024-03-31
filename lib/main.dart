@@ -4,9 +4,9 @@ import 'package:stay_indie/screens/chat/InboxScreen.dart';
 import 'package:stay_indie/screens/ConnectionsScreen.dart';
 import 'package:stay_indie/screens/OpportunitiesScreen.dart';
 import 'package:stay_indie/screens/HomeScreen.dart';
-import 'package:stay_indie/screens/profile/setting_model.dart';
+import 'package:stay_indie/screens/settings/setting_model.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
-import 'package:stay_indie/screens/profilescreen.dart';
+
 import 'package:stay_indie/screens/project/story_screen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/LoginScreen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/SignUpScreen.dart';
@@ -16,9 +16,10 @@ import 'package:stay_indie/screens/chat/ChatScreen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testRegisterPage.dart';
 import 'package:stay_indie/screens/profile/NewProfilePage.dart';
-import 'package:stay_indie/screens/profile/settings_page.dart';
+import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:stay_indie/screens/project/addProjectFlow/add_project_screen.dart';
+import 'package:stay_indie/screens/socials/connect_social_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,8 +42,8 @@ class MainApp extends StatelessWidget {
       initialRoute: SplashScreen.id, // Set the initial route to LoginScreen
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
-        ProfileScreen.id: (context) => ProfileScreen(),
         OpportunityScreen.id: (context) => OpportunityScreen(),
+        NewProfilePage.id: (context) => NewProfilePage(),
         AddScreen.id: (context) => AddScreen(),
         ConnectionsScreen.id: (context) => ConnectionsScreen(),
         StoryScreen.id: (context) => StoryScreen(
@@ -61,10 +62,10 @@ class MainApp extends StatelessWidget {
         SplashScreen.id: (context) => SplashScreen(),
         LoginPage.id: (context) => LoginPage(),
         RegisterPage.id: (context) => RegisterPage(isRegistering: false),
-        NewProfilePage.id: (context) => NewProfilePage(),
         SettingPage.id: (context) => SettingPage(),
         ProfileEditPage.id: (context) => ProfileEditPage(),
         AddProjectPage.id: (context) => AddProjectPage(),
+        ConnectSocialPage.id: (context) => ConnectSocialPage(),
       },
     );
   }

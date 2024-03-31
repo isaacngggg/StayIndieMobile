@@ -62,6 +62,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "easy_image_viewer",
+      "rootUri": "file:///Users/isaacng/.pub-cache/hosted/pub.dev/easy_image_viewer-1.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///Users/isaacng/.pub-cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
@@ -620,7 +626,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-03-31T09:59:29.288541Z",
+  "generated": "2024-03-31T11:28:43.222266Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

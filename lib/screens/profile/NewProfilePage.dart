@@ -9,8 +9,8 @@ import 'package:stay_indie/widgets/navigation/BottomNavBar.dart';
 import 'package:stay_indie/objects/Profile.dart';
 import 'package:stay_indie/objects/Project.dart';
 
-import 'package:stay_indie/screens/profile/profile_cover_page.dart';
-import 'package:stay_indie/screens/profile/profile_main_page.dart';
+import 'package:stay_indie/screens/profile/cover_page.dart';
+import 'package:stay_indie/screens/profile/content_page.dart';
 
 class NewProfilePage extends StatefulWidget {
   static const String id = 'new_profile_page';

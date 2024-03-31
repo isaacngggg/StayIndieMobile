@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:stay_indie/screens/profile/edit_basic_info_page.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/LoginScreen.dart';
+import 'package:stay_indie/screens/socials/connect_social_page.dart';
 
 class ProfileEditPage extends StatelessWidget {
   static const id = 'profile_edit_page';
@@ -40,6 +41,16 @@ class ProfileEditPage extends StatelessWidget {
                     Navigator.of(context).push(
                       CupertinoPageRoute(
                         builder: (context) => ProfileEditPage(),
+                      ),
+                    );
+                  },
+                ),
+                CupertinoListTile(
+                  title: Text('Connect Socials'),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      CupertinoPageRoute(
+                        builder: (context) => ConnectSocialPage(),
                       ),
                     );
                   },

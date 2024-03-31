@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/screens/HomeScreen.dart';
 import 'package:stay_indie/screens/AddScreen.dart';
 import 'package:stay_indie/screens/profile/NewProfilePage.dart';
-import 'package:stay_indie/screens/profile/setting_model.dart';
+import 'package:stay_indie/screens/settings/setting_model.dart';
 
 import 'package:stay_indie/screens/chat/InboxScreen.dart';
 

@@ -4,9 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/objects/Project.dart';
-import 'package:stay_indie/widgets/images/ImageCarousel.dart';
-import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 
 class ProjectTile extends StatelessWidget {
   final Project project;
@@ -32,6 +31,7 @@ class ProjectTile extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
                 child: Column(
@@ -48,37 +48,39 @@ class ProjectTile extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 10),
-              CircleAvatarWBorder(
-                radius: 20,
-                imageUrl: 'assets/goodnotes_profile.jpeg',
-              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black,
+                  )),
             ],
           ),
-          if (project.collaborators != null) SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  // AvatarStack(
-                  //   images: [
-                  //     'assets/goodnotes_profile.jpeg',
-                  //     'assets/figma_profile.png'
-                  //   ],
-                  //   radius: 10,
-                  // ),
-                  SizedBox(width: 15),
-                  Icon(Icons.verified, color: kPrimaryColour, size: 14),
-                  SizedBox(width: 5),
-                  Text(
-                      'In Collaboration with & ${project.collaborators?[0]} 2 others.',
-                      style: kCaption1),
-                ],
-              ),
-              Text(project.date, style: kCaption1),
-            ],
-          ),
+          if (project.collaborators != null) ...[
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    // AvatarStack(
+                    //   images: [
+                    //     'assets/goodnotes_profile.jpeg',
+                    //     'assets/figma_profile.png'
+                    //   ],
+                    //   radius: 10,
+                    // ),
+                    SizedBox(width: 15),
+                    Icon(Icons.verified, color: kPrimaryColour, size: 14),
+                    SizedBox(width: 5),
+                    Text(
+                        'In Collaboration with & ${project.collaborators?[0]} 2 others.',
+                        style: kCaption1),
+                  ],
+                ),
+                Text(project.date, style: kCaption1),
+              ],
+            ),
+          ],
           SizedBox(height: 10),
           // ImageCarousel(),
           SizedBox(
@@ -89,7 +91,20 @@ class ProjectTile extends StatelessWidget {
               shrinkWrap: true,
               itemCount: images.length,
               itemBuilder: (context, index) {
-                return Image.asset(images[index]);
+                return GestureDetector(
+                  child: Container(
+                    margin: EdgeInsets.only(right: 10),
+                    decoration: kOutlineBorder,
+                    child: Image.asset(images[index]),
+                  ),
+                  onTap: () {
+                    showImageViewerPager(
+                      context,
+                      MultiImageProvider(
+                          images.map((image) => AssetImage(image)).toList()),
+                    );
+                  },
+                );
               },
             ),
           ),
