@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		O9yrZtl56L5/NwixsDugsp1iUZg=
+		4bZXil6zhXcEeCqfBJHOv43lER4=
 		</data>
 		<key>Resources/Base.lproj/MainMenu.nib</key>
 		<data>
@@ -23,10 +23,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			2YMU9ZUy35XI+vX0pvTvWGjazi0=
+			W3PTEnAu5UVyNznd4Lw2jsMmu7Q=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"d98314f59532df95c8faf5f4a6f4ef5868dace2d"</string>
+			<string>cdhash H"5b73d312702ee545723739dde0bc368ec326bbb4"</string>
 		</dict>
 		<key>Frameworks/FlutterMacOS.framework</key>
 		<dict>
@@ -36,6 +36,24 @@
 			</data>
 			<key>requirement</key>
 			<string>cdhash H"04dbbff9792b21412f612d9da45e3f4b3a8204c4"</string>
+		</dict>
+		<key>Frameworks/app_links.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			vXbMA67aO7/6jyl6VzXiy6e0iJw=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"bd76cc03aeda3bbffa8f297a5735e2cba7b4889c"</string>
+		</dict>
+		<key>Frameworks/file_selector_macos.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			BVZyhfUyspsT3GTDitVydQ3Zf7E=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"05567285f532b29b13dc64c38ad572750dd97fb1"</string>
 		</dict>
 		<key>Frameworks/libswiftAppKit.dylib</key>
 		<dict>
@@ -190,6 +208,33 @@
 			<key>requirement</key>
 			<string>cdhash H"3406aab10f486b91c2d9334de341504de56a5631" or cdhash H"73e04119822f2d8cd5eeb426ddac2b2b98295def"</string>
 		</dict>
+		<key>Frameworks/path_provider_foundation.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			9jAaMbyO9+SZjoIe6PH44WdfYxE=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"f6301a31bc8ef7e4998e821ee8f1f8e1675f6311"</string>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			XKaH2AcsXdYkZyBsEY+ZXqiUCPM=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"5ca687d8072c5dd62467206c118f995ea89408f3"</string>
+		</dict>
+		<key>Frameworks/url_launcher_macos.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			8s4bHEpekyEijW5Ghsjg844N67M=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"f2ce1b1c4a5e9321228d6e4686c8e0f38e0debb3"</string>
+		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
 			<key>hash2</key>
@@ -201,7 +246,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fkvunhz+oMKZYHRHNeVv8HrVGydS3HFKRGpVQzSDSs0=
+			jNxduKIlCsa+iTpw19LDYivxVnXzbAP/PQJGMD19TZs=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/MainMenu.nib</key>

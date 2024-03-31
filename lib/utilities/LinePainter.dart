@@ -18,3 +18,21 @@ class LinePainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
+
+class LinePainterHoriztonal extends CustomPainter {
+  final double width;
+
+  LinePainterHoriztonal({required this.width});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = kPrimaryColour40
+      ..strokeWidth = 2;
+
+    canvas.drawLine(Offset(-width, 0), Offset(width, 0), paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}

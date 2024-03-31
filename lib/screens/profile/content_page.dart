@@ -5,7 +5,7 @@ import 'package:stay_indie/objects/Profile.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
 import 'package:stay_indie/widgets/projects/ProjectTile.dart';
 import 'package:stay_indie/widgets/journeys/MyJourneyWidget.dart';
-import 'package:stay_indie/screens/profile/edit_basic_info_page.dart';
+import 'package:stay_indie/utilities/LinePainter.dart';
 import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:stay_indie/screens/profile/NewProfilePage.dart';
 import 'package:stay_indie/screens/project/addProjectFlow/add_project_screen.dart';
@@ -32,10 +32,9 @@ class ProfileMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       child: Container(
         decoration: BoxDecoration(
-          color: kBackgroundColour,
+          color: Colors.black,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -83,9 +82,24 @@ class ProfileMainPage extends StatelessWidget {
             ),
             Expanded(
               child: Container(
+                decoration: BoxDecoration(
+                  color: kBackgroundColour,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    SizedBox(
+                      height: 20,
+                      child: Center(
+                        child: CustomPaint(
+                            size: Size(0, 0),
+                            painter: LinePainterHoriztonal(width: 30)),
+                      ),
+                    ),
                     widget.selfProfile
                         ? Padding(
                             padding: const EdgeInsets.all(10.0),
