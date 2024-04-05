@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../HomeScreen.dart';
+import '../archive/HomeScreen.dart';
 import 'testLoginPage.dart';
 
 class RegisterPage extends StatefulWidget {

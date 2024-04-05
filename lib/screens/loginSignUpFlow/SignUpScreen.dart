@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
-import 'package:stay_indie/screens/HomeScreen.dart';
+import 'package:stay_indie/screens/archive/HomeScreen.dart';
 import 'LoginScreen.dart';
 import 'package:stay_indie/fields/PrimaryTextField.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

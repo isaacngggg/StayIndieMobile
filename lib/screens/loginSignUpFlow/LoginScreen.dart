@@ -4,7 +4,7 @@ import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/fields/PrimaryTextField.dart';
 import 'SignUpScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:stay_indie/screens/HomeScreen.dart';
+import 'package:stay_indie/screens/archive/HomeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'loginscreen';

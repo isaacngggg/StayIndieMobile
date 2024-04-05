@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/objects/SocialMetric.dart';
+import 'package:stay_indie/models/SocialMetric.dart';
 
 class SocialMetricPill extends StatelessWidget {
   final SocialMetric socialMetric;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:stay_indie/objects/Profile.dart';
+import 'package:stay_indie/models/Profile.dart';
 
 class EditBasicInfoPage extends StatefulWidget {
   static const String id = 'edit_basic_info_page';
@@ -14,16 +14,7 @@ class EditBasicInfoPage extends StatefulWidget {
 }
 
 class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
-  Profile userProfile = Profile(
-    id: '1',
-    username: 'johndoe',
-    name: 'John Doe',
-    bio: 'Hey, how are you?',
-    headline: 'Software Engineer',
-    location: 'San Francisco, CA',
-    profileImagePath: 'assets/profile_example.jpeg',
-    createdAt: DateTime.now(),
-  );
+  late Profile userProfile;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
@@ -32,7 +23,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
 
   @override
   void initState() {
-    Profile.getProfileData().then((value) {
+    Profile.getProfileData(currentUserId).then((value) {
       if (value != null) {
         setState(() {
           userProfile = value;
@@ -90,16 +81,14 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
                     style: kSecondaryButtonStyle,
                     onPressed: () {
                       print(locationController.text);
-                      userProfile = Profile(
-                        id: userProfile.id,
-                        username: userProfile.username,
-                        name: nameController.text,
-                        bio: bioController.text,
-                        headline: headlineController.text,
-                        location: locationController.text,
-                        profileImagePath: userProfile.profileImagePath,
-                        createdAt: userProfile.createdAt,
-                      );
+
+                      Map<String, dynamic> userProfile = {
+                        'id': currentUserId,
+                        'name': nameController.text,
+                        'bio': bioController.text,
+                        'headline': headlineController.text,
+                        'location': locationController.text,
+                      };
                       Profile.updateProfile(userProfile);
                       print('done');
                       Navigator.pop(context);

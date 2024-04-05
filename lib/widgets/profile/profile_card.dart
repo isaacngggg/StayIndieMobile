@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
+import 'package:stay_indie/constants.dart';
 
 class ProfileCard extends StatelessWidget {
   final String name;
@@ -11,47 +15,60 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 20,
-            spreadRadius: -5,
-            color: Colors.black26,
+    return Stack(
+      children: [
+        Positioned(
+            top: 10,
+            right: 20,
+            child: FaIcon(
+              FontAwesomeIcons.solidCircleXmark,
+              color: Colors.grey.shade300,
+            )),
+        Container(
+          margin: EdgeInsets.only(right: 10),
+          width: 150,
+          decoration: kOutlineBorder,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage('assets/profile_example.jpeg'),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(name,
+                    style:
+                        TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  role,
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 10),
+                ),
+              ),
+              SizedBox(
+                height: 2,
+              ),
+              // Text(
+              //   company,
+              //   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
+              // ),
+              TextButton(
+                child: Text('Follow'),
+                onPressed: () {},
+                style: kPrimaryButtonSmall,
+              ),
+            ],
           ),
-        ],
-      ),
-      padding: EdgeInsets.symmetric(vertical: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            height: 100,
-            child: Image.asset('assets/profile_example.jpeg'),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(name,
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18)),
-          Text(role),
-          SizedBox(
-            height: 2,
-          ),
-          // Text(
-          //   company,
-          //   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
-          // ),
-          PrimaryButton(text: 'Follow', onPressed: () => print('followed'))
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

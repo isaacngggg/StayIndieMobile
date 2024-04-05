@@ -4,14 +4,22 @@ import 'package:stay_indie/constants.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:stay_indie/objects/Project.dart';
+import 'package:stay_indie/models/Project.dart';
+import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
 
-class AddProjectPage extends StatelessWidget {
+class AddProjectPage extends StatefulWidget {
   static const id = 'add_project_page';
   const AddProjectPage({super.key});
 
   @override
+  State<AddProjectPage> createState() => _AddProjectPageState();
+}
+
+class _AddProjectPageState extends State<AddProjectPage> {
+  List<String> _networkImages = [];
+  @override
   Widget build(BuildContext context) {
+    final _newProjectId = uuid.v4();
     final _formKey = GlobalKey<FormBuilderState>();
     return Scaffold(
       appBar: AppBar(
@@ -35,11 +43,12 @@ class AddProjectPage extends StatelessWidget {
                   maxLines: 3,
                 ),
                 FormBuilderDateTimePicker(
-                  name: 'project_start_date',
+                  name: 'start_date',
                   inputType: InputType.date,
                   decoration: InputDecoration(labelText: 'Start Date'),
                   format: DateFormat("EEE, M-d-y"),
                 ),
+                ProjectMediaCarousel(networkImages: _networkImages),
                 TextButton(
                     onPressed: () async {
                       final ImagePicker picker = ImagePicker();
@@ -48,17 +57,19 @@ class AddProjectPage extends StatelessWidget {
                       if (image == null) return;
                       final imageBytes = await image.readAsBytes();
                       final userId = await supabase.auth.currentUser!.id;
-                      final imageUrl = '/$userId/images/${DateTime.now()}.png';
+                      final imageUrl =
+                          '/$userId/$_newProjectId/images/${DateTime.now()}.png';
                       await supabase.storage
                           .from('project_medias')
                           .uploadBinary(imageUrl, imageBytes)
                           .whenComplete(() async {
                         print('Image uploaded');
-                        print('Retrieving image');
                         final url = supabase.storage
                             .from('project_medias')
                             .getPublicUrl(imageUrl);
-                        print(url);
+                        setState(() {
+                          _networkImages.add(url);
+                        });
                       });
                     },
                     child: Text('Add Image')),
@@ -69,15 +80,18 @@ class AddProjectPage extends StatelessWidget {
                     style: kSecondaryButtonStyle,
                     onPressed: () {
                       _formKey.currentState?.saveAndValidate();
-                      _formKey.currentState?.value;
-
-                      var newProject = Project.fromMap(
-                          _formKey.currentState?.value as Map<String, dynamic>);
-
+                      Map<String, dynamic> formValue =
+                          Map<String, dynamic>.from(_formKey.currentState?.value
+                              as Map<String, dynamic>);
+                      formValue.addEntries([
+                        MapEntry('id', _newProjectId),
+                      ]);
+                      var newProject = Project.fromMap(formValue);
                       Project.addProject(newProject);
 
                       print('Project Added');
-                      // Navigator.pop(context);
+
+                      Navigator.pop(context);
                     },
                     child: Text('Add Project'),
                   ),

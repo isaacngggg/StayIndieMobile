@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/objects/Message.dart';
-import 'package:stay_indie/objects/Profile.dart';
+import 'package:stay_indie/models/Message.dart';
+import 'package:stay_indie/models/Profile.dart';
 import 'package:timeago/timeago.dart';
 
 class ChatBubble extends StatelessWidget {
@@ -31,9 +31,7 @@ class ChatBubble extends StatelessWidget {
             horizontal: 12,
           ),
           decoration: BoxDecoration(
-            color: message.isMine
-                ? Theme.of(context).primaryColor
-                : Colors.grey[300],
+            color: message.isMine ? kAccentColour20 : Colors.grey[300],
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(message.content),

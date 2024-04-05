@@ -1,25 +1,19 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/objects/Message.dart';
-import 'package:stay_indie/objects/Profile.dart';
+import 'package:stay_indie/models/Chat.dart';
+import 'package:stay_indie/models/Message.dart';
+import 'package:stay_indie/models/Profile.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stay_indie/widgets/chat/ChatBubble.dart';
+import 'package:stay_indie/screens/chat/chat_info_screen.dart';
 
-/// Page to chat with someone.
-///
-/// Displays chat bubbles as a ListView and TextField to enter new chat.
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  final Chat chatInfo;
+  const ChatScreen({required this.chatInfo, Key? key}) : super(key: key);
 
   static const String id = 'chat_screen';
-
-  static Route<void> route() {
-    return MaterialPageRoute(
-      builder: (context) => const ChatScreen(),
-    );
-  }
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -35,6 +29,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _messagesStream = supabase
         .from('messages')
         .stream(primaryKey: ['id'])
+        .eq('chat_id', widget.chatInfo.id)
         .order('created_at')
         .map((maps) => maps
             .map((map) => Message.fromMap(map: map, myUserId: myUserId))
@@ -57,7 +52,19 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Chat')),
+      appBar: AppBar(
+        title: Text(widget.chatInfo.name),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ChatInfoScreen(chatInfo: widget.chatInfo);
+              }));
+            },
+          ),
+        ],
+      ),
       body: StreamBuilder<List<Message>>(
         stream: _messagesStream,
         builder: (context, snapshot) {
@@ -79,16 +86,16 @@ class _ChatScreenState extends State<ChatScreen> {
                             /// I know it's not good to include code that is not related
                             /// to rendering the widget inside build method, but for
                             /// creating an app quick and dirty, it's fine 😂
-                            _loadProfileCache(message.profileId);
+                            _loadProfileCache(message.senderId);
 
                             return ChatBubble(
                               message: message,
-                              profile: _profileCache[message.profileId],
+                              profile: _profileCache[message.senderId],
                             );
                           },
                         ),
                 ),
-                const _MessageBar(),
+                _MessageBar(chatId: widget.chatInfo.id),
               ],
             );
           } else {
@@ -102,7 +109,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
 /// Set of widget that contains TextField and Button to submit message
 class _MessageBar extends StatefulWidget {
+  final String chatId;
   const _MessageBar({
+    required this.chatId,
     Key? key,
   }) : super(key: key);
 
@@ -168,8 +177,9 @@ class _MessageBarState extends State<_MessageBar> {
     _textController.clear();
     try {
       await supabase.from('messages').insert({
-        'profile_id': myUserId,
+        'sender_id': myUserId,
         'content': text,
+        'chat_id': widget.chatId, // Replace with actual chat id
       });
     } on PostgrestException catch (error) {
       context.showErrorSnackBar(message: error.message);

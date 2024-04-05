@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'package:stay_indie/widgets/social/SocialMetricPill.dart';
-import 'package:stay_indie/objects/SocialMetric.dart';
+import 'package:stay_indie/models/SocialMetric.dart';
 
 class SocialMetricList extends StatelessWidget {
   const SocialMetricList({

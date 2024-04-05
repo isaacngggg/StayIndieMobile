@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/objects/Project.dart';
+import 'package:stay_indie/models/Project.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:easy_image_viewer/easy_image_viewer.dart';
 
-class ProjectTile extends StatelessWidget {
+import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
+
+class ProjectTile extends StatefulWidget {
   final Project project;
 
   ProjectTile({
@@ -16,12 +18,21 @@ class ProjectTile extends StatelessWidget {
   });
 
   @override
-  List<String> images = [
-    'assets/image1.png',
-    'assets/image2.png',
-    'assets/image3.png',
-    // Add more image paths
-  ];
+  State<ProjectTile> createState() => _ProjectTileState();
+}
+
+class _ProjectTileState extends State<ProjectTile> {
+  @override
+  void initState() {
+    Project.getProjectImages(widget.project.id, currentUserId).then((images) {
+      setState(() {
+        _networkImages = images;
+      });
+    });
+    super.initState();
+  }
+
+  List<String> _networkImages = [];
 
   Widget build(BuildContext context) {
     return Container(
@@ -38,11 +49,11 @@ class ProjectTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      project.title,
+                      widget.project.title,
                       style: kHeading3,
                     ),
                     Text(
-                      project.description,
+                      widget.project.description,
                       style: kBody2,
                     ),
                   ],
@@ -55,70 +66,49 @@ class ProjectTile extends StatelessWidget {
                   )),
             ],
           ),
-          if (project.collaborators != null) ...[
+          if (widget.project.collaborators != null) ...[
             SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    // AvatarStack(
-                    //   images: [
-                    //     'assets/goodnotes_profile.jpeg',
-                    //     'assets/figma_profile.png'
-                    //   ],
-                    //   radius: 10,
-                    // ),
                     SizedBox(width: 15),
                     Icon(Icons.verified, color: kPrimaryColour, size: 14),
                     SizedBox(width: 5),
                     Text(
-                        'In Collaboration with & ${project.collaborators?[0]} 2 others.',
+                        'In Collaboration with & ${widget.project.collaborators?[0]} 2 others.',
                         style: kCaption1),
                   ],
                 ),
-                Text(project.date, style: kCaption1),
+                Text(widget.project.startDate.toString(), style: kCaption1),
               ],
             ),
           ],
           SizedBox(height: 10),
           // ImageCarousel(),
-          SizedBox(
-            height: 200,
-            child: ListView.builder(
-              clipBehavior: Clip.none,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: images.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  child: Container(
-                    margin: EdgeInsets.only(right: 10),
-                    decoration: kOutlineBorder,
-                    child: Image.asset(images[index]),
-                  ),
-                  onTap: () {
-                    showImageViewerPager(
-                      context,
-                      MultiImageProvider(
-                          images.map((image) => AssetImage(image)).toList()),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
+          _networkImages.length > 0
+              ? ProjectMediaCarousel(networkImages: _networkImages)
+              : Container(),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 IconButton(
-                  icon: Icon(Icons.favorite_border),
+                  icon: FaIcon(FontAwesomeIcons.heart),
                   onPressed: () {},
                 ),
                 IconButton(
-                  icon: Icon(Icons.comment),
+                  icon: FaIcon(FontAwesomeIcons.comment),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: FaIcon(FontAwesomeIcons.retweet),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: FaIcon(FontAwesomeIcons.paperPlane),
                   onPressed: () {},
                 ),
               ]),
@@ -140,6 +130,8 @@ class ProjectTile extends StatelessWidget {
                           CupertinoListTile(
                             title: Text('Delete'),
                             onTap: () {
+                              Project.deleteProject(
+                                  widget.project.id.toString());
                               Navigator.pop(context);
                             },
                           ),

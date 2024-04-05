@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:stay_indie/screens/AddScreen.dart';
+import 'package:stay_indie/constants.dart';
+import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
+import 'package:stay_indie/screens/archive/AddScreen.dart';
 import 'package:stay_indie/screens/chat/InboxScreen.dart';
-import 'package:stay_indie/screens/ConnectionsScreen.dart';
-import 'package:stay_indie/screens/OpportunitiesScreen.dart';
-import 'package:stay_indie/screens/HomeScreen.dart';
-import 'package:stay_indie/screens/settings/setting_model.dart';
+import 'package:stay_indie/screens/archive/ConnectionsScreen.dart';
+import 'package:stay_indie/screens/archive/OpportunitiesScreen.dart';
+import 'package:stay_indie/screens/archive/HomeScreen.dart';
+import 'package:stay_indie/screens/connections_page.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
 
 import 'package:stay_indie/screens/project/story_screen.dart';
@@ -15,11 +17,16 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stay_indie/screens/chat/ChatScreen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testRegisterPage.dart';
-import 'package:stay_indie/screens/profile/NewProfilePage.dart';
+import 'package:stay_indie/screens/profile/MainProfilePage.dart';
 import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:stay_indie/screens/project/addProjectFlow/add_project_screen.dart';
 import 'package:stay_indie/screens/socials/connect_social_page.dart';
+import 'package:stay_indie/screens/notification/notification_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:stay_indie/screens/templates/stepper_form.dart';
+
+import 'package:stay_indie/models/SingleFormPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,12 +45,30 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.light(),
+      theme: ThemeData.light().copyWith(
+        primaryColor: Colors.grey.shade900,
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          iconTheme:
+              IconThemeData(color: Colors.black), // if you want black icons
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.white,
+          selectedItemColor:
+              Colors.black, // if you want selected item color to be black
+          unselectedItemColor:
+              Colors.grey, // if you want unselected item color to be grey
+        ),
+      ),
       initialRoute: SplashScreen.id, // Set the initial route to LoginScreen
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
         OpportunityScreen.id: (context) => OpportunityScreen(),
-        NewProfilePage.id: (context) => NewProfilePage(),
+        NewProfilePage.id: (context) => NewProfilePage(
+              profileId: currentUserId,
+            ),
         AddScreen.id: (context) => AddScreen(),
         ConnectionsScreen.id: (context) => ConnectionsScreen(),
         StoryScreen.id: (context) => StoryScreen(
@@ -56,7 +81,6 @@ class MainApp extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
         IndustryScreen.id: (context) => IndustryScreen(),
-        ChatScreen.id: (context) => ChatScreen(),
         InboxScreen.id: (context) => InboxScreen(),
         SearchScreen.id: (context) => SearchScreen(),
         SplashScreen.id: (context) => SplashScreen(),
@@ -66,6 +90,7 @@ class MainApp extends StatelessWidget {
         ProfileEditPage.id: (context) => ProfileEditPage(),
         AddProjectPage.id: (context) => AddProjectPage(),
         ConnectSocialPage.id: (context) => ConnectSocialPage(),
+        NotificationsPage.id: (context) => NotificationsPage(),
       },
     );
   }

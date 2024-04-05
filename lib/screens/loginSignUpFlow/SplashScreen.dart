@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stay_indie/screens/HomeScreen.dart';
+import 'package:stay_indie/screens/archive/HomeScreen.dart';
+import 'package:stay_indie/screens/chat/ChatScreen.dart';
+import 'package:stay_indie/screens/chat/InboxScreen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/LoginScreen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/SignUpScreen.dart';
 import 'package:stay_indie/constants.dart';
@@ -30,7 +32,7 @@ class SplashScreenState extends State<SplashScreen> {
           .pushNamedAndRemoveUntil(LoginScreen.id, (route) => false);
     } else {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil(HomeScreen.id, (route) => false);
+          .pushNamedAndRemoveUntil(InboxScreen.id, (route) => false);
     }
   }
 

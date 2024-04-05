@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 
-import 'package:stay_indie/objects/Profile.dart';
+import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/widgets/social/SocialMetricList.dart';
 import 'package:stay_indie/screens/settings/settings_page.dart';
 
