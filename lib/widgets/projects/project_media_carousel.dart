@@ -6,14 +6,16 @@ class ProjectMediaCarousel extends StatelessWidget {
   const ProjectMediaCarousel({
     super.key,
     required List<String> networkImages,
+    this.height = 200,
   }) : _networkImages = networkImages;
 
+  final double height;
   final List<String> _networkImages;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: height,
       child: ListView.builder(
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,
@@ -22,11 +24,15 @@ class ProjectMediaCarousel extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             child: Container(
-              clipBehavior: Clip.antiAlias,
-              margin: EdgeInsets.only(right: 10),
-              decoration: kOutlineBorder,
-              child: Image.network(_networkImages[index]),
-            ),
+                clipBehavior: Clip.antiAlias,
+                margin: EdgeInsets.only(right: 10),
+                decoration: kOutlineBorder.copyWith(color: Colors.white),
+                child: Image(
+                  image: NetworkImage(_networkImages[index]),
+                  fit: BoxFit.fitHeight,
+                )
+                // Image.network(_networkImages[index]).fit(BoxFit.contain),
+                ),
             onTap: () {
               showImageViewerPager(
                 context,

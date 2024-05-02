@@ -31,7 +31,7 @@ class ChatBubble extends StatelessWidget {
             horizontal: 12,
           ),
           decoration: BoxDecoration(
-            color: message.isMine ? kAccentColour20 : Colors.grey[300],
+            color: message.isMine ? kAccentColour : kBackgroundColour20,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(message.content),

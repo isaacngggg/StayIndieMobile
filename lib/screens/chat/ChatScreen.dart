@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Chat.dart';
 import 'package:stay_indie/models/Message.dart';
@@ -51,9 +52,23 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> participants = [];
+    widget.chatInfo.participantProfiles.forEach((profile) {
+      participants.add(profile.name);
+    });
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.chatInfo.name),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(widget.chatInfo.name),
+            const SizedBox(width: 8),
+            Text(
+              '${participants.toString().replaceAll('[', '').replaceAll(']', '')}',
+              style: const TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.info),
@@ -125,7 +140,7 @@ class _MessageBarState extends State<_MessageBar> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.grey[200],
+      color: kBackgroundColour10,
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -145,9 +160,9 @@ class _MessageBarState extends State<_MessageBar> {
                   ),
                 ),
               ),
-              TextButton(
+              IconButton(
                 onPressed: () => _submitMessage(),
-                child: const Text('Send'),
+                icon: const Icon(Icons.send),
               ),
             ],
           ),

@@ -6,14 +6,35 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Project.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:stay_indie/screens/project/manage_story_screen.dart';
+import 'package:stay_indie/screens/project/story_screen.dart';
 
 import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
 
+import 'package:stay_indie/models/StoryPage.dart';
+import 'package:stay_indie/models/Profile.dart';
+
 class ProjectTile extends StatefulWidget {
   final Project project;
+  final List<StoryPage> storyPages;
+  final Profile profile;
 
   ProjectTile({
+    required this.profile,
     required this.project,
+    this.storyPages = const [
+      const StoryPage(
+        id: '1',
+        metaTitle: 'metaTitle',
+        title: 'title',
+        body: 'body',
+        images_url: [
+          'https://images.unsplash.com/photo-1632218616824-4b3b3b3b3b3b',
+          'https://images.unsplash.com/photo-1632218616824-4b3b3b3b3b3b',
+          'https://images.unsplash.com/photo-1632218616824-4b3b3b3b3b3b',
+        ],
+      ),
+    ],
     super.key,
   });
 
@@ -48,6 +69,7 @@ class _ProjectTileState extends State<ProjectTile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 5),
                     Text(
                       widget.project.title,
                       style: kHeading3,
@@ -60,10 +82,30 @@ class _ProjectTileState extends State<ProjectTile> {
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.black,
-                  )),
+                padding: const EdgeInsets.only(left: 10),
+                child: CircleAvatar(
+                    backgroundColor: Colors.deepPurple.shade300,
+                    child: IconButton(
+                      icon: Icon(Icons.web_stories,
+                          color: Colors.white, size: 16),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return StoryScreen(
+                            profile: widget.profile,
+                            storyPage: widget.storyPages[0],
+                            meta: widget.project.title,
+                            title: widget.project.title,
+                            body: widget.project.description,
+                            images: _networkImages,
+                          );
+                        }));
+                      },
+                    )
+                    // I
+
+                    ),
+              ),
             ],
           ),
           if (widget.project.collaborators != null) ...[
@@ -118,7 +160,7 @@ class _ProjectTileState extends State<ProjectTile> {
                   showCupertinoModalBottomSheet(
                     context: context,
                     builder: (context) => Container(
-                      height: 200,
+                      height: 300,
                       child: CupertinoListSection.insetGrouped(
                         children: [
                           CupertinoListTile(
@@ -139,6 +181,16 @@ class _ProjectTileState extends State<ProjectTile> {
                             title: Text('Hide'),
                             onTap: () {
                               Navigator.pop(context);
+                            },
+                          ),
+                          CupertinoListTile(
+                            title: Text('Edit Stories'),
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ManageStoryScreen(
+                                    storyPages: widget.storyPages);
+                              }));
                             },
                           ),
                         ],

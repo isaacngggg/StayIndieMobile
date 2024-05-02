@@ -4,10 +4,12 @@ import 'package:stay_indie/constants.dart';
 class CircleAvatarWBorder extends StatelessWidget {
   final String imageUrl;
   final double radius;
+  final Color borderColor;
 
   const CircleAvatarWBorder({
     required this.imageUrl,
     this.radius = 10,
+    this.borderColor = kPrimaryColour20,
     super.key,
   });
 
@@ -15,7 +17,7 @@ class CircleAvatarWBorder extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: radius + 1,
-      backgroundColor: kPrimaryColour20,
+      backgroundColor: borderColor,
       child: CircleAvatar(
         radius: radius,
         backgroundImage: NetworkImage(imageUrl),

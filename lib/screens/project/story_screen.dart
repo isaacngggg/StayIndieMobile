@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 // import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:stay_indie/constants.dart';
+import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
+import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
+import 'package:stay_indie/models/Profile.dart';
+import 'package:stay_indie/models/StoryPage.dart';
 
 class StoryScreen extends StatefulWidget {
+  final Profile profile;
+  final StoryPage storyPage;
   final String meta;
   final String title;
   final String body;
@@ -18,6 +25,8 @@ class StoryScreen extends StatefulWidget {
   ];
 
   StoryScreen({
+    required this.profile,
+    required this.storyPage,
     required this.meta,
     required this.title,
     required this.body,
@@ -34,16 +43,23 @@ class _StoryScreenState extends State<StoryScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(shape: BoxShape.circle),
-          child: Image(
-            fit: BoxFit.fill,
-            image: AssetImage('assets/profile_example.jpeg'),
+          margin: EdgeInsets.only(left: 10),
+          // padding: EdgeInsets.symmetric(horizontal: 4),
+          child: CircleAvatar(
+            backgroundColor: Colors.grey,
+            backgroundImage: NetworkImage(widget.profile.profileImageUrl),
           ),
         ),
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: kHeading3,
+        ),
         actions: [
-          IconButton(icon: Icon(Icons.close), onPressed: () {}),
+          IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
         ],
       ),
       body: Container(
@@ -52,12 +68,12 @@ class _StoryScreenState extends State<StoryScreen> {
           children: [
             Positioned.fill(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Container(
-                  padding: EdgeInsets.all(12),
+                  padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       border: Border(
-                          left: BorderSide(color: Colors.black, width: 2))),
+                          left: BorderSide(color: kPrimaryColour40, width: 2))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,101 +99,9 @@ class _StoryScreenState extends State<StoryScreen> {
             Positioned.fill(
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                // Row(
-                //   children: [
-                //     // TextField(
-                //     //   decoration: const InputDecoration(
-                //     //     fillColor: Colors.black,
-                //     //     border: UnderlineInputBorder(),
-                //     //     labelText: 'Comment',
-                //     //   ),
-                //     // )
-                //   ],
-                // ),
-                //   CarouselSlider(
-                //     options: CarouselOptions(height: 300,enableInfiniteScroll: false, viewportFraction: 0.9, enlargeFactor: 2, autoPlay: true,pageSnapping: false),
-                //     items: [1,2,3,4,5].map((i) {
-                //       return Builder(
-                //         builder: (BuildContext context) {
-                //           return GestureDetector(
-                //             child: Container(
-                //               width: MediaQuery.of(context).size.width,
-                //               margin: EdgeInsets.symmetric(horizontal: 5.0),
-                //               decoration: BoxDecoration(
-                //                 color: Colors.grey,
-                //                 border: Border.all(color: Colors.black38,width: 0.1),
-                //                 borderRadius: BorderRadius.all(Radius.circular(10)),
-
-                //               ),
-                //               child: Image(image: AssetImage('assets/image1.png'),
-                //               fit: BoxFit.fitHeight,
-
-                //               )
-                //                     ),
-                //             onTap: () {
-                //               print ('$i Tapped');
-                //             },
-                //           );
-                //       },
-                //     );
-                //   }).toList(),
-                // ),
-                Positioned.fill(
-                  bottom: 80,
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            color: Colors.orange,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: GestureDetector(
-                            child: Container(
-                              color: Colors.red,
-                            ),
-                            onTap: () {
-                              print('forward');
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                ExpandableCarousel(
-                  options: CarouselOptions(
-                    showIndicator: false,
-                    autoPlay: false,
-                    autoPlayInterval: const Duration(seconds: 2),
-                  ),
-                  items: widget.setimages.map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                color: Colors.grey,
-                                width: 1,
-                                strokeAlign: BorderSide.strokeAlignInside,
-                              ),
-                            ),
-                            clipBehavior: Clip.antiAlias,
-                            child: Image(
-                              image: AssetImage(i),
-                              fit: BoxFit.fitHeight,
-                              height: 300,
-                            ));
-                      },
-                    );
-                  }).toList(),
+                ProjectMediaCarousel(
+                  networkImages: widget.images,
+                  height: 350,
                 ),
                 SizedBox(
                   height: 20,

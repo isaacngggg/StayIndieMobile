@@ -46,7 +46,7 @@ class BottomNavBar extends StatelessWidget {
           Navigator.pushReplacement(
               context,
               NoAnimationRoute(
-                  builder: (context) => NewProfilePage(
+                  builder: (context) => ProfilePage(
                         profileId: currentUserId,
                         selfProfile: true,
                       )));

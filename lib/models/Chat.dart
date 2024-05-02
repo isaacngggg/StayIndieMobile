@@ -53,20 +53,17 @@ class Chat {
         for (var participant in participentId) {
           await Profile.getProfileData(participant).then((profile) {
             participantProfiles.add(profile!);
-            print('Profile: ' + profile.name);
           });
         }
         if (participantProfiles.length == 2) {
           for (var profile in participantProfiles) {
-            print('Profile: ' + profile.name);
             if (profile.id != currentUserId) {
-              print('Profile: ' + profile.name);
               chats.add(Chat(
                   id: chat['id'],
                   participants: participentId,
                   name: profile.name,
                   description: chat['description'],
-                  imageUrl: chat['image_url'],
+                  imageUrl: profile.profileImageUrl,
                   participantProfiles: participantProfiles));
             }
           }

@@ -23,10 +23,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			Cl8B7AsJIXvH8i9hLEMg0lgG+lQ=
+			oTdTlFWoL6SKZk51PZR3f4jmSYU=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"0a5f01ec0b09217bc7f22f612c4320d25806fa54"</string>
+			<string>cdhash H"a137539455a82fa48a664e753d94777f88e64985"</string>
 		</dict>
 		<key>Frameworks/FlutterMacOS.framework</key>
 		<dict>
@@ -54,6 +54,15 @@
 			</data>
 			<key>requirement</key>
 			<string>cdhash H"05567285f532b29b13dc64c38ad572750dd97fb1"</string>
+		</dict>
+		<key>Frameworks/libswiftAVFoundation.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			vG/+wrcE2vnxenLi//6PdPbBnnI=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"feb2b00ea35babbf1f8ecd2b9dd7c3523b8dd2e3" or cdhash H"bc6ffec2b704daf9f17a72e2fffe8f74f6c19e72"</string>
 		</dict>
 		<key>Frameworks/libswiftAppKit.dylib</key>
 		<dict>
@@ -190,6 +199,15 @@
 			<key>requirement</key>
 			<string>cdhash H"e02d111c168bcdb2d35b89d2b165838e343b452e" or cdhash H"02dc40ef2cd51984593e83df859652a5f2c41325"</string>
 		</dict>
+		<key>Frameworks/libswiftVision.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			7Mmfd8NUG+5ucWEFNZ2Isu9o1Os=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"4c1cf8ece6dd17248f4c1fcce2bc16f9cc773ad4" or cdhash H"ecc99f77c3541bee6e716105359d88b2ef68d4eb"</string>
+		</dict>
 		<key>Frameworks/libswiftXPC.dylib</key>
 		<dict>
 			<key>cdhash</key>
@@ -207,6 +225,24 @@
 			</data>
 			<key>requirement</key>
 			<string>cdhash H"3406aab10f486b91c2d9334de341504de56a5631" or cdhash H"73e04119822f2d8cd5eeb426ddac2b2b98295def"</string>
+		</dict>
+		<key>Frameworks/libswiftsimd.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			yoevzZNzSjWnQqIYLmXdd/DhGvQ=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"a91aa60521c71dd382e53441689bc0970469be1b" or cdhash H"ca87afcd93734a35a742a2182e65dd77f0e11af4"</string>
+		</dict>
+		<key>Frameworks/mobile_scanner.framework</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			KByfyYOrX9cx844lbt3e1i5BGAY=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"281c9fc983ab5fd731f38e256eddded62e411806"</string>
 		</dict>
 		<key>Frameworks/path_provider_foundation.framework</key>
 		<dict>

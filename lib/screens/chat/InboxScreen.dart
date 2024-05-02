@@ -6,6 +6,7 @@ import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/widgets/navigation/mvp_nav_bar.dart';
 import 'package:stay_indie/screens/notification/notification_page.dart';
 import 'package:stay_indie/models/Chat.dart';
+import 'package:stay_indie/screens/qr_screen.dart';
 
 class InboxScreen extends StatefulWidget {
   InboxScreen({super.key});
@@ -36,11 +37,7 @@ class _InboxScreenState extends State<InboxScreen> {
       controller: _pageController,
       scrollDirection: Axis.horizontal,
       children: [
-        Scaffold(
-          body: Center(
-            child: Text('QR Scanner Page'),
-          ),
-        ),
+        QrCodePage(),
         Scaffold(
           bottomNavigationBar: BottomNavBar(pageIndex: 0),
           appBar: AppBar(
@@ -59,30 +56,55 @@ class _InboxScreenState extends State<InboxScreen> {
             child: SizedBox(
               height: 800,
               width: double.infinity,
-              child: ListView(
+              child: Stack(
                 children: [
-                  TopSearchBar(),
-                  for (var chat in chats)
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: chat.imageUrl == null
-                            ? null
-                            : NetworkImage(chat.imageUrl!),
-                        child: Text(chat.name.substring(0, 2)),
-                        radius: 30,
-                      ),
-                      title: Text(chat.name ?? "Unnamed ?? group chat"),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChatScreen(
-                                      chatInfo: chat,
-                                    )));
-                      },
-                      subtitle: Text('Hey, how are you?'),
-                      trailing: Text('12:00'),
-                    ),
+                  ListView(
+                    children: [
+                      TopSearchBar(),
+                      for (var chat in chats)
+                        ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: chat.imageUrl == null
+                                ? null
+                                : NetworkImage(chat.imageUrl!),
+                            child: chat.imageUrl == null
+                                ? Text(chat.name.substring(0, 2))
+                                : null,
+                            radius: 30,
+                          ),
+                          title: Text(chat.name ?? "Unnamed ?? group chat"),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChatScreen(
+                                          chatInfo: chat,
+                                        )));
+                          },
+                          subtitle: Text('Hey, how are you?'),
+                          trailing: Text('12:00'),
+                        ),
+                    ],
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    right: 0,
+                    left: 0,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            style: kPurpleButtonStyle,
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                Text('Request EPK'),
+                                Icon(Icons.add),
+                              ],
+                            ),
+                          ),
+                        ]),
+                  ),
                 ],
               ),
             ),

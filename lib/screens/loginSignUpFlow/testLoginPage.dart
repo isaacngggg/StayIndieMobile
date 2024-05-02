@@ -74,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
           ElevatedButton(
             onPressed: _isLoading ? null : _signIn,
             child: const Text('Login'),
+            style: kPrimaryButtonStyle,
           ),
         ],
       ),

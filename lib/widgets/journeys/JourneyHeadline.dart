@@ -18,45 +18,45 @@ class JourneyHeadline extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showCupertinoModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return SafeArea(
-                child: DefaultTextStyle(
-                  style: TextStyle(
-                      color: kPrimaryColour, decoration: TextDecoration.none),
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    color: kBackgroundColour,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(journey.title, style: kHeading2),
-                        Text(journey.organization, style: kBody1),
-                        Text(DateFormat('MMM yyyy').format(journey.startDate),
-                            style: kCaption1),
-                        Text(journey.description, style: kBody1),
-                        SizedBox(height: 20),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text('Edit'),
-                          style: kWiredButtonSmall,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Journey.deleteJourney(journey);
-                            Navigator.pop(context);
-                          },
-                          child: Text('Delete'),
-                          style: kDeleteButtonSmall,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            });
+        // showCupertinoModalBottomSheet(
+        //     context: context,
+        //     builder: (context) {
+        //       return SafeArea(
+        //         child: DefaultTextStyle(
+        //           style: TextStyle(
+        //               color: kPrimaryColour, decoration: TextDecoration.none),
+        //           child: Container(
+        //             padding: EdgeInsets.all(20),
+        //             color: kBackgroundColour,
+        //             child: Column(
+        //               crossAxisAlignment: CrossAxisAlignment.stretch,
+        //               mainAxisSize: MainAxisSize.min,
+        //               children: [
+        //                 Text(journey.title, style: kHeading2),
+        //                 Text(journey.organization, style: kBody1),
+        //                 Text(DateFormat('MMM yyyy').format(journey.startDate),
+        //                     style: kCaption1),
+        //                 Text(journey.description, style: kBody1),
+        //                 SizedBox(height: 20),
+        //                 TextButton(
+        //                   onPressed: () {},
+        //                   child: Text('Edit'),
+        //                   style: kWiredButtonSmall,
+        //                 ),
+        //                 TextButton(
+        //                   onPressed: () {
+        //                     Journey.deleteJourney(journey);
+        //                     Navigator.pop(context);
+        //                   },
+        //                   child: Text('Delete'),
+        //                   style: kDeleteButtonSmall,
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       );
+        //     });
       },
       child: Stack(
         children: [
@@ -71,7 +71,7 @@ class JourneyHeadline extends StatelessWidget {
                   backgroundImage: AssetImage('assets/amazon.png'),
                 ),
               ),
-              SizedBox(width: 10),
+              SizedBox(width: 20),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,11 +103,11 @@ class JourneyHeadline extends StatelessWidget {
             ],
           ),
           Positioned(
-            top: 40,
+            bottom: 6,
             left: 20,
             child: CustomPaint(
               size: Size(0, 0),
-              painter: LinePainter(height: 30),
+              painter: LinePainter(height: 40),
             ),
           ),
         ],

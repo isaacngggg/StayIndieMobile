@@ -13,7 +13,7 @@ import 'package:stay_indie/models/SingleFormPage.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:stay_indie/models/Project.dart';
 import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
-
+import 'package:stay_indie/widgets/images/ImageTile.dart';
 import 'package:timeago/timeago.dart';
 import 'package:intl/intl.dart';
 
@@ -45,6 +45,7 @@ class _StepperFormState extends State<StepperForm> {
     upperBound = widget
         .pages.length; // upperBound MUST BE total number of icons minus 1.
     // TODO: implement initState
+
     super.initState();
   }
 
@@ -125,12 +126,17 @@ class _StepperFormState extends State<StepperForm> {
 
   /// Returns the mainContent wrapping the mainContent text.
   Widget mainContent(var _networkImages) {
+    final gridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+    );
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(height: 130),
+          SizedBox(height: 60),
           SizedBox(
             height: 70,
             child: Stack(
@@ -253,6 +259,23 @@ class _StepperFormState extends State<StepperForm> {
                         style: GoogleFonts.ebGaramond(textStyle: kHeading2),
                         controller: currentPage.controller,
                         scrollPadding: EdgeInsets.all(10),
+                      ),
+                    if (currentPage.inputType == FormInputFieldType.grid)
+                      Expanded(
+                        child: GridView(gridDelegate: gridDelegate, children: [
+                          ImageTile(
+                            title: 'Music',
+                            image: 'assets/music.png',
+                          ),
+                          ImageTile(
+                            title: 'Film',
+                            image: 'assets/film.png',
+                          ),
+                          ImageTile(
+                            title: 'Freelance',
+                            image: 'assets/freelance.png',
+                          ),
+                        ]),
                       ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
+import 'package:stay_indie/screens/journeys/full_story_screen.dart';
 import 'package:stay_indie/screens/project/addProjectFlow/add_project_screen.dart';
 import 'package:stay_indie/widgets/journeys/JourneyHeadline.dart';
 import 'package:stay_indie/models/Journey.dart';
@@ -40,29 +41,36 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.antiAlias,
-      padding: const EdgeInsets.all(20.0),
-      decoration: kOutlineBorder,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('My Journey', style: kHeading2),
-              IconButton(
-                  icon: Icon(
-                    Icons.add,
-                  ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Journey Highlights', style: kHeading2),
+            CircleAvatar(
+                backgroundColor: Colors.deepPurple.shade300,
+                child: IconButton(
+                  icon: Icon(Icons.web_stories, color: Colors.white, size: 16),
                   onPressed: () {
-                    Navigator.pushNamed(context, AddJourneyPage.id);
-                  }),
-            ],
-          ),
-          SizedBox(height: 10),
-          StreamBuilder<List<Journey>>(
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return FullStoryPage(journeys: journeys);
+                    }));
+                  },
+                )
+                // I
+
+                ),
+          ],
+        ),
+        SizedBox(height: 10),
+        Container(
+          clipBehavior: Clip.antiAlias,
+          padding: const EdgeInsets.all(25.0),
+          decoration: kOutlineBorder,
+          child: StreamBuilder<List<Journey>>(
             stream: _JourneyStream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -87,8 +95,8 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
               }
             },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

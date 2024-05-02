@@ -87,7 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
               subtitle: Text(connection.headline),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return NewProfilePage(
+                  return ProfilePage(
                     profileId: connection.id,
                   );
                 }));

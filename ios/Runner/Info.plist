@@ -30,6 +30,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>io.supabase.flutterquickstart</string>
+				<string>fb1514861569095185</string>
 			</array>
 		</dict>
 	</array>
@@ -63,6 +64,17 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1514861569095185</string>
+	<key>FacebookClientToken</key>
+	<string>c76ef99d72c19bdb85757465c376dd93</string>
+	<key>FacebookDisplayName</key>
+	<string>Indiego</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	<string>fbapi</string>
+	<string>fb-messenger-share-api</string>
 	</array>
 </dict>
 </plist>

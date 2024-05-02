@@ -1,0 +1,11 @@
+framework module qr_bar_code_scanner_dialog {
+  umbrella header "qr_bar_code_scanner_dialog-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module qr_bar_code_scanner_dialog.Swift {
+  header "qr_bar_code_scanner_dialog-Swift.h"
+  requires objc
+}
