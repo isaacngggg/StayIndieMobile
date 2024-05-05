@@ -30,13 +30,18 @@ class BottomNavBar extends StatelessWidget {
       selectedIndex: pageIndex,
       destinations: [
         NavigationDestination(
-          icon: FaIcon(FontAwesomeIcons.comments),
-          selectedIcon: FaIcon(FontAwesomeIcons.solidComments),
+          icon: FaIcon(FontAwesomeIcons.comments, color: kPrimaryColour30),
+          selectedIcon:
+              FaIcon(FontAwesomeIcons.solidComments, color: kPrimaryColour),
           label: 'chats',
         ),
         NavigationDestination(
-          icon: FaIcon(FontAwesomeIcons.addressBook),
-          selectedIcon: FaIcon(FontAwesomeIcons.solidAddressBook),
+          icon: FaIcon(
+            FontAwesomeIcons.addressBook,
+            color: kPrimaryColour30,
+          ),
+          selectedIcon:
+              FaIcon(FontAwesomeIcons.solidAddressBook, color: kPrimaryColour),
           label: 'connections',
         ),
         NavigationDestination(
@@ -44,13 +49,13 @@ class BottomNavBar extends StatelessWidget {
             backgroundColor: Colors.transparent,
             radius: 19,
             child: CircleAvatarWBorder(
-                imageUrl: currentUserProfile!.profileImageUrl, radius: 16),
+                imageUrl: currentUserProfile.profileImageUrl, radius: 16),
           ),
           selectedIcon: CircleAvatar(
             backgroundColor: kAccentColour,
             radius: 19,
             child: CircleAvatarWBorder(
-              imageUrl: currentUserProfile!.profileImageUrl,
+              imageUrl: currentUserProfile.profileImageUrl,
               radius: 16,
             ),
           ),

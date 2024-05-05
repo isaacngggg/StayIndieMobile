@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/models/connections/Spotify/Spotify.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
 enum FormInputFieldType { text, number, date, media, grid }
 
@@ -22,24 +23,11 @@ String currentUserId = supabase.auth.currentUser != null
 
 late Profile currentUserProfile;
 
-// ThemeData theme = ThemeData.dark().copyWith(
-//   primaryColor: Colors.black,
-//   scaffoldBackgroundColor: Colors.black,
-//   highlightColor: Colors.white12,
-//   textTheme: GoogleFonts.poppinsTextTheme(),
-//   appBarTheme: AppBarTheme(
-//     iconTheme: IconThemeData(color: Colors.white), // if you want black icons
-//   ),
-//   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-//     backgroundColor: Colors.white,
-//     selectedItemColor:
-//         Colors.black, // if you want selected item color to be black
-//     unselectedItemColor:
-//         Colors.grey, // if you want unselected item color to be grey
-//   ),
-// );
-
 ThemeData theme = ThemeData.dark().copyWith(
+  colorScheme: ColorScheme.dark(
+    primary: kPrimaryColour,
+    secondary: kPrimaryColour90,
+  ),
   primaryColor: Colors.black,
   scaffoldBackgroundColor: Colors.black,
   highlightColor: Colors.white12,
@@ -50,20 +38,23 @@ ThemeData theme = ThemeData.dark().copyWith(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.transparent,
-    selectedItemColor:
-        Colors.black, // if you want selected item color to be black
-    unselectedItemColor:
-        Colors.grey, // if you want unselected item color to be grey
+    selectedIconTheme: IconThemeData(color: kPrimaryColour),
+    selectedItemColor: kPrimaryColour,
+    unselectedItemColor: kPrimaryColour80,
   ),
 );
 
-Color kPrimaryColour = Colors.grey.shade900;
-Color kPrimaryColour80 = Colors.grey.shade800;
-Color kPrimaryColour70 = Colors.grey.shade700;
-Color kPrimaryColour60 = Colors.grey.shade600;
-Color kPrimaryColour50 = Colors.grey.shade500;
-Color kPrimaryColour40 = Colors.grey.shade400;
-const Color kPrimaryColour20 = Color(0xFF313131);
+// Colors
+
+const Color kPrimaryColour = Color(0xFFFAFAFA);
+const Color kPrimaryColour20 = Color(0xFFf5f5f5);
+const Color kPrimaryColour30 = Color(0xFFe0e0e0);
+const Color kPrimaryColour40 = Color(0xFfcccccccc);
+const Color kPrimaryColour50 = Color(0xFFb3b3b3);
+const Color kPrimaryColour60 = Color(0xFF999999);
+const Color kPrimaryColour70 = Color(0xFF808080);
+const Color kPrimaryColour80 = Color(0xFF666666);
+const Color kPrimaryColour90 = Color(0xFF313131);
 
 const Color kBackgroundColour = Color(0xFF000000);
 const Color kBackgroundColour10 = Color(0xFF1F1E1E);
@@ -72,6 +63,51 @@ const Color kBackgroundColour20 = Color(0xFF333333);
 Color kAccentColour = Colors.deepPurple.shade400;
 Color kAccentColour10 = Colors.deepPurple.shade100.withAlpha(50);
 Color kAccentColour20 = Colors.deepPurple.shade200;
+
+// Button Styles
+
+// Large Buttons
+
+ButtonStyle kPrimaryButtonStyle = ButtonStyle(
+  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+    EdgeInsets.symmetric(vertical: 20.0),
+  ),
+  foregroundColor: MaterialStateProperty.all<Color>(kBackgroundColour),
+  backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColour),
+  overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour80),
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+  ),
+);
+
+ButtonStyle kOutlinedButtonStyle = ButtonStyle(
+  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+    EdgeInsets.symmetric(vertical: 20.0),
+  ),
+  foregroundColor: MaterialStateProperty.all<Color>(kPrimaryColour),
+  overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour20),
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+  ),
+);
+
+ButtonStyle kTextButtonStyle = ButtonStyle(
+  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+    EdgeInsets.symmetric(vertical: 20.0),
+  ),
+  foregroundColor: MaterialStateProperty.all<Color>(kPrimaryColour70),
+  backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+  overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour80),
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+  ),
+);
 
 ButtonStyle kSecondaryButtonStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.all(kAccentColour10),
@@ -82,18 +118,19 @@ ButtonStyle kSecondaryButtonStyle = ButtonStyle(
   ),
 );
 
-ButtonStyle kWiredButtonSmall = ButtonStyle(
-  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+// Small Buttons
+
+ButtonStyle kSmallButtonStyle = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(kAccentColour),
+  foregroundColor: MaterialStateProperty.all(kBackgroundColour20),
+  shape: MaterialStateProperty.all(
     RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(13.0),
-      side: BorderSide(color: kPrimaryColour20, width: 1),
+      borderRadius: BorderRadius.circular(10),
     ),
   ),
-  foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-  backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
 );
 
-ButtonStyle kDeleteButtonSmall = ButtonStyle(
+ButtonStyle kSmallDeleteButton = ButtonStyle(
   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
     RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(13.0),
@@ -102,24 +139,6 @@ ButtonStyle kDeleteButtonSmall = ButtonStyle(
   ),
   foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
   backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade100),
-);
-
-ButtonStyle kPurpleButtonStyle = ButtonStyle(
-  backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
-  shape: MaterialStateProperty.all(
-    RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-  ),
-);
-
-ButtonStyle kPrimaryButtonStyle = ButtonStyle(
-  backgroundColor: MaterialStateProperty.all(kAccentColour),
-  shape: MaterialStateProperty.all(
-    RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(25),
-    ),
-  ),
 );
 
 ButtonStyle kPrimaryButtonSmall = ButtonStyle(
@@ -140,6 +159,48 @@ final preloader = Scaffold(
     ),
   ),
 );
+
+// Input Fields
+
+BoxDecoration kMultiInputBoxDecoraction = BoxDecoration(
+  border: Border.all(color: kPrimaryColour50, width: 2),
+  borderRadius: BorderRadius.circular(15),
+);
+
+Divider kDivider = Divider(
+  height: 1,
+  color: kPrimaryColour80,
+  thickness: 1,
+);
+
+InputDecoration kPlainTextFieldDecoration = InputDecoration(
+  contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+  border: InputBorder.none,
+  labelStyle: TextStyle(
+    color: kPrimaryColour,
+  ),
+);
+
+InputDecoration kBoxedTextFieldDecoration = InputDecoration(
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kPrimaryColour50),
+    borderRadius: BorderRadius.circular(15),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kPrimaryColour50),
+    borderRadius: BorderRadius.circular(15),
+  ),
+  labelStyle: TextStyle(
+    color: kPrimaryColour,
+  ),
+);
+
+InputDecoration kLinedTextFieldDecoration = InputDecoration(
+  labelStyle: GoogleFonts.ebGaramond(textStyle: kSubheading1),
+  floatingLabelBehavior: FloatingLabelBehavior.never,
+);
+
+// Text Styles
 
 TextStyle kButtonTextStyle = TextStyle(
   fontSize: 20,
@@ -207,9 +268,9 @@ BoxDecoration kSelectedOutlineBorder = BoxDecoration(
   borderRadius: BorderRadius.all(Radius.circular(20)),
 );
 
-Border kOutlineLight = Border.all(color: kPrimaryColour20, width: 1);
+Border kOutlineLight = Border.all(color: kPrimaryColour90, width: 1);
 
-Border kOutlineBold = Border.all(color: kPrimaryColour, width: 2);
+Border kOutlineBold = Border.all(color: kPrimaryColour90, width: 2);
 
 extension ShowSnackBar on BuildContext {
   /// Displays a basic snackbar

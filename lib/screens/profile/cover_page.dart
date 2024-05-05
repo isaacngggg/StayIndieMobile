@@ -8,6 +8,7 @@ import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:stay_indie/widgets/social/SocialMetricList.dart';
 import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/models/ConnectionRequest.dart';
+import 'package:stay_indie/widgets/profile/CoverButton.dart';
 
 class ProfileCoverPage extends StatefulWidget {
   const ProfileCoverPage({
@@ -34,20 +35,6 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
     widget.userProfile.connectionsProfileIds.contains(currentUserId)
         ? isConnected = true
         : isConnected = false;
-
-    supabase
-        .from('connection_requests')
-        .select()
-        .eq('request_profile_id', currentUserId)
-        .eq('target_profile_id', widget.userProfile.id)
-        .then((value) => requestPending = value.isNotEmpty);
-
-    supabase
-        .from('connection_requests')
-        .select()
-        .eq('request_profile_id', currentUserId)
-        .eq('target_profile_id', widget.userProfile.id)
-        .then((value) => recievedRequest = value.isNotEmpty);
 
     super.initState();
   }
@@ -123,7 +110,7 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                                     return ProfileEditPage();
                                   }));
                                 },
-                                style: kPurpleButtonStyle,
+                                style: kSmallButtonStyle,
                                 child: Text(
                                   'Edit Profile',
                                   style: TextStyle(
@@ -134,8 +121,8 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                                   ),
                                 ),
                               )
-                            : coverPageButton(
-                                widget.userProfile, true, () {})), // Add this
+                            : CoverButton(
+                                userProfile: widget.userProfile)), // Add this
                     SizedBox(width: 10),
                     IconButton(
                         icon: FaIcon(FontAwesomeIcons.paperPlane),
@@ -234,73 +221,43 @@ class GradientShadowOverlay extends StatelessWidget {
 
 coverPageButton(Profile userProfile, bool isConnected, Function followUser) {
   if (isConnected) {
-    return Row(
-      children: [
-        Expanded(
-          child: TextButton(
-            onPressed: () {
-              followUser();
-            },
-            style: kSecondaryButtonStyle,
-            child: Text(
-              'Connected',
-              style: TextStyle(
-                color: Colors.green,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+    return Expanded(
+      child: TextButton(
+        onPressed: () {
+          followUser();
+        },
+        style: kSecondaryButtonStyle,
+        child: Text(
+          'Connected',
+          style: TextStyle(
+            color: Colors.green,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
           ),
         ),
-      ],
+      ),
     );
   } else {
-    return Row(
-      children: [
-        TextButton(
-          onPressed: () {
-            followUser();
-          },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.grey),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-          child: Text(
-            'Follow',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
+    return TextButton(
+      onPressed: () {
+        followUser();
+      },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.grey),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
-        SizedBox(width: 10),
-        TextButton(
-          onPressed: () {
-            followUser();
-          },
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.grey),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-          child: Text(
-            'Message',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+      ),
+      child: Text(
+        'Follow',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
         ),
-      ],
+      ),
     );
   }
 }

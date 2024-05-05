@@ -162,7 +162,15 @@ class _MessageBarState extends State<_MessageBar> {
               ),
               IconButton(
                 onPressed: () => _submitMessage(),
-                icon: const Icon(Icons.send),
+                icon: CircleAvatar(
+                  radius: 16,
+                  backgroundColor: kAccentColour,
+                  child: const Icon(
+                    Icons.send,
+                    size: 16,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           ),

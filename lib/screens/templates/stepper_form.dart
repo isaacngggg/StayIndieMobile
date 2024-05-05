@@ -288,7 +288,7 @@ class _StepperFormState extends State<StepperForm> {
                               ? TextButton(
                                   onPressed: () {},
                                   child: Text('Restart'),
-                                  style: kDeleteButtonSmall,
+                                  style: kSmallDeleteButton,
                                 )
                               : SizedBox(),
                           Spacer(),

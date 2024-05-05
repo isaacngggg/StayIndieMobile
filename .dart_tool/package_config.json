@@ -434,6 +434,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/isaacng/.pub-cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "oauth2",
       "rootUri": "file:///Users/isaacng/.pub-cache/hosted/pub.dev/oauth2-2.0.2",
       "packageUri": "lib/",
@@ -510,6 +516,12 @@
       "rootUri": "file:///Users/isaacng/.pub-cache/hosted/pub.dev/pretty_qr_code-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/isaacng/.pub-cache/hosted/pub.dev/provider-6.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "qr",
@@ -812,7 +824,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-01T16:35:51.852234Z",
+  "generated": "2024-05-05T10:21:40.141371Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

@@ -73,7 +73,7 @@ class _StoryScreenState extends State<StoryScreen> {
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       border: Border(
-                          left: BorderSide(color: kPrimaryColour40, width: 2))),
+                          left: BorderSide(color: kPrimaryColour20, width: 2))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

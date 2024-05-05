@@ -97,7 +97,6 @@ class ContentPage extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(top: 20),
                 decoration: BoxDecoration(
                     gradient: RadialGradient(
                       colors: [userProfile.profileColor, kBackgroundColour],
@@ -141,7 +140,7 @@ class ContentPage extends StatelessWidget {
                                       padding: EdgeInsets.symmetric(
                                           vertical: 0, horizontal: 20),
                                       children: [
-                                        SizedBox(height: 15),
+                                        SizedBox(height: 35),
                                         if (topTrack != null) ...[
                                           Column(
                                             crossAxisAlignment:
@@ -208,6 +207,7 @@ class ContentPage extends StatelessWidget {
                                             SizedBox(
                                               height: 56,
                                               child: ListView(
+                                                clipBehavior: Clip.none,
                                                 shrinkWrap: true,
                                                 scrollDirection:
                                                     Axis.horizontal,

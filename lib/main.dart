@@ -34,13 +34,6 @@ Future<void> main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYXdqanN4aWJjbHVxZGdmeXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDYyODMyNjIsImV4cCI6MjAyMTg1OTI2Mn0.O1P24fO0gGhLF2-T5XVcl256x_AHiR-eXn-K8Tko2Ng',
   );
-
-  await Profile.getProfileData(currentUserId).then((profile) {
-    if (profile != null) {
-      currentUserProfile = profile;
-    }
-  });
-
   try {
     runApp(const MainApp());
   } catch (e) {

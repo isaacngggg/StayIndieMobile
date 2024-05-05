@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -61,42 +62,46 @@ class _RegisterPageState extends State<RegisterPage> {
         child: ListView(
           padding: formPadding,
           children: [
-            TextFormField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                label: Text('Email'),
+            Container(
+              decoration: kMultiInputBoxDecoraction,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: _emailController,
+                    decoration:
+                        kPlainTextFieldDecoration.copyWith(labelText: 'Email'),
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
+                        return 'Required';
+                      }
+                      return null;
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  kDivider,
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: kPlainTextFieldDecoration.copyWith(
+                        labelText: 'Password'),
+                    validator: (val) {
+                      if (val == null || val.isEmpty) {
+                        return 'Required';
+                      }
+                      if (val.length < 6) {
+                        return '6 characters minimum';
+                      }
+                      return null;
+                    },
+                  ),
+                ],
               ),
-              validator: (val) {
-                if (val == null || val.isEmpty) {
-                  return 'Required';
-                }
-                return null;
-              },
-              keyboardType: TextInputType.emailAddress,
-            ),
-            formSpacer,
-            TextFormField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                label: Text('Password'),
-              ),
-              validator: (val) {
-                if (val == null || val.isEmpty) {
-                  return 'Required';
-                }
-                if (val.length < 6) {
-                  return '6 characters minimum';
-                }
-                return null;
-              },
             ),
             formSpacer,
             TextFormField(
               controller: _usernameController,
-              decoration: const InputDecoration(
-                label: Text('Username'),
-              ),
+              decoration:
+                  kBoxedTextFieldDecoration.copyWith(labelText: 'Username'),
               validator: (val) {
                 if (val == null || val.isEmpty) {
                   return 'Required';
@@ -109,18 +114,17 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             ),
             formSpacer,
-            ElevatedButton(
+            TextButton(
+              style: kPrimaryButtonStyle,
               onPressed: _isLoading ? null : _signUp,
               child: const Text('Register'),
             ),
-            PrimaryButton(
-              text: 'Register',
-              onPressed: _isLoading ? null : _signUp,
-            ),
             formSpacer,
             TextButton(
+              style: kTextButtonStyle,
               onPressed: () {
-                Navigator.of(context).pushNamed(LoginPage.id);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, LoginPage.id, (route) => false);
               },
               child: const Text('I already have an account'),
             )

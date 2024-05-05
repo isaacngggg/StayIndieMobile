@@ -124,8 +124,8 @@ class Profile {
     }
     try {
       final response = await supabase.from('profiles').update({
-        'connections': supabase
-            .rpc('array_append(connections, ${request.requestProfileId})'),
+        'connections':
+            supabase.rpc('array_append(connections, ${request.senderId})'),
       }).eq('profile_id', user.id);
       await supabase.from('connection_requests').delete().eq('id', request.id);
     } catch (e) {

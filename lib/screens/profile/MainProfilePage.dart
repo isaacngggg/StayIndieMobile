@@ -75,8 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return FutureBuilder<Profile>(
         future: userProfile,
-        builder:
-            (BuildContext context, AsyncSnapshot<Profile> profileSnapshot) {
+        builder: (context, AsyncSnapshot<Profile> profileSnapshot) {
           if (profileSnapshot.connectionState == ConnectionState.waiting) {
             return preloader; // or your custom loader
           } else if (profileSnapshot.hasError) {

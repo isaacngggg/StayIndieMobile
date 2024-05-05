@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'SplashScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'testRegisterPage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -55,26 +57,69 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign In')),
-      body: ListView(
-        padding: formPadding,
+      body: Stack(
         children: [
-          TextFormField(
-            controller: _emailController,
-            decoration: const InputDecoration(labelText: 'Email'),
-            keyboardType: TextInputType.emailAddress,
-          ),
-          formSpacer,
-          TextFormField(
-            controller: _passwordController,
-            decoration: const InputDecoration(labelText: 'Password'),
-            obscureText: true,
-          ),
-          formSpacer,
-          ElevatedButton(
-            onPressed: _isLoading ? null : _signIn,
-            child: const Text('Login'),
-            style: kPrimaryButtonStyle,
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: Container(
+              // clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(32.0),
+                    topRight: Radius.circular(32.0),
+                  ),
+                  color: kBackgroundColour10),
+              padding: EdgeInsets.all(16.0),
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'Login',
+                      style: kHeading1,
+                    ),
+                    formSpacer,
+                    Container(
+                      decoration: kMultiInputBoxDecoraction,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: _emailController,
+                            decoration: kPlainTextFieldDecoration.copyWith(
+                                labelText: 'Email'),
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          kDivider,
+                          TextFormField(
+                            controller: _passwordController,
+                            decoration: kPlainTextFieldDecoration.copyWith(
+                                labelText: 'Password'),
+                            obscureText: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                    formSpacer,
+                    TextButton(
+                      onPressed: _isLoading ? null : _signIn,
+                      child: const Text('Login'),
+                      style: kPrimaryButtonStyle,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, RegisterPage.id, (route) => false);
+                      },
+                      child: const Text('Register'),
+                      style: kTextButtonStyle,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),

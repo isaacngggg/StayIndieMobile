@@ -6,6 +6,9 @@ import 'package:stay_indie/screens/loginSignUpFlow/LoginScreen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/SignUpScreen.dart';
 import 'package:stay_indie/constants.dart';
 
+import 'package:stay_indie/models/Profile.dart';
+import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
+
 /// Page to redirect users to the appropriate page depending on the initial auth state
 class SplashScreen extends StatefulWidget {
   static const id = 'splashscreen';
@@ -29,8 +32,13 @@ class SplashScreenState extends State<SplashScreen> {
     final session = supabase.auth.currentSession;
     if (session == null) {
       Navigator.of(context)
-          .pushNamedAndRemoveUntil(LoginScreen.id, (route) => false);
+          .pushNamedAndRemoveUntil(LoginPage.id, (route) => false);
     } else {
+      await Profile.getProfileData(currentUserId).then((profile) {
+        if (profile != null) {
+          currentUserProfile = profile;
+        }
+      });
       Navigator.of(context)
           .pushNamedAndRemoveUntil(InboxScreen.id, (route) => false);
     }

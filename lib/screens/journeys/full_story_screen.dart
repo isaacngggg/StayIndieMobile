@@ -71,7 +71,7 @@ class FullStoryPage extends StatelessWidget {
                                   child: CircleAvatar(
                                     radius: Curves.easeOut.transform(value) *
                                         30, // or the size you want
-                                    backgroundColor: kPrimaryColour40,
+                                    backgroundColor: kPrimaryColour20,
                                     child: CircleAvatar(
                                       radius: Curves.easeOut.transform(value) *
                                           (30 -
