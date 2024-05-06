@@ -11,6 +11,8 @@ class Project {
   final List<String>? collaborators;
   final List<String>? tags;
 
+  static Map<String, Future<List<Project>>> _projectCache = {};
+
   Project({
     required this.id,
     required this.title,
@@ -36,18 +38,25 @@ class Project {
 
   static Future<List<Project>> getProfileProjects(profileID) async {
     try {
-      final response =
-          await supabase.from('projects').select().eq('profile_id', profileID);
+      if (_projectCache[profileID] != null) {
+        return _projectCache[profileID]!;
+      } else {
+        final response = await supabase
+            .from('projects')
+            .select()
+            .eq('profile_id', profileID);
 
-      if (response.isEmpty) {
-        print('No projects found');
-        return [];
+        if (response.isEmpty) {
+          print('No projects found');
+          return [];
+        }
+        List<Project> projects = [];
+        for (var project in response.toList()) {
+          projects.add(Project.fromMap(project));
+        }
+        _projectCache[profileID] = Future.value(projects);
+        return projects;
       }
-      List<Project> projects = [];
-      for (var project in response.toList()) {
-        projects.add(Project.fromMap(project));
-      }
-      return projects;
     } catch (e) {
       print('error here !');
       print('Error' + e.toString());

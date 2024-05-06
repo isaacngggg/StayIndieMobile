@@ -55,20 +55,3 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 }
-
-class NoAnimationRoute<T> extends MaterialPageRoute<T> {
-  NoAnimationRoute({
-    required WidgetBuilder builder,
-    RouteSettings? settings,
-  }) : super(builder: builder, settings: settings);
-
-  @override
-  Widget buildTransitions(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
-  ) {
-    return child;
-  }
-}

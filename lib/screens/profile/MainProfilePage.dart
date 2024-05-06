@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:stay_indie/constants.dart';
@@ -27,30 +29,16 @@ class _ProfilePageState extends State<ProfilePage> {
   double _appBarOpacity = 0.0;
   late bool _showAppBar;
   late PageController _pageController;
-  late final Stream<List<Project>> _projectStream;
   late Future<Profile> userProfile;
 
-  List userProjects = [];
+  late Future<List<Project>> userProjects;
   Track? topTrack;
   @override
   void initState() {
     var profileId = widget.profileId;
-    _projectStream = supabase
-        .from('projects')
-        .stream(primaryKey: ['id'])
-        .eq('profile_id', profileId)
-        // .order('created_at')
-        .map((maps) {
-          return maps.map((map) => Project.fromMap(map)).toList();
-        });
 
     userProfile = Profile.getProfileData(profileId);
-
-    Project.getProfileProjects(profileId).then((value) {
-      setState(() {
-        userProjects = value;
-      });
-    });
+    userProjects = Project.getProfileProjects(profileId);
 
     //UI work
     _showAppBar = widget.selfProfile;
@@ -98,8 +86,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ProfileCoverPage(
                       profileUrl: profileUrl,
                       userProfile: profileSnapshot.data!),
-                  StreamBuilder<List<Project>>(
-                    stream: _projectStream,
+                  FutureBuilder<List<Project>>(
+                    future: userProjects,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         var projects = snapshot.data!;

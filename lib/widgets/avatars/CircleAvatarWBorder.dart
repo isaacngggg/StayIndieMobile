@@ -9,7 +9,7 @@ class CircleAvatarWBorder extends StatelessWidget {
   const CircleAvatarWBorder({
     required this.imageUrl,
     this.radius = 10,
-    this.borderColor = kPrimaryColour20,
+    this.borderColor = kPrimaryColour80,
     super.key,
   });
 

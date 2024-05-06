@@ -8,7 +8,7 @@ import 'package:stay_indie/widgets/navigation/mvp_nav_bar.dart';
 import 'package:stay_indie/screens/notification/notification_page.dart';
 import 'package:stay_indie/models/Chat.dart';
 import 'package:stay_indie/screens/qr_screen.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:stay_indie/widgets/GRBottomSheet.dart';
 
 class InboxScreen extends StatefulWidget {
   InboxScreen({super.key});
@@ -96,55 +96,85 @@ class _InboxScreenState extends State<InboxScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                            style: kSmallButtonStyle,
+                            style: kSmallAccentButtonStyle,
                             onPressed: () {
-                              showMaterialModalBottomSheet(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                enableDrag: true,
-                                context: context,
-                                builder: (context) => Container(
-                                  padding: EdgeInsets.all(20),
-                                  child: Wrap(
-                                    children: [
-                                      SafeArea(
-                                        top: false,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            formSpacer,
-                                            Text(
-                                              'Request EPK',
-                                              style: kHeading2,
-                                            ),
-                                            formSpacer,
-                                            Text(
-                                              "We'll send a request to the artist to share their EPK with you via your email.",
-                                              style: kBody1,
-                                            ),
-                                            formSpacer,
-                                            TextFormField(
-                                              decoration:
-                                                  kBoxedTextFieldDecoration
-                                                      .copyWith(
-                                                          labelText: 'Email'),
-                                            ),
-                                            formSpacer,
-                                            TextButton(
-                                                child: Text('Send Request'),
-                                                style: kSmallButtonStyle,
-                                                onPressed: () {}),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              GRBottomSheet.buildBottomSheet(
+                                context,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    formSpacer,
+                                    Text(
+                                      'Request EPK',
+                                      style: kHeading2,
+                                    ),
+                                    formSpacer,
+                                    Text(
+                                      "We'll send a request to the artist to share their EPK with you via your email.",
+                                      style: kBody1,
+                                    ),
+                                    formSpacer,
+                                    TextFormField(
+                                      decoration: kBoxedTextFieldDecoration
+                                          .copyWith(labelText: 'Email'),
+                                    ),
+                                    formSpacer,
+                                    TextButton(
+                                        child: Text('Send Request'),
+                                        style: kSmallAccentButtonStyle,
+                                        onPressed: () {}),
+                                  ],
                                 ),
                               );
+                              // showMaterialModalBottomSheet(
+                              //   shape: RoundedRectangleBorder(
+                              //     borderRadius: BorderRadius.circular(20),
+                              //   ),
+                              //   enableDrag: true,
+                              //   context: context,
+                              //   builder: (context) => Container(
+                              //     padding: EdgeInsets.all(20),
+                              //     child: Wrap(
+                              //       children: [
+                              //         SafeArea(
+                              //           top: false,
+                              //           child: Column(
+                              //             mainAxisAlignment:
+                              //                 MainAxisAlignment.start,
+                              //             crossAxisAlignment:
+                              //                 CrossAxisAlignment.stretch,
+                              //             children: [
+                              //               formSpacer,
+                              //               Text(
+                              //                 'Request EPK',
+                              //                 style: kHeading2,
+                              //               ),
+                              //               formSpacer,
+                              //               Text(
+                              //                 "We'll send a request to the artist to share their EPK with you via your email.",
+                              //                 style: kBody1,
+                              //               ),
+                              //               formSpacer,
+                              //               TextFormField(
+                              //                 decoration:
+                              //                     kBoxedTextFieldDecoration
+                              //                         .copyWith(
+                              //                             labelText: 'Email'),
+                              //               ),
+                              //               formSpacer,
+                              //               TextButton(
+                              //                   child: Text('Send Request'),
+                              //                   style: kSmallButtonStyle,
+                              //                   onPressed: () {}),
+                              //             ],
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // );
                             },
                             child: Row(
                               children: [

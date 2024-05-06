@@ -24,17 +24,30 @@ class ProjectMediaCarousel extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(right: 10),
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                color: kPrimaryColour80,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Container(
+                margin: EdgeInsets.all(1),
                 clipBehavior: Clip.antiAlias,
-                margin: EdgeInsets.only(right: 10),
-                decoration: kOutlineBorder.copyWith(color: Colors.white),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Image(
                   image: NetworkImage(_networkImages[index]),
                   fit: BoxFit.fitHeight,
-                )
-                // Image.network(_networkImages[index]).fit(BoxFit.contain),
                 ),
+              ),
+            ),
             onTap: () {
               showImageViewerPager(
+                swipeDismissible: true,
+                backgroundColor: kBackgroundColour,
+                useSafeArea: true,
                 context,
                 MultiImageProvider(_networkImages
                     .map((image) => NetworkImage(image))

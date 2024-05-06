@@ -9,7 +9,7 @@ class LinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = kPrimaryColour20
+      ..color = kPrimaryColour90
       ..strokeWidth = 1;
 
     canvas.drawLine(Offset(0, 0), Offset(0, height), paint);
@@ -27,7 +27,7 @@ class LinePainterHoriztonal extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = kPrimaryColour20
+      ..color = kPrimaryColour90
       ..strokeWidth = 2;
 
     canvas.drawLine(Offset(-width, 0), Offset(width, 0), paint);

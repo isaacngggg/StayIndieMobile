@@ -73,7 +73,7 @@ class _ChatInfoScreenState extends State<ChatInfoScreen> {
                                     .contains(profile.id)
                             ? null
                             : TextButton(
-                                style: kPrimaryButtonSmall,
+                                style: kSmallPrimaryButtonStyle,
                                 child: Text('Follow'),
                                 onPressed: () => null,
                               )),

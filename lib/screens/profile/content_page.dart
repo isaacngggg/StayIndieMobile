@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'package:stay_indie/models/Profile.dart';
+import 'package:stay_indie/models/ProfileProvider.dart';
 import 'package:stay_indie/models/SingleFormPage.dart';
 import 'package:stay_indie/screens/templates/stepper_form.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
@@ -54,47 +56,11 @@ class ContentPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              color: kBackgroundColour,
-              child: SafeArea(
-                bottom: false,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text(
-                          userProfile.name,
-                          style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(_appBarOpacity),
-                          ),
-                        ),
-                      ),
-                      Opacity(
-                        opacity: _appBarOpacity,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 3, right: 10),
-                          child: GestureDetector(
-                            onTap: () {
-                              _pageController.animateToPage(0,
-                                  duration: Duration(milliseconds: 500),
-                                  curve: Curves.easeInOut);
-                            },
-                            child: CircleAvatarWBorder(
-                                imageUrl: profileUrl, radius: 18),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            TopBar(
+                userProfile: userProfile,
+                appBarOpacity: _appBarOpacity,
+                pageController: _pageController,
+                profileUrl: profileUrl),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -138,7 +104,7 @@ class ContentPage extends StatelessWidget {
                                   Container(
                                     child: ListView(
                                       padding: EdgeInsets.symmetric(
-                                          vertical: 0, horizontal: 20),
+                                          vertical: 0, horizontal: 16),
                                       children: [
                                         SizedBox(height: 35),
                                         if (topTrack != null) ...[
@@ -314,6 +280,57 @@ class ContentPage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class TopBar extends StatelessWidget {
+  const TopBar({
+    super.key,
+    required this.userProfile,
+    required double appBarOpacity,
+    required PageController pageController,
+    required this.profileUrl,
+  })  : _appBarOpacity = appBarOpacity,
+        _pageController = pageController;
+
+  final Profile userProfile;
+  final double _appBarOpacity;
+  final PageController _pageController;
+  final String profileUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _pageController.animateToPage(0,
+            duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+      },
+      child: Container(
+        color: kBackgroundColour,
+        child: SafeArea(
+          bottom: false,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Opacity(
+              opacity: _appBarOpacity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Hero(
+                    tag: 'profilePic',
+                    child:
+                        CircleAvatarWBorder(imageUrl: profileUrl, radius: 18),
+                  ),
+                  Text(userProfile.name, style: kHeading2),
+                  SizedBox(width: 36),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

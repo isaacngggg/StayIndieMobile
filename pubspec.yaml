@@ -37,6 +37,7 @@ dependencies:
   indexed_list_view: ^3.0.2
   loading_animation_widget: ^1.2.1
   provider: ^6.1.2
+  shared_preferences: ^2.2.3
   
 
 

@@ -51,30 +51,25 @@ class _CoverButtonState extends State<CoverButton> {
                 return TextButton(
                   onPressed: () {},
                   child: Text('Request Pending'),
-                  style: kSmallButtonStyle.copyWith(
-                    backgroundColor:
-                        MaterialStateProperty.all(kBackgroundColour20),
-                    foregroundColor:
-                        MaterialStateProperty.all(kPrimaryColour20),
-                  ),
+                  style: kSmallSecondaryButtonStyle,
                 );
               } else if (receivedRequest) {
                 return TextButton(
                   onPressed: () {},
                   child: Text('Accept Request'),
-                  style: kSmallButtonStyle,
+                  style: kSmallAccentButtonStyle,
                 );
               } else if (isConnected) {
                 return TextButton(
                   onPressed: () {},
                   child: Text('Connected'),
-                  style: kSmallButtonStyle,
+                  style: kSmallSecondaryButtonStyle,
                 );
               } else {
                 return TextButton(
                   onPressed: () {},
                   child: Text('Connect'),
-                  style: kSmallButtonStyle,
+                  style: kSmallPrimaryButtonStyle,
                 );
               }
             }
@@ -82,10 +77,7 @@ class _CoverButtonState extends State<CoverButton> {
             return TextButton(
               onPressed: () {},
               child: Text('Loading'),
-              style: kSmallButtonStyle.copyWith(
-                backgroundColor: MaterialStateProperty.all(kBackgroundColour20),
-                foregroundColor: MaterialStateProperty.all(kPrimaryColour20),
-              ),
+              style: kSmallDisableButton,
             );
           }
         });

@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:image_picker/image_picker.dart';
+import 'package:stay_indie/widgets/images/UploadButton.dart';
 
 import 'package:im_stepper/stepper.dart';
 import 'package:stay_indie/models/SingleFormPage.dart';
@@ -125,7 +125,7 @@ class _StepperFormState extends State<StepperForm> {
   }
 
   /// Returns the mainContent wrapping the mainContent text.
-  Widget mainContent(var _networkImages) {
+  Widget mainContent(var networkImages) {
     final gridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
       crossAxisSpacing: 10,
@@ -150,7 +150,7 @@ class _StepperFormState extends State<StepperForm> {
                       enableNextPreviousButtons: false,
                       lineLength: 10,
                       lineColor: Colors.transparent,
-                      stepColor: Colors.black,
+                      stepColor: kPrimaryColour,
                       stepRadius: 5,
                       stepPadding: 0,
                       // stepReachedAnimationEffect: Curves.bounceOut,
@@ -159,7 +159,7 @@ class _StepperFormState extends State<StepperForm> {
                       activeStepBorderWidth: 0,
                       activeStepBorderPadding: 0,
                       activeStepBorderColor: Colors.transparent,
-                      activeStepColor: Colors.white,
+                      activeStepColor: kBackgroundColour,
                       icons: icons,
 
                       // activeStep property set to activeStep variable defined above.
@@ -182,7 +182,8 @@ class _StepperFormState extends State<StepperForm> {
             child: Text(
               currentPage.titleQuestion,
               style: GoogleFonts.ebGaramond(
-                  textStyle: kHeading1.copyWith(height: 1.1)),
+                  textStyle:
+                      kHeading1.copyWith(height: 1.1, color: kPrimaryColour)),
             ),
           ),
           SizedBox(height: 10),
@@ -190,7 +191,9 @@ class _StepperFormState extends State<StepperForm> {
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Text(
               currentPage.suportingText,
-              style: kSubheading2.copyWith(color: Colors.grey.shade700),
+              style: kSubheading2.copyWith(
+                color: kPrimaryColour50,
+              ),
             ),
           ),
           SizedBox(height: 10),
@@ -204,35 +207,13 @@ class _StepperFormState extends State<StepperForm> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (currentPage.inputType == FormInputFieldType.media) ...[
-                      TextButton(
-                        child: Text('Upload'),
-                        onPressed: () async {
-                          final ImagePicker picker = ImagePicker();
-                          final XFile? image = await picker.pickImage(
-                              source: ImageSource.gallery);
-                          if (image == null) return;
-                          final imageBytes = await image.readAsBytes();
-
-                          final imagePath =
-                              '/$currentUserId/$_newProjectId/images/${DateTime.now()}.png';
-                          await supabase.storage
-                              .from('project_medias')
-                              .uploadBinary(imagePath, imageBytes)
-                              .whenComplete(() async {
-                            print('Image uploaded');
-                            final url = await supabase.storage
-                                .from('project_medias')
-                                .getPublicUrl(imagePath);
-                            print('url got');
-                            setState(() {
-                              print(url);
-                              _networkImages.add(url);
-                            });
-                          });
-                        },
-                        style: kPrimaryButtonSmall,
-                      ),
-                      ProjectMediaCarousel(networkImages: _networkImages),
+                      UploadButton(
+                          bucket: 'project_medias',
+                          itemId: _newProjectId,
+                          updateNetworkImagesFunc: (url) => setState(() {
+                                networkImages.add(url);
+                              })),
+                      ProjectMediaCarousel(networkImages: networkImages),
                     ],
                     if (currentPage.inputType == FormInputFieldType.date)
                       FormBuilderDateTimePicker(

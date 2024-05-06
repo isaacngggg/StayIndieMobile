@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
 import 'package:stay_indie/screens/journeys/full_story_screen.dart';
-import 'package:stay_indie/screens/project/addProjectFlow/add_project_screen.dart';
+import 'package:stay_indie/screens/journeys/HighlightsEditPage.dart';
 import 'package:stay_indie/widgets/journeys/JourneyHeadline.dart';
 import 'package:stay_indie/models/Journey.dart';
 
@@ -48,27 +49,22 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Journey Highlights', style: kHeading2),
-            CircleAvatar(
-                backgroundColor: Colors.deepPurple.shade300,
-                child: IconButton(
-                  icon: Icon(Icons.web_stories, color: Colors.white, size: 16),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return FullStoryPage(journeys: journeys);
-                    }));
-                  },
-                )
-                // I
-
-                ),
+            Text('Highlights', style: kHeading2),
+            IconButton(
+              icon: Icon(Icons.edit),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HighlightsEditPage()));
+              },
+            ),
           ],
         ),
         SizedBox(height: 10),
         Container(
           clipBehavior: Clip.antiAlias,
-          padding: const EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(20.0),
           decoration: kOutlineBorder,
           child: StreamBuilder<List<Journey>>(
             stream: _JourneyStream,
@@ -77,18 +73,40 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                 var journeysSnaps = snapshot.data!;
                 return Column(
                   children: [
-                    for (var journey in journeysSnaps) ...[
-                      JourneyHeadline(journey: journey),
-                      SizedBox(height: 10),
-                    ]
+                    for (var entry in journeys.asMap().entries) ...[
+                      GestureDetector(
+                        child: JourneyHeadline(journey: entry.value),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return FullStoryPage(
+                              journeys: journeys,
+                              initialPage: entry.key,
+                            );
+                          }));
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                    ],
                   ],
                 );
               } else {
                 return Column(
                   children: [
-                    for (var journey in journeys) ...[
-                      JourneyHeadline(journey: journey),
-                      SizedBox(height: 10),
+                    for (var entry in journeys.asMap().entries) ...[
+                      GestureDetector(
+                        child: JourneyHeadline(journey: entry.value),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return FullStoryPage(
+                              journeys: journeys,
+                              initialPage: entry.key,
+                            );
+                          }));
+                        },
+                      ),
+                      const SizedBox(height: 10),
                     ]
                   ],
                 );

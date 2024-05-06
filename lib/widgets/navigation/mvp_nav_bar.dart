@@ -52,7 +52,7 @@ class BottomNavBar extends StatelessWidget {
                 imageUrl: currentUserProfile.profileImageUrl, radius: 16),
           ),
           selectedIcon: CircleAvatar(
-            backgroundColor: kAccentColour,
+            backgroundColor: kPrimaryColour,
             radius: 19,
             child: CircleAvatarWBorder(
               imageUrl: currentUserProfile.profileImageUrl,

@@ -63,7 +63,7 @@ class ProfileCard extends StatelessWidget {
               TextButton(
                 child: Text('Follow'),
                 onPressed: () {},
-                style: kPrimaryButtonSmall,
+                style: kSmallPrimaryButtonStyle,
               ),
             ],
           ),

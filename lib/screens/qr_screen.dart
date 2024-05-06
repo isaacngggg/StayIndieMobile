@@ -79,7 +79,7 @@ class _QrCodePageState extends State<QrCodePage> {
               child: Text(
                 'Scan QR Code',
               ),
-              style: kPrimaryButtonSmall,
+              style: kSmallPrimaryButtonStyle,
             ),
           ],
         ),

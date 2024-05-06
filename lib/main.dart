@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
 import 'package:stay_indie/screens/archive/AddScreen.dart';
@@ -26,6 +27,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/offline_screen.dart';
 import 'package:stay_indie/screens/profile/epk/epk_page.dart';
+import 'package:stay_indie/models/ProfileProvider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

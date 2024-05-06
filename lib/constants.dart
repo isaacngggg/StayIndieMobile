@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -24,17 +25,20 @@ String currentUserId = supabase.auth.currentUser != null
 late Profile currentUserProfile;
 
 ThemeData theme = ThemeData.dark().copyWith(
-  colorScheme: ColorScheme.dark(
-    primary: kPrimaryColour,
-    secondary: kPrimaryColour90,
+  textTheme: GoogleFonts.robotoTextTheme(
+    ThemeData.dark().textTheme,
   ),
-  primaryColor: Colors.black,
-  scaffoldBackgroundColor: Colors.black,
-  highlightColor: Colors.white12,
+  colorScheme: ColorScheme.dark(
+      primary: kPrimaryColour,
+      secondary: kPrimaryColour90,
+      tertiary: kAccentColour),
+  primaryColor: kAccentColour,
+  scaffoldBackgroundColor: kBackgroundColour,
+  highlightColor: kAccentColour,
   appBarTheme: AppBarTheme(
     iconTheme: IconThemeData(color: Colors.white), // if you want black icons
     elevation: 0,
-    color: Colors.black,
+    backgroundColor: kBackgroundColour,
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.transparent,
@@ -56,13 +60,14 @@ const Color kPrimaryColour70 = Color(0xFF808080);
 const Color kPrimaryColour80 = Color(0xFF666666);
 const Color kPrimaryColour90 = Color(0xFF313131);
 
-const Color kBackgroundColour = Color(0xFF000000);
-const Color kBackgroundColour10 = Color(0xFF1F1E1E);
-const Color kBackgroundColour20 = Color(0xFF333333);
+const Color kBackgroundColour = Color(0xFF0D0D0D);
+const Color kBackgroundColour10 = Color(0xFF181818);
+const Color kBackgroundColour20 = Color(0xFF212121);
+const Color kBackgroundColour30 = Color(0xFF333333);
 
-Color kAccentColour = Colors.deepPurple.shade400;
-Color kAccentColour10 = Colors.deepPurple.shade100.withAlpha(50);
-Color kAccentColour20 = Colors.deepPurple.shade200;
+Color kAccentColour = Color(0xFF81C657);
+Color kAccentColour10 = Color(0xFFC6EAB0);
+Color kAccentColour20 = Color(0xFFE6F4D6);
 
 // Button Styles
 
@@ -120,7 +125,38 @@ ButtonStyle kSecondaryButtonStyle = ButtonStyle(
 
 // Small Buttons
 
-ButtonStyle kSmallButtonStyle = ButtonStyle(
+ButtonStyle kSmallPrimaryButtonStyle = ButtonStyle(
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      side: BorderSide(color: kBackgroundColour20, width: 1),
+      borderRadius: BorderRadius.circular(13.0),
+    ),
+  ),
+  foregroundColor: MaterialStateProperty.all<Color>(kBackgroundColour),
+  backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColour),
+);
+
+ButtonStyle kSmallSecondaryButtonStyle = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(kBackgroundColour20),
+  foregroundColor: MaterialStateProperty.all(kPrimaryColour20),
+  shape: MaterialStateProperty.all(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
+);
+
+ButtonStyle kSmallDisableButton = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(kPrimaryColour50),
+  foregroundColor: MaterialStateProperty.all(kBackgroundColour),
+  shape: MaterialStateProperty.all(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
+);
+
+ButtonStyle kSmallAccentButtonStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.all(kAccentColour),
   foregroundColor: MaterialStateProperty.all(kBackgroundColour20),
   shape: MaterialStateProperty.all(
@@ -139,25 +175,6 @@ ButtonStyle kSmallDeleteButton = ButtonStyle(
   ),
   foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
   backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade100),
-);
-
-ButtonStyle kPrimaryButtonSmall = ButtonStyle(
-  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-    RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(13.0),
-    ),
-  ),
-  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-  backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-);
-
-final preloader = Scaffold(
-  body: Center(
-    child: LoadingAnimationWidget.inkDrop(
-      color: Colors.purple,
-      size: 30,
-    ),
-  ),
 );
 
 // Input Fields
@@ -294,3 +311,30 @@ const formSpacer = SizedBox(width: 16, height: 16);
 
 /// Some padding for all the forms to use
 const formPadding = EdgeInsets.symmetric(vertical: 20, horizontal: 16);
+
+class NoAnimationRoute<T> extends MaterialPageRoute<T> {
+  NoAnimationRoute({
+    required WidgetBuilder builder,
+    RouteSettings? settings,
+  }) : super(builder: builder, settings: settings);
+
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return child;
+  }
+}
+
+// Preloader
+final preloader = Scaffold(
+  body: Center(
+    child: LoadingAnimationWidget.hexagonDots(
+      color: kPrimaryColour,
+      size: 30,
+    ),
+  ),
+);

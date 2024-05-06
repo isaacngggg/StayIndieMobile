@@ -73,14 +73,14 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                     style: TextStyle(
                       fontSize: 43,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: kPrimaryColour,
                     )),
                 Text(
                   widget.userProfile.headline,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: kPrimaryColour,
                   ),
                 ),
                 Text(
@@ -88,7 +88,7 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: Colors.white,
+                    color: kPrimaryColour,
                   ),
                 ),
                 SizedBox(height: 20),
@@ -110,15 +110,9 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                                     return ProfileEditPage();
                                   }));
                                 },
-                                style: kSmallButtonStyle,
+                                style: kSmallSecondaryButtonStyle,
                                 child: Text(
                                   'Edit Profile',
-                                  style: TextStyle(
-                                    color: const Color.fromARGB(
-                                        255, 249, 242, 242),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
                                 ),
                               )
                             : CoverButton(

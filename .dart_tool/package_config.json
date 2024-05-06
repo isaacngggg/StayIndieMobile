@@ -579,9 +579,9 @@
     },
     {
       "name": "shared_preferences",
-      "rootUri": "file:///Users/isaacng/.pub-cache/hosted/pub.dev/shared_preferences-2.2.2",
+      "rootUri": "file:///Users/isaacng/.pub-cache/hosted/pub.dev/shared_preferences-2.2.3",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "shared_preferences_android",
@@ -824,7 +824,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-05T10:21:40.141371Z",
+  "generated": "2024-05-06T15:19:58.361477Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

@@ -32,7 +32,7 @@ class NotificationsPage extends StatelessWidget {
               title: Text('John Doe'),
               subtitle: Text('Requested to follow you'),
               trailing: TextButton(
-                style: kPrimaryButtonSmall,
+                style: kSmallPrimaryButtonStyle,
                 child: Text('Follow'),
                 onPressed: () => null,
               )),
