@@ -29,11 +29,7 @@ class ConnectionsScreen extends StatelessWidget {
           child: ListView(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.all(10),
-        children: [
-          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-          ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-        ],
+        children: [],
       )),
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:stay_indie/constants.dart';
 
 class ConnectionRequest {
@@ -9,6 +7,7 @@ class ConnectionRequest {
   bool accepted;
   String createdAt;
 
+  // static Map<String, ConnectionRequest> _connectionRequestCache = {};
   ConnectionRequest({
     required this.id,
     required this.senderId,
@@ -39,18 +38,17 @@ class ConnectionRequest {
     final response = await supabase
         .from('connection_requests')
         .select()
-        .eq('receiver_id', profileId);
+        .eq('receiver_id', profileId)
+        .eq('accepted', false);
 
     if (response.isEmpty) {
       print('No connection requests found for $profileId');
       return [];
     }
-    return response == null
-        ? []
-        : response.map((map) => ConnectionRequest.fromMap(map)).toList();
+    return response.map((map) => ConnectionRequest.fromMap(map)).toList();
   }
 
-  static void requestFollowProfile(String profileId) async {
+  static void sendRequest(String profileId) async {
     final user = supabase.auth.currentUser;
     if (user == null) {
       print('No user found');
@@ -94,7 +92,7 @@ class ConnectionRequest {
   static Future<bool> needToAccept(String profileId) async {
     try {
       print(
-          'Checking if request is pending for $profileId from $currentUserId');
+          'Checking if $currentUserId need to accept request from $profileId');
       final response = await supabase
           .from('connection_requests')
           .select()
@@ -102,15 +100,64 @@ class ConnectionRequest {
           .eq('receiver_id', currentUserId)
           .eq('accepted', false);
       if (response.isNotEmpty) {
-        // print('Need to accept');
+        print('$currentUserId need to accept request from $profileId');
         return true;
       } else {
-        print('Request not sent');
+        print('$currentUserId has nothing to accept from $profileId');
         return false;
       }
     } catch (e) {
       print('Error with the needToAccepts Function' + e.toString());
       return false;
+    }
+  }
+
+  static void deleteRequest(String requestId) async {
+    final user = supabase.auth.currentUser;
+    if (user == null) {
+      print('No user found');
+      return null;
+    }
+    try {
+      await supabase.from('connection_requests').delete().eq('id', requestId);
+    } catch (e) {
+      print('Error' + e.toString());
+    }
+  }
+
+  static Future<ConnectionRequest?> getRequest(
+      String sender_id, String receiver_id) async {
+    final user = supabase.auth.currentUser;
+    if (user == null) {
+      print('No user found');
+      return null;
+    }
+    try {
+      final response = await supabase
+          .from('connection_requests')
+          .select()
+          .eq('sender_id', sender_id)
+          .eq('receiver_id', receiver_id);
+      return response.isNotEmpty
+          ? ConnectionRequest.fromMap(response.first)
+          : null;
+    } catch (e) {
+      print('Error' + e.toString());
+    }
+  }
+
+  static void acceptRequest(String requestId) async {
+    final user = supabase.auth.currentUser;
+    if (user == null) {
+      print('No user found');
+      return null;
+    }
+    try {
+      await supabase
+          .from('connection_requests')
+          .update({'accepted': true}).eq('id', requestId);
+    } catch (e) {
+      print('Error' + e.toString());
     }
   }
 }

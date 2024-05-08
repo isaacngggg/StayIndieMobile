@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/LoginScreen.dart';
+import 'package:stay_indie/screens/archive/LoginScreen.dart';
 
 class SettingsModal extends StatelessWidget {
   const SettingsModal({super.key});

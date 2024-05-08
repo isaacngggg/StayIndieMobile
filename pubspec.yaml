@@ -38,6 +38,7 @@ dependencies:
   loading_animation_widget: ^1.2.1
   provider: ^6.1.2
   shared_preferences: ^2.2.3
+  shimmer: ^3.0.0
   
 
 

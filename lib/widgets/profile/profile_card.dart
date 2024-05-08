@@ -5,13 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/constants.dart';
+import 'package:stay_indie/models/Profile.dart';
+import 'package:stay_indie/widgets/profile/CoverButton.dart';
 
 class ProfileCard extends StatelessWidget {
-  final String name;
-  final String role;
-  final String company;
+  final Profile profile;
 
-  const ProfileCard(this.name, this.role, this.company);
+  const ProfileCard({Key? key, required this.profile}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +42,14 @@ class ProfileCard extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.center,
-                child: Text(name,
+                child: Text(profile.name,
                     style:
                         TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
               ),
               Align(
                 alignment: Alignment.center,
                 child: Text(
-                  role,
+                  profile.headline,
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 10),
                 ),
               ),
@@ -60,11 +60,7 @@ class ProfileCard extends StatelessWidget {
               //   company,
               //   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
               // ),
-              TextButton(
-                child: Text('Follow'),
-                onPressed: () {},
-                style: kSmallPrimaryButtonStyle,
-              ),
+              CoverButton(userProfile: profile),
             ],
           ),
         ),

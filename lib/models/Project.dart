@@ -106,7 +106,8 @@ class Project {
     }
   }
 
-  static getProjectImages(String projectId, String userID) async {
+  static Future<List<String>> getProjectImages(
+      String projectId, String userID) async {
     try {
       String imagesPath = '$userID/$projectId/images/';
       List<String> images = [];
@@ -129,5 +130,9 @@ class Project {
       print('Error' + e.toString());
       return [];
     }
+  }
+
+  static void clearCache() {
+    _projectCache = {};
   }
 }

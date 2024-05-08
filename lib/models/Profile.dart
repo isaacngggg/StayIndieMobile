@@ -139,7 +139,7 @@ class Profile {
     await prefs.remove('profile');
   }
 
-  static updateProfile(Map updatedProfile) async {
+  Future<void> updateProfile(Map updatedProfile) async {
     // Update the profiles
     final user = supabase.auth.currentUser;
     if (user == null) {
@@ -154,12 +154,13 @@ class Profile {
             updatedProfile,
           )
           .eq('id', user.id);
+      await saveToPrefs();
     } catch (e) {
       print('Error' + e.toString());
     }
   }
 
-  static void acceptFollowRequest(ConnectionRequest request) async {
+  static void addConnection(ConnectionRequest request) async {
     final user = supabase.auth.currentUser;
     if (user == null) {
       print('No user found');
@@ -170,7 +171,6 @@ class Profile {
         'connections':
             supabase.rpc('array_append(connections, ${request.senderId})'),
       }).eq('profile_id', user.id);
-      await supabase.from('connection_requests').delete().eq('id', request.id);
     } catch (e) {
       print('Error' + e.toString());
     }
@@ -204,31 +204,17 @@ class Profile {
     }
   }
 
-  static Future<String> _getCoverButton(String id) async {
-    bool requestPending = false;
-    bool receivedRequest = false;
-
-    var value = await supabase
-        .from('connection_requests')
-        .select()
-        .eq('request_profile_id', currentUserId)
-        .eq('target_profile_id', id)
-        .single();
-    requestPending = value.isNotEmpty;
-
-    value = await supabase
-        .from('connection_requests')
-        .select()
-        .eq('request_profile_id', id)
-        .eq('target_profile_id', currentUserId)
-        .single();
-    receivedRequest = value.isNotEmpty;
-
-    if (receivedRequest) {
-      print('Received request');
+  static Future<List<Profile>> getProfilesFromIdList(
+      List<String> profileIds) async {
+    List<Profile> profiles = [];
+    for (String profileId in profileIds) {
+      Profile profile = await getProfileData(profileId);
+      profiles.add(profile);
     }
-    print('Request pending: ' + requestPending.toString());
+    return profiles;
+  }
 
-    return requestPending ? 'Pending' : 'Connect';
+  static void clearCache() {
+    _profileCache = {};
   }
 }

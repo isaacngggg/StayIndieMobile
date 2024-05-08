@@ -19,7 +19,7 @@ class InboxScreen extends StatefulWidget {
 }
 
 class _InboxScreenState extends State<InboxScreen> {
-  late PageController _pageController;
+  late PageController pageController;
   List<Chat> chats = [];
   @override
   void initState() {
@@ -34,9 +34,9 @@ class _InboxScreenState extends State<InboxScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _pageController = PageController(initialPage: 1);
+    pageController = PageController(initialPage: 1);
     return PageView(
-      controller: _pageController,
+      controller: pageController,
       scrollDirection: Axis.horizontal,
       children: [
         QrCodePage(),
@@ -48,7 +48,13 @@ class _InboxScreenState extends State<InboxScreen> {
               SizedBox(
                 width: 10,
               ),
-              IconButton(icon: Icon(Icons.notifications), onPressed: () {}),
+              IconButton(
+                  icon: Icon(Icons.notifications),
+                  onPressed: () {
+                    pageController.animateToPage(2,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeIn);
+                  }),
               SizedBox(
                 width: 10,
               ),
@@ -96,7 +102,7 @@ class _InboxScreenState extends State<InboxScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                            style: kSmallAccentButtonStyle,
+                            style: kSmallPrimaryButtonStyle,
                             onPressed: () {
                               GRBottomSheet.buildBottomSheet(
                                 context,
@@ -128,53 +134,6 @@ class _InboxScreenState extends State<InboxScreen> {
                                   ],
                                 ),
                               );
-                              // showMaterialModalBottomSheet(
-                              //   shape: RoundedRectangleBorder(
-                              //     borderRadius: BorderRadius.circular(20),
-                              //   ),
-                              //   enableDrag: true,
-                              //   context: context,
-                              //   builder: (context) => Container(
-                              //     padding: EdgeInsets.all(20),
-                              //     child: Wrap(
-                              //       children: [
-                              //         SafeArea(
-                              //           top: false,
-                              //           child: Column(
-                              //             mainAxisAlignment:
-                              //                 MainAxisAlignment.start,
-                              //             crossAxisAlignment:
-                              //                 CrossAxisAlignment.stretch,
-                              //             children: [
-                              //               formSpacer,
-                              //               Text(
-                              //                 'Request EPK',
-                              //                 style: kHeading2,
-                              //               ),
-                              //               formSpacer,
-                              //               Text(
-                              //                 "We'll send a request to the artist to share their EPK with you via your email.",
-                              //                 style: kBody1,
-                              //               ),
-                              //               formSpacer,
-                              //               TextFormField(
-                              //                 decoration:
-                              //                     kBoxedTextFieldDecoration
-                              //                         .copyWith(
-                              //                             labelText: 'Email'),
-                              //               ),
-                              //               formSpacer,
-                              //               TextButton(
-                              //                   child: Text('Send Request'),
-                              //                   style: kSmallButtonStyle,
-                              //                   onPressed: () {}),
-                              //             ],
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     ),
-                              //   ),
-                              // );
                             },
                             child: Row(
                               children: [

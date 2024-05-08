@@ -17,7 +17,8 @@ class GRBottomSheet {
           children: [
             SafeArea(
               top: false,
-              child: content,
+              child: Padding(
+                  padding: MediaQuery.of(context).viewInsets, child: content),
             ),
           ],
         ),

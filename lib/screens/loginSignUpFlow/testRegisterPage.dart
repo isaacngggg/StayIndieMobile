@@ -123,8 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
             TextButton(
               style: kTextButtonStyle,
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, LoginPage.id, (route) => false);
+                Navigator.pop(context);
               },
               child: const Text('I already have an account'),
             )

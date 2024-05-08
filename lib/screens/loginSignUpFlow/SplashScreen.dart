@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/screens/archive/HomeScreen.dart';
 import 'package:stay_indie/screens/chat/ChatScreen.dart';
 import 'package:stay_indie/screens/chat/InboxScreen.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/LoginScreen.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/SignUpScreen.dart';
+import 'package:stay_indie/screens/archive/LoginScreen.dart';
+import 'package:stay_indie/screens/archive/SignUpScreen.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'package:stay_indie/models/Profile.dart';
@@ -34,6 +34,7 @@ class SplashScreenState extends State<SplashScreen> {
       Navigator.of(context)
           .pushNamedAndRemoveUntil(LoginPage.id, (route) => false);
     } else {
+      clearAllCache(context);
       await Profile.getProfileData(currentUserId).then((profile) {
         if (profile != null) {
           currentUserProfile = profile;

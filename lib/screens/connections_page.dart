@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'package:stay_indie/fields/search_bar.dart';
+import 'package:stay_indie/models/ConnectionRequest.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/widgets/avatars/AvatarStack.dart';
 import 'package:stay_indie/widgets/navigation/mvp_nav_bar.dart';
@@ -19,8 +20,21 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   late Profile userProfile;
   late List<Profile> connections = [];
+  late List<Profile> connectionRequestProfiles = [];
   @override
   void initState() {
+    ConnectionRequest.getProfileConnectionRequests(currentUserId).then((value) {
+      value.forEach((element) {
+        Profile.getProfileData(element.senderId).then((value) {
+          if (value != null) {
+            setState(() {
+              connectionRequestProfiles.add(value);
+            });
+          }
+        });
+      });
+    });
+
     Profile.getProfileData(currentUserId).then((value) {
       if (value != null) {
         setState(() {
@@ -60,21 +74,24 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          TopSearchBar(),
-          SizedBox(
-            height: 200,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.all(10),
-              children: [
-                ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-                ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-                ProfileCard('Isaac Ng', 'Product Manager', 'American Express'),
-              ],
-            ),
-          ),
+      body: ListView(children: [
+        TopSearchBar(),
+        connectionRequestProfiles == []
+            ? SizedBox(
+                height: 200,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.all(10),
+                  children: [
+                    for (var profile in connectionRequestProfiles)
+                      ProfileCard(
+                        profile: profile,
+                      ),
+                  ],
+                ),
+              )
+            : Container(),
+        if (connections.isNotEmpty)
           for (var connection in connections)
             ListTile(
               leading: CircleAvatar(
@@ -92,9 +109,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 }));
               },
+            )
+        else
+          Expanded(
+            child: Center(
+              child: Text('No connections found'),
             ),
-        ],
-      ),
+          ),
+      ]),
     );
   }
 }

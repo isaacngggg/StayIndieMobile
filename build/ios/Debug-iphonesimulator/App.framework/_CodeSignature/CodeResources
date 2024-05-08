@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		Mh9zjYy/Z3EDTo+FAEYaY2vfiAU=
+		uAA+uB8i+mu/Jsjv6tvbXar0k6M=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		zCfWQCZ13c4885lAkkfnUGCJo/g=
+		T2d1yHScRRbdOtKDezZzsD8V7o4=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		h5oTmgdnPXBJZgboCmF3bA5eaAI=
+		VJpa4mhB/pHvRNhfR7AmgcTvq6w=
 		</data>
 		<key>flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
 		<data>
@@ -48,6 +48,10 @@
 		<data>
 		lRunAs7AiuM5miPMql63stAUaPY=
 		</data>
+		<key>flutter_assets/assets/greenroom_logo_dark.png</key>
+		<data>
+		yHG8mQFrg+gCnvPeA8MXYEJnSYs=
+		</data>
 		<key>flutter_assets/assets/image1.png</key>
 		<data>
 		EtNadDMcrn2WUle3+OfkbXLOwCs=
@@ -67,6 +71,10 @@
 		<key>flutter_assets/assets/music.png</key>
 		<data>
 		nHoNpWRHr+ocKawJ8u7G+GGxetw=
+		</data>
+		<key>flutter_assets/assets/placeholder.png</key>
+		<data>
+		n+fRqQ4x97Ki+6xP5lc7lKtdj+I=
 		</data>
 		<key>flutter_assets/assets/profile_example.jpeg</key>
 		<data>
@@ -118,7 +126,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		2Q5nIbECHfelRmffhwTQp90a0i0=
+		CsbIJq7TzLp7qVE1+IAbgZDXW7s=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -163,14 +171,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/oJ0iW5ZZkfeQcOXxj82XxX4xxxbcDoJu3fObSsR/Xs=
+			5gVZsu1mgHdYLPi/1YkgLNAe0nByK9vAhAZlKQ3uiCg=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VOpwPAT9LG6qpLmqPit0spImKygcIY16wLvT0KYXe0o=
+			Lzl7QnD9v2KdTQTE/SxRwrIsU4HwFjH+4sXt2quZZBs=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -184,7 +192,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HJMSe8w71+jb+nVb84sE2+1Bt0422/PjxAu8tg/LbC4=
+			IqrBBbzPIb5+00/FBQMSLs4npsgq7oXoK5G0k9g+X9o=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
@@ -229,6 +237,13 @@
 			/f3BrR9NFtsz9nSIrC+hQbv4gW8GHeu9oPNtqaTE4QA=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/greenroom_logo_dark.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HqYnVJ0qqU2indDlslibMEmNX4PzN69mJceYzcXF88I=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/image1.png</key>
 		<dict>
 			<key>hash2</key>
@@ -262,6 +277,13 @@
 			<key>hash2</key>
 			<data>
 			EoJUtbf12JQuVvdrVtI4wMr2K8SFYeCnXy2rlashBjQ=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/placeholder.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tEw7mkekiU6I6wXhw91NfERZQ2TVrZyHsgTLwB90WaA=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/profile_example.jpeg</key>
@@ -352,7 +374,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ie3ZssQo5K6hST5LgS9LAubdFORR/krxe/Uf7VvleD4=
+			R5KzPRorULC51EuU05X4VTMbvADXXe2Tf+l3hHSFNwM=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

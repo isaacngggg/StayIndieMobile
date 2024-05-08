@@ -89,7 +89,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
                         'headline': headlineController.text,
                         'location': locationController.text,
                       };
-                      Profile.updateProfile(userProfile);
+                      currentUserProfile.updateProfile(userProfile);
                       print('done');
                       Navigator.pop(context);
                     },

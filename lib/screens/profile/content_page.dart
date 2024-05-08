@@ -8,13 +8,14 @@ import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/models/ProfileProvider.dart';
 import 'package:stay_indie/models/SingleFormPage.dart';
+import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/screens/templates/stepper_form.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
 import 'package:stay_indie/widgets/navigation/BottomNavBarMVP.dart';
 import 'package:stay_indie/widgets/projects/ProjectTile.dart';
 import 'package:stay_indie/widgets/journeys/MyJourneyWidget.dart';
 import 'package:stay_indie/utilities/LinePainter.dart';
-import 'package:stay_indie/screens/profile/profile_edit_page.dart';
+import 'package:stay_indie/screens/archive/profile_edit_page.dart';
 import 'package:stay_indie/screens/profile/MainProfilePage.dart';
 import 'package:stay_indie/screens/templates/stepper_form.dart';
 
@@ -317,7 +318,7 @@ class TopBar extends StatelessWidget {
             child: Opacity(
               opacity: _appBarOpacity,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Hero(
@@ -325,8 +326,14 @@ class TopBar extends StatelessWidget {
                     child:
                         CircleAvatarWBorder(imageUrl: profileUrl, radius: 18),
                   ),
+                  Spacer(),
                   Text(userProfile.name, style: kHeading2),
-                  SizedBox(width: 36),
+                  Spacer(),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, SettingPage.id);
+                      },
+                      icon: Icon(Icons.settings)),
                 ],
               ),
             ),

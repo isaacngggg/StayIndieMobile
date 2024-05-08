@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:easy_image_viewer/easy_image_viewer.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProjectMediaCarousel extends StatelessWidget {
   const ProjectMediaCarousel({
@@ -37,7 +38,10 @@ class ProjectMediaCarousel extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Image(
+                child: FadeInImage(
+                  fadeInCurve: Curves.easeIn,
+                  fadeInDuration: Duration(milliseconds: 10),
+                  placeholder: AssetImage('assets/placeholder.png'),
                   image: NetworkImage(_networkImages[index]),
                   fit: BoxFit.fitHeight,
                 ),

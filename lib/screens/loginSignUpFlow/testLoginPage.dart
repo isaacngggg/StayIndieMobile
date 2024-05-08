@@ -37,6 +37,9 @@ class _LoginPageState extends State<LoginPage> {
           .pushNamedAndRemoveUntil(SplashScreen.id, (route) => false);
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
+      setState(() {
+        _isLoading = false;
+      });
     } catch (e) {
       context.showErrorSnackBar(message: e.toString());
     }
@@ -60,6 +63,15 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         children: [
           Positioned(
+            top: 50,
+            right: 0,
+            left: 0,
+            child: Image.asset(
+              'assets/greenroom_logo_dark.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
             bottom: 0,
             right: 0,
             left: 0,
@@ -71,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                     topRight: Radius.circular(32.0),
                   ),
                   color: kBackgroundColour10),
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(20.0),
               child: SafeArea(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -110,10 +122,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, RegisterPage.id, (route) => false);
+                        Navigator.pushNamed(context, RegisterPage.id);
                       },
-                      child: const Text('Register'),
+                      child: const Text('Register Instead'),
                       style: kTextButtonStyle,
                     ),
                   ],

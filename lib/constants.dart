@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:stay_indie/models/Project.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -338,3 +339,20 @@ final preloader = Scaffold(
     ),
   ),
 );
+
+void clearAllCache(context) {
+  try {
+    currentUserId = supabase.auth.currentUser!.id.toString();
+    Profile.removeProfileFromPrefs();
+    Profile.clearCache();
+    Project.clearCache();
+
+    print('Cache Cleared');
+    ShowSnackBar(context)
+        .showSnackBar(message: 'Cache Cleared', backgroundColor: Colors.green);
+  } catch (e) {
+    ShowSnackBar(context).showSnackBar(
+        message: 'Cache unable to be clear: ' + e.toString(),
+        backgroundColor: Colors.red);
+  }
+}

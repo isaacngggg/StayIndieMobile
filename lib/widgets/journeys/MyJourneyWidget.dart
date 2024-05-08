@@ -75,7 +75,9 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                   children: [
                     for (var entry in journeys.asMap().entries) ...[
                       GestureDetector(
-                        child: JourneyHeadline(journey: entry.value),
+                        child: Container(
+                            color: Colors.transparent,
+                            child: JourneyHeadline(journey: entry.value)),
                         onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
@@ -118,14 +120,3 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
     );
   }
 }
-
-
-
-// Column(
-//             children: [
-//               for (var journey in journeys) ...[
-//                 JourneyHeadline(journey: journey),
-//                 SizedBox(height: 10),
-//               ]
-//             ],
-//           ),

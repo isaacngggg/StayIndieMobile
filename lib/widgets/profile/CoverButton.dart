@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/ConnectionRequest.dart';
 import 'package:stay_indie/models/Profile.dart';
+import 'package:stay_indie/widgets/GRBottomSheet.dart';
 
 class CoverButton extends StatefulWidget {
   final Profile userProfile;
@@ -18,6 +19,9 @@ class _CoverButtonState extends State<CoverButton> {
   late Future<bool> requestPending;
   late Future<bool> receivedRequest;
   late bool isConnected = false;
+
+  late bool requestPendingSnapshot;
+  late bool receivedRequestSnapshot;
   @override
   void initState() {
     // TODO: implement initState
@@ -29,7 +33,7 @@ class _CoverButtonState extends State<CoverButton> {
 
     setState(() {
       requestPending = ConnectionRequest.isRequested(widget.userProfile.id);
-      receivedRequest = ConnectionRequest.needToAccept(currentUserId);
+      receivedRequest = ConnectionRequest.needToAccept(widget.userProfile.id);
     });
     super.initState();
   }
@@ -44,30 +48,75 @@ class _CoverButtonState extends State<CoverButton> {
             if (snapshot.hasError) {
               return Text('Snapshot Error: ${snapshot.error}');
             } else {
-              bool requestPending = snapshot.data![0];
-              bool receivedRequest = snapshot.data![1];
+              requestPendingSnapshot = snapshot.data![0];
+              receivedRequestSnapshot = snapshot.data![1];
 
-              if (requestPending) {
+              if (requestPendingSnapshot) {
                 return TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ConnectionRequest.getRequest(
+                            currentUserId, widget.userProfile.id)
+                        .then((value) {
+                      if (value != null) {
+                        ConnectionRequest.deleteRequest(value.id);
+                        setState(() {
+                          requestPending = Future.value(false);
+                          // receivedRequestSnapshot = false;
+                        });
+                      }
+                    });
+                  },
                   child: Text('Request Pending'),
                   style: kSmallSecondaryButtonStyle,
                 );
-              } else if (receivedRequest) {
+              } else if (receivedRequestSnapshot) {
                 return TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print('Accepting Request');
+                    ConnectionRequest.getRequest(
+                            widget.userProfile.id, currentUserId)
+                        .then((value) {
+                      if (value != null) {
+                        ConnectionRequest.acceptRequest(value.id);
+                        setState(() {
+                          receivedRequest = Future.value(false);
+                          isConnected = true;
+                        });
+                      }
+                    });
+                  },
                   child: Text('Accept Request'),
-                  style: kSmallAccentButtonStyle,
+                  style: kSmallPrimaryButtonStyle,
                 );
               } else if (isConnected) {
                 return TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    GRBottomSheet.buildBottomSheet(
+                      context,
+                      Column(
+                        children: [
+                          Text('Connected'),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Remove Connection'),
+                            style: kSmallPrimaryButtonStyle,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                   child: Text('Connected'),
                   style: kSmallSecondaryButtonStyle,
                 );
               } else {
                 return TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ConnectionRequest.sendRequest(widget.userProfile.id);
+                    setState(() {
+                      requestPending = Future.value(true);
+                      isConnected = false;
+                    });
+                  },
                   child: Text('Connect'),
                   style: kSmallPrimaryButtonStyle,
                 );

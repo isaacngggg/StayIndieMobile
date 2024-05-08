@@ -4,7 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'package:stay_indie/models/Profile.dart';
-import 'package:stay_indie/screens/profile/profile_edit_page.dart';
+import 'package:stay_indie/screens/archive/profile_edit_page.dart';
+import 'package:stay_indie/screens/profile/edit_basic_info_page.dart';
 import 'package:stay_indie/widgets/social/SocialMetricList.dart';
 import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/models/ConnectionRequest.dart';
@@ -107,7 +108,7 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return ProfileEditPage();
+                                    return EditBasicInfoPage();
                                   }));
                                 },
                                 style: kSmallSecondaryButtonStyle,
@@ -151,11 +152,12 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _isCurrentUser
-                      ? Spacer()
+                      ? Container()
                       : IconButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                                Colors.grey.withOpacity(0.2)),
+                              Colors.grey.withOpacity(0.2),
+                            ),
                           ),
                           onPressed: () {
                             Navigator.pop(context);
@@ -165,19 +167,7 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                             color: Colors.white,
                           ),
                         ),
-                  IconButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Colors.grey.withOpacity(0.2)),
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, SettingPage.id);
-                    },
-                    icon: FaIcon(
-                      FontAwesomeIcons.gear,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Spacer(),
                 ],
               ),
             ),

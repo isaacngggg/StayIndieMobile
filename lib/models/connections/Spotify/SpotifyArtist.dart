@@ -1,7 +1,3 @@
-import 'dart:ffi';
-
-import 'package:http/http.dart';
-
 class SpotifyArtist {
   String id;
   String name;

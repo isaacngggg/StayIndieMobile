@@ -1,0 +1,26 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/isaacng/Library/Developer/Xcode/DerivedData/Runner-dxvqxmhdbqvciuajmbesssxpovoj/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/qr_bar_code_scanner_dialog.framework/qr_bar_code_scanner_dialog'
+relocations:
+  - { offsetInCU: 0x34, offset: 0x5AFD9, size: 0x8, addend: 0x0, symName: _qr_bar_code_scanner_dialogVersionString, symObjAddr: 0x0, symBinAddr: 0x6960, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x5B00E, size: 0x8, addend: 0x0, symName: _qr_bar_code_scanner_dialogVersionNumber, symObjAddr: 0x38, symBinAddr: 0x6998, symSize: 0x0 }
+  - { offsetInCU: 0x27, offset: 0x5B04B, size: 0x8, addend: 0x0, symName: '+[QrBarCodeScannerDialogPlugin registerWithRegistrar:]', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0xC }
+  - { offsetInCU: 0x91, offset: 0x5B0B5, size: 0x8, addend: 0x0, symName: '+[QrBarCodeScannerDialogPlugin registerWithRegistrar:]', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0xC }
+  - { offsetInCU: 0x27, offset: 0x5B149, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginC8register4withySo07FlutterL9Registrar_p_tFZ', symObjAddr: 0x0, symBinAddr: 0x400C, symSize: 0x4 }
+  - { offsetInCU: 0x7A, offset: 0x5B19C, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginC8register4withySo07FlutterL9Registrar_p_tFZTo', symObjAddr: 0x24, symBinAddr: 0x4030, symSize: 0x30 }
+  - { offsetInCU: 0xDB, offset: 0x5B1FD, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctFTo', symObjAddr: 0x138, symBinAddr: 0x4144, symSize: 0x74 }
+  - { offsetInCU: 0x123, offset: 0x5B245, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginCACycfcTo', symObjAddr: 0x1DC, symBinAddr: 0x41E8, symSize: 0x3C }
+  - { offsetInCU: 0x174, offset: 0x5B296, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginC8register4withySo07FlutterL9Registrar_p_tFZTf4nd_n', symObjAddr: 0x248, symBinAddr: 0x4254, symSize: 0xD4 }
+  - { offsetInCU: 0x207, offset: 0x5B329, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF015$syXlSgIeyBy_ypT7Iegn_TRyXlSgIeyBy_Tf1ncn_nTf4ddg_n', symObjAddr: 0x3BC, symBinAddr: 0x43C8, symSize: 0x174 }
+  - { offsetInCU: 0x247, offset: 0x5B369, size: 0x8, addend: 0x0, symName: '_$sypSgWOh', symObjAddr: 0x31C, symBinAddr: 0x4328, symSize: 0x40 }
+  - { offsetInCU: 0x25B, offset: 0x5B37D, size: 0x8, addend: 0x0, symName: ___swift_instantiateConcreteTypeFromMangledName, symObjAddr: 0x35C, symBinAddr: 0x4368, symSize: 0x40 }
+  - { offsetInCU: 0x26F, offset: 0x5B391, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginCMa', symObjAddr: 0x39C, symBinAddr: 0x43A8, symSize: 0x20 }
+  - { offsetInCU: 0x28E, offset: 0x5B3B0, size: 0x8, addend: 0x0, symName: '_$sypSgWOc', symObjAddr: 0x530, symBinAddr: 0x453C, symSize: 0x48 }
+  - { offsetInCU: 0x2A2, offset: 0x5B3C4, size: 0x8, addend: 0x0, symName: ___swift_project_boxed_opaque_existential_0, symObjAddr: 0x578, symBinAddr: 0x4584, symSize: 0x24 }
+  - { offsetInCU: 0x2B6, offset: 0x5B3D8, size: 0x8, addend: 0x0, symName: ___swift_destroy_boxed_opaque_existential_0, symObjAddr: 0x59C, symBinAddr: 0x45A8, symSize: 0x20 }
+  - { offsetInCU: 0x409, offset: 0x5B52B, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginC8register4withySo07FlutterL9Registrar_p_tFZ', symObjAddr: 0x0, symBinAddr: 0x400C, symSize: 0x4 }
+  - { offsetInCU: 0x41D, offset: 0x5B53F, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginCACycfC', symObjAddr: 0x4, symBinAddr: 0x4010, symSize: 0x20 }
+  - { offsetInCU: 0x451, offset: 0x5B573, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF', symObjAddr: 0x54, symBinAddr: 0x4060, symSize: 0xE4 }
+  - { offsetInCU: 0x49B, offset: 0x5B5BD, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginCACycfc', symObjAddr: 0x1AC, symBinAddr: 0x41B8, symSize: 0x30 }
+  - { offsetInCU: 0x4D2, offset: 0x5B5F4, size: 0x8, addend: 0x0, symName: '_$s26qr_bar_code_scanner_dialog33SwiftQrBarCodeScannerDialogPluginCfD', symObjAddr: 0x218, symBinAddr: 0x4224, symSize: 0x30 }
+...

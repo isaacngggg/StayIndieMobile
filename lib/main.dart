@@ -11,15 +11,15 @@ import 'package:stay_indie/screens/connections_page.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
 import 'package:stay_indie/screens/project/manage_story_screen.dart';
 
-import 'package:stay_indie/screens/loginSignUpFlow/LoginScreen.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/SignUpScreen.dart';
+import 'package:stay_indie/screens/archive/LoginScreen.dart';
+import 'package:stay_indie/screens/archive/SignUpScreen.dart';
 import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testRegisterPage.dart';
 import 'package:stay_indie/screens/profile/MainProfilePage.dart';
 import 'package:stay_indie/screens/settings/settings_page.dart';
-import 'package:stay_indie/screens/profile/profile_edit_page.dart';
+import 'package:stay_indie/screens/archive/profile_edit_page.dart';
 import 'package:stay_indie/screens/project/addProjectFlow/add_project_screen.dart';
 import 'package:stay_indie/screens/socials/connect_social_page.dart';
 import 'package:stay_indie/screens/notification/notification_page.dart';
@@ -84,7 +84,7 @@ class OfflineApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
+      theme: theme,
       initialRoute: OfflineSplashScreen.id,
     );
   }
