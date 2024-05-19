@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Journey.dart';
 import 'package:stay_indie/screens/templates/stepper_form.dart';
+import 'package:stay_indie/models/SingleFormPage.dart';
 
 class HighlightsEditPage extends StatefulWidget {
   HighlightsEditPage({super.key});
@@ -86,8 +87,20 @@ class _HighlightsEditPageState extends State<HighlightsEditPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                StepperForm(pages: [], title: 'Add Journey')));
+                            maintainState: false,
+                            allowSnapshotting: false,
+                            barrierDismissible: false,
+                            builder: (context) {
+                              return StepperForm(
+                                  title: 'Add a Project',
+                                  pages: SingleFormPage.addJourneyPage,
+                                  mediaBucket: 'project_medias',
+                                  onSubmit: (formValue) {
+                                    print(formValue);
+                                    var newJourney = Journey.fromMap(formValue);
+                                    Journey.addJourney(newJourney);
+                                  });
+                            }));
                   },
                   style: kSmallAccentButtonStyle,
                   child: Text('Add Highlight'),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Project.dart';
 import 'package:uuid/uuid.dart';
@@ -13,6 +14,9 @@ class Journey {
   final List<String>? collaborators;
   final List<String>? tags;
 
+  final String emoji;
+  final Color emojiBgColor;
+
   Journey({
     required this.id,
     required this.title,
@@ -23,6 +27,8 @@ class Journey {
     this.imagesUrls = const [],
     this.collaborators,
     this.tags,
+    this.emojiBgColor = kPrimaryColour,
+    this.emoji = '🚀',
   });
 
   Journey.fromMap(Map<String?, dynamic> map)
@@ -40,22 +46,25 @@ class Journey {
                 : null),
         collaborators = map['collaborators'],
         tags = map['tags'],
+        emoji = map['emoji'] ?? '🚀',
+        emojiBgColor = map['emoji_bg_colo'] != null
+            ? Color(int.parse(map['color'].toString()))
+            : kPrimaryColour,
         imagesUrls =
             []; // Add an initializer expression for the imagesUrls field
 
-  void initializeImagesUrls() {
-    Project.getProjectImages(id, currentUserId)
+  Future initializeImagesUrls(String userId) async {
+    print('Getting images for journey: ' + id);
+    await Project.getProjectImages(id, userId)
         .then((value) => imagesUrls = value);
   }
 
-  static Future<List<Journey>> getCurrentUserJourneys() async {
-    final currentUser = supabase.auth.currentUser;
+  static Future<List<Journey>> getUserJourneys(String userId) async {
     try {
-      print(currentUser!.id);
       final response = await supabase
           .from('journey_entries')
           .select()
-          .eq('profile_id', currentUser.id);
+          .eq('profile_id', userId);
 
       if (response.isEmpty) {
         print('No journeys found');
@@ -64,7 +73,8 @@ class Journey {
       List<Journey> journeys = [];
       for (var journey in response.toList()) {
         Journey newJourney = Journey.fromMap(journey);
-        newJourney.initializeImagesUrls();
+        print('Initializing images for journey: ' + newJourney.id);
+        await newJourney.initializeImagesUrls(userId);
         journeys.add(newJourney);
       }
       return journeys;
@@ -82,6 +92,7 @@ class Journey {
     }
     try {
       await supabase.from('journey_entries').insert({
+        'id': journey.id,
         'title': journey.title,
         'organization': journey.organization,
         'description': journey.description,
@@ -112,17 +123,14 @@ class Journey {
   //   }
   // }
 
-  static Future<void> deleteJourney(Journey journey) async {
+  static Future<void> deleteJourney(String journeyId) async {
     final currentUser = supabase.auth.currentUser;
     if (currentUser == null) {
       print('No user found');
       return;
     }
     try {
-      await supabase
-          .from('journey_entries')
-          .delete()
-          .eq('id', journey.id.toString());
+      await supabase.from('journey_entries').delete().eq('id', journeyId);
     } catch (e) {
       print('Error' + e.toString());
     }
@@ -156,6 +164,16 @@ class Journey {
       }).eq('id', journeyId);
     } catch (e) {
       print('Error adding Image Url: ' + e.toString());
+    }
+  }
+
+  static Future<void> removeImageUrl(String imageUrl, String journeyId) async {
+    try {
+      final response = await supabase.from('journey_entries').update({
+        'images_Urls': supabase.rpc('array_remove(images_urls), $imageUrl)'),
+      }).eq('id', journeyId);
+    } catch (e) {
+      print('Error removing Image Url: ' + e.toString());
     }
   }
 }

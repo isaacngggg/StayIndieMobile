@@ -22,6 +22,7 @@ class SettingPage extends StatelessWidget {
       body: ListView(
         children: [
           CupertinoListSection.insetGrouped(
+            backgroundColor: kBackgroundColour,
             header: Text(
               'General',
               style: kHeading4.copyWith(color: kPrimaryColour),
@@ -38,6 +39,7 @@ class SettingPage extends StatelessWidget {
             ],
           ),
           CupertinoListSection.insetGrouped(
+            backgroundColor: kBackgroundColour,
             header: Text(
               'Account',
               style: kHeading4.copyWith(color: kPrimaryColour),
@@ -73,6 +75,7 @@ class SettingPage extends StatelessWidget {
             ],
           ),
           CupertinoListSection.insetGrouped(
+            backgroundColor: kBackgroundColour,
             header: Text(
               'Danger Zone',
               style: kHeading4.copyWith(color: kPrimaryColour),

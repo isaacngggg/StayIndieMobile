@@ -64,21 +64,21 @@ class SingleFormPage {
 
   static List<SingleFormPage> addJourneyPage = [
     SingleFormPage(
-      titleQuestion: 'What is the title of your project?',
+      titleQuestion: 'Title of your journey',
       suportingText: 'A catchy title helps in attracting more audience.',
       storageKey: 'title',
+      inputType: FormInputFieldType.text,
+    ),
+    SingleFormPage(
+      titleQuestion: 'Organization',
+      suportingText: 'A company or organisation that you worked on.',
+      storageKey: 'organization',
       inputType: FormInputFieldType.text,
     ),
     SingleFormPage(
       titleQuestion: 'A short description',
       suportingText: 'A brief intro that focuses on what you have achieved.',
       storageKey: 'description',
-      inputType: FormInputFieldType.text,
-    ),
-    SingleFormPage(
-      titleQuestion: 'A catchy summary',
-      suportingText: 'A snappy summary that highlights your project.',
-      storageKey: 'summary',
       inputType: FormInputFieldType.text,
     ),
     SingleFormPage(
@@ -93,6 +93,34 @@ class SingleFormPage {
           'Add as many images as you want, and yes video and audio too.',
       storageKey: 'media',
       inputType: FormInputFieldType.media,
+    ),
+  ];
+
+  static List<SingleFormPage> profileSetUp = [
+    SingleFormPage(
+      titleQuestion: 'Name',
+      suportingText: 'Your actual name, not a nickname.',
+      storageKey: 'name',
+      inputType: FormInputFieldType.text,
+    ),
+    SingleFormPage(
+      titleQuestion: 'Bio',
+      suportingText: 'Tell me a bit about yourself.',
+      storageKey: 'bio',
+      inputType: FormInputFieldType.text,
+    ),
+    SingleFormPage(
+      titleQuestion: 'Location',
+      suportingText: 'Where are you based?',
+      storageKey: 'location',
+      inputType: FormInputFieldType.text,
+    ),
+    SingleFormPage(
+      titleQuestion: 'Headline',
+      suportingText:
+          'Something catchy that describes you e.g. "I make cool music in my attic"',
+      storageKey: 'headline',
+      inputType: FormInputFieldType.text,
     ),
   ];
 }

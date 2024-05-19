@@ -11,15 +11,22 @@ import 'package:stay_indie/widgets/images/UploadButton.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:stay_indie/models/SingleFormPage.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:stay_indie/models/Project.dart';
+
 import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
 import 'package:stay_indie/widgets/images/ImageTile.dart';
-import 'package:timeago/timeago.dart';
 import 'package:intl/intl.dart';
 
 class StepperForm extends StatefulWidget {
   final String title;
-  StepperForm({required this.title, required this.pages, super.key});
+  final dynamic onSubmit;
+  final String? mediaBucket;
+  StepperForm({
+    required this.title,
+    required this.pages,
+    required this.onSubmit,
+    this.mediaBucket,
+    super.key,
+  });
   static const id = 'stepper_form';
   final _newProjectId = uuid.v4();
   List<SingleFormPage> pages;
@@ -37,6 +44,14 @@ class _StepperFormState extends State<StepperForm> {
   List<String> _networkImages = [];
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _formKey.currentState?.reset();
+
+    super.dispose();
+  }
+
+  @override
   void initState() {
     // Initial step set to 5.
     _newProjectId = widget._newProjectId;
@@ -51,31 +66,26 @@ class _StepperFormState extends State<StepperForm> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: kBackgroundColour,
-        appBar: AppBar(
-          backgroundColor: kBackgroundColour,
-          // title: Text(widget.title, style: kSubheading1),
-          actions: [
-            IconButton(
-              onPressed: () {
-                // _formKey.currentState?.reset();
-                Navigator.of(context).pop();
-              },
-              icon: Icon(Icons.close),
-            )
-          ],
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                mainContent(_networkImages),
-              ],
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              // _formKey.currentState?.reset();
+              Navigator.of(context).pop();
+            },
+            icon: Icon(Icons.close),
+          )
+        ],
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              mainContent(_networkImages),
+            ],
           ),
         ),
       ),
@@ -208,7 +218,7 @@ class _StepperFormState extends State<StepperForm> {
                   children: [
                     if (currentPage.inputType == FormInputFieldType.media) ...[
                       UploadButton(
-                          bucket: 'project_medias',
+                          bucket: widget.mediaBucket!,
                           itemId: _newProjectId,
                           updateNetworkImagesFunc: (url) => setState(() {
                                 networkImages.add(url);
@@ -219,11 +229,8 @@ class _StepperFormState extends State<StepperForm> {
                       FormBuilderDateTimePicker(
                         name: currentPage.storageKey,
                         inputType: InputType.date,
-                        decoration: InputDecoration(
+                        decoration: kLinedTextFieldDecoration.copyWith(
                           labelText: currentPage.inputLabel,
-                          labelStyle:
-                              GoogleFonts.ebGaramond(textStyle: kSubheading1),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
                         format: DateFormat("EEE, M-d-y"),
                         controller: currentPage.controller,
@@ -231,11 +238,8 @@ class _StepperFormState extends State<StepperForm> {
                     if (currentPage.inputType == FormInputFieldType.text)
                       FormBuilderTextField(
                         name: currentPage.storageKey,
-                        decoration: InputDecoration(
+                        decoration: kLinedTextFieldDecoration.copyWith(
                           labelText: currentPage.inputLabel,
-                          labelStyle:
-                              GoogleFonts.ebGaramond(textStyle: kSubheading1),
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
                         style: GoogleFonts.ebGaramond(textStyle: kHeading2),
                         controller: currentPage.controller,
@@ -300,9 +304,8 @@ class _StepperFormState extends State<StepperForm> {
                                                 values[entry.key])));
                                     _formKey.currentState?.saveAndValidate();
 
-                                    print(formValue);
-                                    var newProject = Project.fromMap(formValue);
-                                    Project.addProject(newProject);
+                                    widget.onSubmit(formValue);
+                                    Navigator.of(context).pop(formValue);
                                   },
                                 )
                               : Container(),

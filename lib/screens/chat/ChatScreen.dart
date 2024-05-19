@@ -2,16 +2,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/models/Chat.dart';
+import 'package:stay_indie/models/ChatInfo.dart';
 import 'package:stay_indie/models/Message.dart';
 import 'package:stay_indie/models/Profile.dart';
+import 'package:stay_indie/widgets/chat/message_bar.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stay_indie/widgets/chat/ChatBubble.dart';
 import 'package:stay_indie/screens/chat/chat_info_screen.dart';
 
 class ChatScreen extends StatefulWidget {
-  final Chat chatInfo;
+  final ChatInfo chatInfo;
   const ChatScreen({required this.chatInfo, Key? key}) : super(key: key);
 
   static const String id = 'chat_screen';
@@ -26,15 +27,12 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    final myUserId = supabase.auth.currentUser!.id;
     _messagesStream = supabase
         .from('messages')
         .stream(primaryKey: ['id'])
         .eq('chat_id', widget.chatInfo.id)
         .order('created_at')
-        .map((maps) => maps
-            .map((map) => Message.fromMap(map: map, myUserId: myUserId))
-            .toList());
+        .map((maps) => maps.map((map) => Message.fromMap(map: map)).toList());
     super.initState();
   }
 
@@ -58,27 +56,56 @@ class _ChatScreenState extends State<ChatScreen> {
     });
     return Scaffold(
       appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(widget.chatInfo.name),
-            const SizedBox(width: 8),
-            Text(
-              '${participants.toString().replaceAll('[', '').replaceAll(']', '')}',
-              style: const TextStyle(fontSize: 12),
-            ),
-          ],
+        leading: IconButton(
+          padding: const EdgeInsets.symmetric(horizontal: 0),
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.info),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ChatInfoScreen(chatInfo: widget.chatInfo);
-              }));
-            },
+        title: GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatInfoScreen(
+                chatInfo: widget.chatInfo,
+              ),
+            ),
           ),
-        ],
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              widget.chatInfo.imageUrl == null
+                  ? const CircleAvatar(
+                      radius: 20,
+                      child: FaIcon(FontAwesomeIcons.user),
+                    )
+                  : CircleAvatar(
+                      radius: 20,
+                      backgroundImage: NetworkImage(widget.chatInfo.imageUrl!),
+                    ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.chatInfo.name,
+                      style: kHeading3,
+                    ),
+                    const SizedBox(width: 8),
+                    widget.chatInfo.participants.length == 2
+                        ? Container()
+                        : Text(
+                            '${participants.toString().replaceAll('[', '').replaceAll(']', '')}',
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       body: StreamBuilder<List<Message>>(
         stream: _messagesStream,
@@ -106,11 +133,13 @@ class _ChatScreenState extends State<ChatScreen> {
                             return ChatBubble(
                               message: message,
                               profile: _profileCache[message.senderId],
+                              isGroupChat:
+                                  widget.chatInfo.participants.length > 2,
                             );
                           },
                         ),
                 ),
-                _MessageBar(chatId: widget.chatInfo.id),
+                MessageBar(chatId: widget.chatInfo.id),
               ],
             );
           } else {
@@ -119,95 +148,5 @@ class _ChatScreenState extends State<ChatScreen> {
         },
       ),
     );
-  }
-}
-
-/// Set of widget that contains TextField and Button to submit message
-class _MessageBar extends StatefulWidget {
-  final String chatId;
-  const _MessageBar({
-    required this.chatId,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<_MessageBar> createState() => _MessageBarState();
-}
-
-class _MessageBarState extends State<_MessageBar> {
-  late final TextEditingController _textController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: kBackgroundColour10,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  keyboardType: TextInputType.text,
-                  maxLines: null,
-                  autofocus: true,
-                  controller: _textController,
-                  decoration: const InputDecoration(
-                    hintText: 'Type a message',
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    contentPadding: EdgeInsets.all(8),
-                  ),
-                ),
-              ),
-              IconButton(
-                onPressed: () => _submitMessage(),
-                icon: CircleAvatar(
-                  radius: 16,
-                  backgroundColor: kAccentColour,
-                  child: const Icon(
-                    Icons.send,
-                    size: 16,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  void initState() {
-    _textController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
-
-  void _submitMessage() async {
-    final text = _textController.text;
-    final myUserId = supabase.auth.currentUser!.id;
-    if (text.isEmpty) {
-      return;
-    }
-    _textController.clear();
-    try {
-      await supabase.from('messages').insert({
-        'sender_id': myUserId,
-        'content': text,
-        'chat_id': widget.chatId, // Replace with actual chat id
-      });
-    } on PostgrestException catch (error) {
-      context.showErrorSnackBar(message: error.message);
-    } catch (_) {
-      context.showErrorSnackBar(message: 'Unexpected error occurred');
-    }
   }
 }

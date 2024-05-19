@@ -8,6 +8,8 @@ import 'package:stay_indie/constants.dart';
 
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
+import 'package:stay_indie/screens/templates/stepper_form.dart';
+import 'package:stay_indie/models/SingleFormPage.dart';
 
 /// Page to redirect users to the appropriate page depending on the initial auth state
 class SplashScreen extends StatefulWidget {
@@ -35,13 +37,38 @@ class SplashScreenState extends State<SplashScreen> {
           .pushNamedAndRemoveUntil(LoginPage.id, (route) => false);
     } else {
       clearAllCache(context);
-      await Profile.getProfileData(currentUserId).then((profile) {
-        if (profile != null) {
+      try {
+        await Profile.getProfileData(currentUserId).then((profile) {
           currentUserProfile = profile;
+        });
+        bool isProfileSetUp = await Profile.checkIfProfileIsSetUp();
+        if (isProfileSetUp) {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(InboxScreen.id, (route) => false);
+          return;
+        } else {
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(InboxScreen.id, (route) => false);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => StepperForm(
+                title: 'Profile Set Up',
+                pages: SingleFormPage.profileSetUp,
+                onSubmit: (formValues) async {
+                  formValues['id'] = supabase.auth.currentUser!.id;
+                  Profile.updateProfile(
+                      supabase.auth.currentUser!.id, formValues);
+                  Navigator.popAndPushNamed(context, InboxScreen.id);
+                },
+              ),
+            ),
+          );
         }
-      });
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(InboxScreen.id, (route) => false);
+      } catch (e) {
+        print('Error in SplashScreen.dart');
+
+        print(e);
+      }
     }
   }
 

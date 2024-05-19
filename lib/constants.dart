@@ -9,6 +9,7 @@ import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/models/connections/Spotify/Spotify.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 enum FormInputFieldType { text, number, date, media, grid }
 
@@ -26,7 +27,7 @@ String currentUserId = supabase.auth.currentUser != null
 late Profile currentUserProfile;
 
 ThemeData theme = ThemeData.dark().copyWith(
-  textTheme: GoogleFonts.robotoTextTheme(
+  textTheme: GoogleFonts.dmSansTextTheme(
     ThemeData.dark().textTheme,
   ),
   colorScheme: ColorScheme.dark(
@@ -69,6 +70,8 @@ const Color kBackgroundColour30 = Color(0xFF333333);
 Color kAccentColour = Color(0xFF81C657);
 Color kAccentColour10 = Color(0xFFC6EAB0);
 Color kAccentColour20 = Color(0xFFE6F4D6);
+
+const Color kTransparent = Color(0x00000000);
 
 // Button Styles
 
@@ -200,6 +203,23 @@ InputDecoration kPlainTextFieldDecoration = InputDecoration(
 );
 
 InputDecoration kBoxedTextFieldDecoration = InputDecoration(
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: kPrimaryColour50),
+      borderRadius: BorderRadius.circular(15),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: kPrimaryColour50),
+      borderRadius: BorderRadius.circular(15),
+    ),
+    labelStyle: TextStyle(
+      color: kPrimaryColour80,
+    ),
+    floatingLabelBehavior: FloatingLabelBehavior.never);
+
+InputDecoration kGreyTextFieldDecoration = InputDecoration(
+  fillColor: kBackgroundColour10,
+  focusColor: kPrimaryColour20,
+  filled: true,
   focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(color: kPrimaryColour50),
     borderRadius: BorderRadius.circular(15),
@@ -208,14 +228,25 @@ InputDecoration kBoxedTextFieldDecoration = InputDecoration(
     borderSide: BorderSide(color: kPrimaryColour50),
     borderRadius: BorderRadius.circular(15),
   ),
-  labelStyle: TextStyle(
-    color: kPrimaryColour,
-  ),
+  floatingLabelBehavior: FloatingLabelBehavior.auto,
+  floatingLabelAlignment: FloatingLabelAlignment.start,
 );
 
 InputDecoration kLinedTextFieldDecoration = InputDecoration(
-  labelStyle: GoogleFonts.ebGaramond(textStyle: kSubheading1),
+  labelStyle: kSubheading1.copyWith(
+      fontFamily: GoogleFonts.ebGaramond().fontFamily, color: kPrimaryColour),
   floatingLabelBehavior: FloatingLabelBehavior.never,
+);
+
+InputDecoration kSearchTextFieldDecoration = InputDecoration(
+  contentPadding: EdgeInsets.all(5),
+  border: OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.all(Radius.circular(15))),
+  filled: true,
+  fillColor: kBackgroundColour20,
+  hintText: 'Search contacts or username',
+  prefixIcon: Icon(Icons.search),
 );
 
 // Text Styles
@@ -348,8 +379,8 @@ void clearAllCache(context) {
     Project.clearCache();
 
     print('Cache Cleared');
-    ShowSnackBar(context)
-        .showSnackBar(message: 'Cache Cleared', backgroundColor: Colors.green);
+    // ShowSnackBar(context)
+    //     .showSnackBar(message: 'Cache Cleared', backgroundColor: Colors.green);
   } catch (e) {
     ShowSnackBar(context).showSnackBar(
         message: 'Cache unable to be clear: ' + e.toString(),

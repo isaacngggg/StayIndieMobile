@@ -3,11 +3,12 @@ import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Profile.dart';
-import 'package:stay_indie/screens/profile/content_page.dart';
+import 'package:stay_indie/screens/archive/content_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:stay_indie/screens/profile/MainProfilePage.dart';
+import 'package:stay_indie/screens/archive/MainProfilePage.dart';
 
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:stay_indie/screens/profile/profile_page.dart';
 
 class QrCodePage extends StatefulWidget {
   const QrCodePage({super.key});

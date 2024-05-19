@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		pGoogjcRtqtgkcQ5IYOIF2DgVOo=
+		jK3fv0YGoZ58MeD35N60bGmk5V8=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		yyVZqRjUdfKDI930TJ3j0B/455I=
+		LZnIuyd+Lz6QfhJDPzf+2tuQSUY=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		VJpa4mhB/pHvRNhfR7AmgcTvq6w=
+		RY6hGKtKZW3CYKStLVCGHXjpraM=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
 		<data>
@@ -174,7 +174,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		CsbIJq7TzLp7qVE1+IAbgZDXW7s=
+		URhxT9eSLZhVKQ+2x3HdcUBoz0k=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -1004,6 +1004,26 @@
 		<data>
 		6uLTlq7fgHHWA8emYDf4ImHC+AY=
 		</data>
+		<key>Frameworks/sqflite.framework/Info.plist</key>
+		<data>
+		vxEVFwOX2d3USayBRFMp3wog1vw=
+		</data>
+		<key>Frameworks/sqflite.framework/_CodeSignature/CodeResources</key>
+		<data>
+		bcgChptGjWG2fChPWOGJ2aq9vwo=
+		</data>
+		<key>Frameworks/sqflite.framework/sqflite</key>
+		<data>
+		eFe9MwVCOFyZlFr/iHEOtIbQRLM=
+		</data>
+		<key>Frameworks/sqflite.framework/sqflite_darwin_privacy.bundle/Info.plist</key>
+		<data>
+		83AS3rKn6IYSfQSwbXKgKQp5BiU=
+		</data>
+		<key>Frameworks/sqflite.framework/sqflite_darwin_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		YIiJ5tHvqBeSpBm2mcfVZdaGz3E=
+		</data>
 		<key>Frameworks/url_launcher_ios.framework/Info.plist</key>
 		<data>
 		Tzq8/X2m61nJfW1TyUG6TpEJO+U=
@@ -1129,7 +1149,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			an1WZMIPf1RucgUHPUZiLNf6J7qoi/b/pgPaR0xrky0=
+			/DraVxMgFKIfiprZGNzhgTgBi06oJ080nawwdAsDrNI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -1143,7 +1163,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			G/iAH+/J2EtLAzwxqJJWZE9NKfE08Aplo0hJulzCkYk=
+			nbGdaor9TDAwwdp/Ll8LxwpVbzbV+36beJhw+fKCYD0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -1171,7 +1191,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			IqrBBbzPIb5+00/FBQMSLs4npsgq7oXoK5G0k9g+X9o=
+			PK5IV9HBcHZP2kx0eBwnxstT2kKbk+b66xHdABuulQg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
@@ -1353,7 +1373,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			R5KzPRorULC51EuU05X4VTMbvADXXe2Tf+l3hHSFNwM=
+			bGhn6n2rGATHoxIRl5lwxRE1zylgSWfQJPRxR8emNi4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -2506,6 +2526,41 @@
 			<key>hash2</key>
 			<data>
 			BWQouTi9VwGKYAGdFcPB7i+nJ/I2h1mLu9k0hIsYCxo=
+			</data>
+		</dict>
+		<key>Frameworks/sqflite.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			6sh9pXNE74dFLgJuLi0yBnWKuZPmlkC6fwjXZwkHzes=
+			</data>
+		</dict>
+		<key>Frameworks/sqflite.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dBy4COjedjcoZnr587kHmEa9eGjqZsrYolor2AIwe0g=
+			</data>
+		</dict>
+		<key>Frameworks/sqflite.framework/sqflite</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JW5Bs/Eqh3m0F1MheZvPz2KU3u8hyXDxuyarkRW7w8A=
+			</data>
+		</dict>
+		<key>Frameworks/sqflite.framework/sqflite_darwin_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			S/Hr2Cw8rtWQyLFk3CmSiKd13nJ20fbPPCN/3Ql8FL8=
+			</data>
+		</dict>
+		<key>Frameworks/sqflite.framework/sqflite_darwin_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RyJqKWCN8gatChEOav61p3/1dawd+cdr/bLW37P6/tE=
 			</data>
 		</dict>
 		<key>Frameworks/url_launcher_ios.framework/Info.plist</key>

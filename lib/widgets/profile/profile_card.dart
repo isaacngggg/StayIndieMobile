@@ -22,7 +22,7 @@ class ProfileCard extends StatelessWidget {
             right: 20,
             child: FaIcon(
               FontAwesomeIcons.solidCircleXmark,
-              color: Colors.grey.shade300,
+              color: kAccentColour,
             )),
         Container(
           margin: EdgeInsets.only(right: 10),
@@ -48,10 +48,13 @@ class ProfileCard extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.center,
-                child: Text(
-                  profile.headline,
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 10),
-                ),
+                child: profile.headline != null
+                    ? Text(
+                        profile.headline!,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 10),
+                      )
+                    : null,
               ),
               SizedBox(
                 height: 2,

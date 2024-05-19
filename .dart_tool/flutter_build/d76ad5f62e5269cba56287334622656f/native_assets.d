@@ -1,0 +1,1 @@
+ /Users/isaacng/Developer/StayIndie/StayIndieMobile/.dart_tool/flutter_build/d76ad5f62e5269cba56287334622656f/native_assets.yaml: 

@@ -2,11 +2,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'package:stay_indie/screens/profile/MainProfilePage.dart';
+import 'package:stay_indie/screens/archive/MainProfilePage.dart';
 import 'package:stay_indie/screens/connections_page.dart';
 
 import 'package:stay_indie/screens/chat/InboxScreen.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
+import 'package:stay_indie/screens/profile/profile_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -19,13 +20,14 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      elevation: 1,
+      height: 60,
+      elevation: 0,
       indicatorColor: Colors.transparent,
       indicatorShape: ShapeBorder.lerp(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           2),
-      backgroundColor: Colors.transparent,
+      backgroundColor: kBackgroundColour,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
       selectedIndex: pageIndex,
       destinations: [
@@ -68,14 +70,14 @@ class BottomNavBar extends StatelessWidget {
               context, NoAnimationRoute(builder: (context) => InboxScreen()));
         } else if (index == 1) {
           Navigator.pushReplacement(
-              context, NoAnimationRoute(builder: (context) => SearchScreen()));
+              context, NoAnimationRoute(builder: (context) => ContactsPage()));
         } else if (index == 2) {
           Navigator.pushReplacement(
               context,
               NoAnimationRoute(
                   builder: (context) => ProfilePage(
                         profileId: currentUserId,
-                        selfProfile: true,
+                        isProfilePage: true,
                       )));
         }
       },

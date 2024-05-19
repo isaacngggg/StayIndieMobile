@@ -29,12 +29,11 @@ class Message {
 
   Message.fromMap({
     required Map<String, dynamic> map,
-    required String myUserId,
   })  : id = map['id'],
         senderId = map['sender_id'],
         content = map['content'],
         createdAt = DateTime.parse(map['created_at']),
-        isMine = map['sender_id'] == myUserId,
+        isMine = map['sender_id'] == currentUserId,
         chatId = map['chat_id'];
 
   static Future<List<Message>> getMessages(String chatId) async {
@@ -47,7 +46,7 @@ class Message {
     List<Message> messages = [];
 
     for (var message in response.toList()) {
-      messages.add(Message.fromMap(map: message, myUserId: currentUserId));
+      messages.add(Message.fromMap(map: message));
     }
 
     return messages;
@@ -78,8 +77,7 @@ class Message {
         .order('created_at', ascending: false)
         .limit(1);
 
-    Message message =
-        Message.fromMap(map: response[0], myUserId: currentUserId);
+    Message message = Message.fromMap(map: response[0]);
 
     return message;
   }

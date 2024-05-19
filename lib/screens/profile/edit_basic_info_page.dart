@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:stay_indie/models/Profile.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditBasicInfoPage extends StatefulWidget {
   static const String id = 'edit_basic_info_page';
@@ -14,8 +17,6 @@ class EditBasicInfoPage extends StatefulWidget {
 }
 
 class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
-  late Profile userProfile;
-
   TextEditingController nameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
   TextEditingController headlineController = TextEditingController();
@@ -23,21 +24,13 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
 
   @override
   void initState() {
-    Profile.getProfileData(currentUserId).then((value) {
-      if (value != null) {
-        setState(() {
-          userProfile = value;
-          nameController = TextEditingController(text: userProfile.name);
-          bioController = TextEditingController(text: userProfile.bio);
-          headlineController =
-              TextEditingController(text: userProfile.headline);
-          locationController =
-              TextEditingController(text: userProfile.location);
-        });
-      } else {
-        print('Profile is null');
-      }
-    });
+    nameController = TextEditingController(text: currentUserProfile.name);
+    bioController = TextEditingController(text: currentUserProfile.bio);
+    headlineController =
+        TextEditingController(text: currentUserProfile.headline);
+    locationController =
+        TextEditingController(text: currentUserProfile.location);
+
     super.initState();
   }
 
@@ -54,6 +47,13 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                AvaterImageEditor(
+                    bucket: 'profile_images',
+                    setStateFunc: (url) {
+                      setState(() {
+                        currentUserProfile.profileImageUrl = url;
+                      });
+                    }),
                 FormBuilderTextField(
                   name: 'name',
                   decoration: InputDecoration(labelText: 'Name'),
@@ -75,10 +75,11 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
                   decoration: InputDecoration(labelText: 'Location'),
                   controller: locationController,
                 ),
+                Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextButton(
-                    style: kSecondaryButtonStyle,
+                    style: kPrimaryButtonStyle,
                     onPressed: () {
                       print(locationController.text);
 
@@ -89,7 +90,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
                         'headline': headlineController.text,
                         'location': locationController.text,
                       };
-                      currentUserProfile.updateProfile(userProfile);
+                      Profile.updateProfile(currentUserId, userProfile);
                       print('done');
                       Navigator.pop(context);
                     },
@@ -101,6 +102,61 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class AvaterImageEditor extends StatelessWidget {
+  final String bucket;
+  final Function setStateFunc;
+  const AvaterImageEditor({
+    required this.bucket,
+    required this.setStateFunc,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+              bottom: 0,
+              child: Icon(
+                Icons.camera_alt,
+                size: 30,
+                color: kBackgroundColour10,
+              )),
+          CircleAvatar(
+            radius: 50,
+            backgroundImage: NetworkImage(currentUserProfile.profileImageUrl),
+          ),
+        ],
+      ),
+      onTap: () async {
+        final ImagePicker picker = ImagePicker();
+        final XFile? image =
+            await picker.pickImage(source: ImageSource.gallery);
+        if (image == null) return;
+        final imageBytes = await image.readAsBytes();
+
+        final imagePath = '$currentUserId/profile.png';
+
+        await supabase.storage
+            .from(bucket)
+            .remove([imagePath]).whenComplete(() => print('removed'));
+
+        await supabase.storage
+            .from(bucket)
+            .uploadBinary(imagePath, imageBytes)
+            .whenComplete(() async {
+          final url =
+              await supabase.storage.from(bucket).getPublicUrl(imagePath);
+
+          setStateFunc(url);
+        });
+      },
     );
   }
 }

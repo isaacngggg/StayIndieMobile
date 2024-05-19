@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/constants.dart';
+import 'package:stay_indie/models/Profile.dart';
+import 'package:stay_indie/models/SingleFormPage.dart';
+import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
+import 'package:stay_indie/screens/templates/stepper_form.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../archive/HomeScreen.dart';
 import 'testLoginPage.dart';
@@ -42,8 +46,22 @@ class _RegisterPageState extends State<RegisterPage> {
     try {
       await supabase.auth.signUp(
           email: email, password: password, data: {'username': username});
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(HomeScreen.id, (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => StepperForm(
+              title: 'Profile Set Up',
+              pages: SingleFormPage.profileSetUp,
+              onSubmit: (formValues) async {
+                Profile.updateProfile(
+                    supabase.auth.currentUser!.id, formValues);
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+              },
+            ),
+          ),
+          (route) => false);
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
     } catch (error) {
@@ -101,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
             TextFormField(
               controller: _usernameController,
               decoration:
-                  kBoxedTextFieldDecoration.copyWith(labelText: 'Username'),
+                  kGreyTextFieldDecoration.copyWith(labelText: 'Username'),
               validator: (val) {
                 if (val == null || val.isEmpty) {
                   return 'Required';

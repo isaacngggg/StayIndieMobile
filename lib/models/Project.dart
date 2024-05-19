@@ -7,7 +7,7 @@ class Project {
   final String summary;
   final String description;
   final DateTime startDate;
-  final List<String>? images;
+  List<String>? images;
   final List<String>? collaborators;
   final List<String>? tags;
 
@@ -52,9 +52,12 @@ class Project {
         }
         List<Project> projects = [];
         for (var project in response.toList()) {
-          projects.add(Project.fromMap(project));
+          var newProject = Project.fromMap(project);
+          newProject.images = await getProjectImages(newProject.id, profileID);
+          projects.add(newProject);
         }
         _projectCache[profileID] = Future.value(projects);
+
         return projects;
       }
     } catch (e) {

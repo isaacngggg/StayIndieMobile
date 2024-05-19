@@ -18,7 +18,8 @@ class CoverButton extends StatefulWidget {
 class _CoverButtonState extends State<CoverButton> {
   late Future<bool> requestPending;
   late Future<bool> receivedRequest;
-  late bool isConnected = false;
+  late bool isConnected =
+      widget.userProfile.connectionsProfileIds.contains(currentUserId);
 
   late bool requestPendingSnapshot;
   late bool receivedRequestSnapshot;
@@ -27,13 +28,17 @@ class _CoverButtonState extends State<CoverButton> {
     // TODO: implement initState
     ConnectionRequest.getProfileConnectionRequests(widget.userProfile.id)
         .then((value) {
-      print("Getting all the connection Requests for ${widget.userProfile.id}" +
-          value.toString());
+      // print("Getting all the connection Requests for ${widget.userProfile.id}" +
+      //     value.toString());
     });
 
     setState(() {
       requestPending = ConnectionRequest.isRequested(widget.userProfile.id);
       receivedRequest = ConnectionRequest.needToAccept(widget.userProfile.id);
+      isConnected =
+          widget.userProfile.connectionsProfileIds!.contains(currentUserId);
+      // print(isConnected);
+      // print("Connections:  ${widget.userProfile.connectionsProfileIds}");
     });
     super.initState();
   }
@@ -44,14 +49,34 @@ class _CoverButtonState extends State<CoverButton> {
         future: Future.wait([requestPending, receivedRequest]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            print('Snapshot: ' + snapshot.toString());
+            // print('Snapshot: ' + snapshot.toString());
             if (snapshot.hasError) {
               return Text('Snapshot Error: ${snapshot.error}');
             } else {
               requestPendingSnapshot = snapshot.data![0];
               receivedRequestSnapshot = snapshot.data![1];
 
-              if (requestPendingSnapshot) {
+              if (isConnected) {
+                return TextButton(
+                  onPressed: () {
+                    GRBottomSheet.buildBottomSheet(
+                      context,
+                      Column(
+                        children: [
+                          Text('Connected'),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Remove Connection'),
+                            style: kSmallPrimaryButtonStyle,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  child: Text('Connected'),
+                  style: kSmallSecondaryButtonStyle,
+                );
+              } else if (requestPendingSnapshot) {
                 return TextButton(
                   onPressed: () {
                     ConnectionRequest.getRequest(
@@ -87,26 +112,6 @@ class _CoverButtonState extends State<CoverButton> {
                   },
                   child: Text('Accept Request'),
                   style: kSmallPrimaryButtonStyle,
-                );
-              } else if (isConnected) {
-                return TextButton(
-                  onPressed: () {
-                    GRBottomSheet.buildBottomSheet(
-                      context,
-                      Column(
-                        children: [
-                          Text('Connected'),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text('Remove Connection'),
-                            style: kSmallPrimaryButtonStyle,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  child: Text('Connected'),
-                  style: kSmallSecondaryButtonStyle,
                 );
               } else {
                 return TextButton(

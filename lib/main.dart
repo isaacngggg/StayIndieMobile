@@ -17,7 +17,7 @@ import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/testRegisterPage.dart';
-import 'package:stay_indie/screens/profile/MainProfilePage.dart';
+import 'package:stay_indie/screens/archive/MainProfilePage.dart';
 import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/screens/archive/profile_edit_page.dart';
 import 'package:stay_indie/screens/project/addProjectFlow/add_project_screen.dart';
@@ -28,6 +28,7 @@ import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/offline_screen.dart';
 import 'package:stay_indie/screens/profile/epk/epk_page.dart';
 import 'package:stay_indie/models/ProfileProvider.dart';
+import 'package:stay_indie/screens/project/project_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,16 +55,16 @@ class MainApp extends StatelessWidget {
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
         OpportunityScreen.id: (context) => OpportunityScreen(),
-        ProfilePage.id: (context) => ProfilePage(
-              profileId: currentUserId,
-            ),
+        // MainProfilePage.id: (context) => MainProfilePage(
+        //       profileId: currentUserId,
+        //     ),
         AddScreen.id: (context) => AddScreen(),
         ConnectionsScreen.id: (context) => ConnectionsScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
         IndustryScreen.id: (context) => IndustryScreen(),
         InboxScreen.id: (context) => InboxScreen(),
-        SearchScreen.id: (context) => SearchScreen(),
+        ConnectionsScreen.id: (context) => ConnectionsScreen(),
         SplashScreen.id: (context) => SplashScreen(),
         LoginPage.id: (context) => LoginPage(),
         RegisterPage.id: (context) => RegisterPage(isRegistering: false),
@@ -73,6 +74,7 @@ class MainApp extends StatelessWidget {
         ConnectSocialPage.id: (context) => ConnectSocialPage(),
         NotificationsPage.id: (context) => NotificationsPage(),
         EpkPage.id: (context) => EpkPage(),
+        ProjectsPage.id: (context) => ProjectsPage(),
       },
     );
   }

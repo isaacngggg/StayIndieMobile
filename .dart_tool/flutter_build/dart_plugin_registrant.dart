@@ -9,11 +9,13 @@ import 'dart:io'; // flutter_ignore: dart_io_import.
 import 'package:image_picker_android/image_picker_android.dart';
 import 'package:path_provider_android/path_provider_android.dart';
 import 'package:shared_preferences_android/shared_preferences_android.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:url_launcher_android/url_launcher_android.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:image_picker_ios/image_picker_ios.dart';
 import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:shared_preferences_foundation/shared_preferences_foundation.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:url_launcher_ios/url_launcher_ios.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 import 'package:app_links/app_links.dart';
@@ -28,6 +30,7 @@ import 'package:flutter_keyboard_visibility_macos/flutter_keyboard_visibility_ma
 import 'package:image_picker_macos/image_picker_macos.dart';
 import 'package:path_provider_foundation/path_provider_foundation.dart';
 import 'package:shared_preferences_foundation/shared_preferences_foundation.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:url_launcher_macos/url_launcher_macos.dart';
 import 'package:file_selector_windows/file_selector_windows.dart';
 import 'package:flutter_keyboard_visibility_windows/flutter_keyboard_visibility_windows.dart';
@@ -65,6 +68,15 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`shared_preferences_android` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        SqflitePlugin.registerWith();
+      } catch (err) {
+        print(
+          '`sqflite` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }
@@ -111,6 +123,15 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`shared_preferences_foundation` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        SqflitePlugin.registerWith();
+      } catch (err) {
+        print(
+          '`sqflite` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }
@@ -239,6 +260,15 @@ class _PluginRegistrant {
       } catch (err) {
         print(
           '`shared_preferences_foundation` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        SqflitePlugin.registerWith();
+      } catch (err) {
+        print(
+          '`sqflite` threw an error: $err. '
           'The app may not function as expected until you remove this plugin from pubspec.yaml'
         );
       }

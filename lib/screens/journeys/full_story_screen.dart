@@ -1,9 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +13,7 @@ import 'package:stay_indie/widgets/images/UploadButton.dart';
 import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
 import 'package:stay_indie/widgets/GRBottomSheet.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 class FullStoryPage extends StatefulWidget {
   final List<Journey> journeys;
@@ -28,17 +25,23 @@ class FullStoryPage extends StatefulWidget {
 }
 
 class _FullStoryPageState extends State<FullStoryPage> {
+  late final PageController _pageController;
   @override
   void initState() {
     // TODO: implement initState
-
+    _pageController =
+        PageController(viewportFraction: 0.7, initialPage: widget.initialPage);
     super.initState();
   }
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final PageController pageController =
-        PageController(viewportFraction: 0.7, initialPage: widget.initialPage);
     return Scaffold(
       backgroundColor: kBackgroundColour,
       body: Stack(
@@ -59,128 +62,146 @@ class _FullStoryPageState extends State<FullStoryPage> {
               Expanded(
                 child: PageView.builder(
                   scrollDirection: Axis.vertical,
-                  controller: pageController,
+                  controller: _pageController,
                   itemCount: widget.journeys.length,
                   itemBuilder: (context, index) {
                     Journey journey = widget.journeys[index];
                     return AnimatedBuilder(
-                      animation: pageController,
+                      animation: _pageController,
                       builder: (context, child) {
                         double value = index == widget.initialPage ? 1 : 0;
                         double opacity = index == widget.initialPage ? 1 : 0;
-                        if (pageController.position.haveDimensions) {
-                          value = pageController.page! - index;
+                        if (_pageController.position.haveDimensions) {
+                          value = _pageController.page! - index;
                           opacity = (1 - (value.abs())).clamp(0.0, 1.0);
                           value = (1 - (value.abs() * .2)).clamp(0.0, 1.0);
                         }
 
-                        return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 0.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 60,
-                                width: 60,
-                                alignment: Alignment.center,
-                                child: CircleAvatar(
-                                  radius: Curves.easeOut.transform(value) *
-                                      23, // or the size you want
-                                  backgroundColor: kPrimaryColour40,
-                                  child: CircleAvatar(
-                                    radius: Curves.easeOut.transform(value) *
-                                        (23 -
-                                            1), // slightly smaller to create a border effect
-                                    backgroundImage:
-                                        AssetImage('assets/amazon.png'),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(height: 10),
-                                              Text(journey.title,
-                                                  style: kHeading3),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Text(journey.organization,
-                                                      style: kBody1),
-                                                  SizedBox(width: 10),
-                                                  Container(
-                                                    width:
-                                                        2.0, // or the size you want
-                                                    height:
-                                                        2.0, // or the size you want
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color:
-                                                          kPrimaryColour, // or the color you want
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 10),
-                                                  Text(
-                                                      DateFormat('MMM yyyy')
-                                                          .format(journey
-                                                              .startDate),
-                                                      style: kCaption1),
-                                                ],
-                                              ),
-                                            ],
+                        return Column(
+                          children: [
+                            Expanded(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 60,
+                                    width: 60,
+                                    alignment: Alignment.center,
+                                    child: CircleAvatar(
+                                      radius: Curves.easeOut.transform(value) *
+                                          23, // or the size you want
+                                      backgroundColor: kPrimaryColour40,
+                                      child: CircleAvatar(
+                                        radius: Curves.easeOut
+                                                .transform(value) *
+                                            (23 -
+                                                1), // slightly smaller to create a border effect
+                                        backgroundColor: journey.emojiBgColor,
+
+                                        child: Text(
+                                          journey.emoji,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Colors.white,
                                           ),
-                                        ),
-                                        IconButton(
-                                            icon: Icon(
-                                              Icons.more_vert,
-                                              color: kPrimaryColour,
-                                            ),
-                                            onPressed: () => {
-                                                  GRBottomSheet
-                                                      .buildBottomSheet(
-                                                          context,
-                                                          MoreActionModel(
-                                                              journey: journey))
-                                                }),
-                                      ],
-                                    ),
-                                    Expanded(
-                                      child: Opacity(
-                                        opacity:
-                                            Curves.easeOut.transform(opacity),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Text(journey.description,
-                                                style: kBody1),
-                                            SizedBox(height: 10),
-                                            ProjectMediaCarousel(
-                                                height: 300,
-                                                networkImages:
-                                                    journey.imagesUrls!),
-                                          ],
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(height: 10),
+                                                  Text(journey.title,
+                                                      style: kHeading3),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(journey.organization,
+                                                          style: kBody1),
+                                                      SizedBox(width: 10),
+                                                      Container(
+                                                        width:
+                                                            2.0, // or the size you want
+                                                        height:
+                                                            2.0, // or the size you want
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color:
+                                                              kPrimaryColour, // or the color you want
+                                                        ),
+                                                      ),
+                                                      SizedBox(width: 10),
+                                                      Text(
+                                                          DateFormat('MMM yyyy')
+                                                              .format(journey
+                                                                  .startDate),
+                                                          style: kCaption1),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            IconButton(
+                                                icon: Icon(
+                                                  Icons.more_vert,
+                                                  color: kPrimaryColour,
+                                                ),
+                                                onPressed: () => {
+                                                      GRBottomSheet
+                                                          .buildBottomSheet(
+                                                              context,
+                                                              MoreActionModel(
+                                                                  journey:
+                                                                      journey))
+                                                    }),
+                                          ],
+                                        ),
+                                        Expanded(
+                                          child: Opacity(
+                                            opacity: Curves.easeOut
+                                                .transform(opacity),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Text(journey.description,
+                                                    style: kBody1),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            ProjectMediaCarousel(
+                              height: 300,
+                              networkImages: journey.imagesUrls,
+                              leftMargin: 60,
+                            ),
+                            Spacer(),
+                          ],
                         );
                       },
                     );
@@ -284,7 +305,8 @@ class MoreActionModel extends StatelessWidget {
           trailing: Icon(Icons.delete),
           title: Text('Delete'),
           onTap: () {
-            Navigator.pop(context);
+            Journey.deleteJourney(journey.id);
+            Navigator.popUntil(context, (route) => route.isFirst);
           },
         ),
       ],
@@ -307,33 +329,42 @@ class EditJourneyModal extends StatefulWidget {
 class _EditJourneyModalState extends State<EditJourneyModal>
     with SingleTickerProviderStateMixin {
   late final TabController tabController;
+  late final TextEditingController emojiController;
   late final TextEditingController titleController;
   late final TextEditingController organizationController;
   late final TextEditingController startDateController;
   late final TextEditingController descriptionController;
 
   List<String> _networkImages = [];
-
+  late String selectedEmoji;
   @override
   void initState() {
+    selectedEmoji = widget.journey.emoji;
     tabController = TabController(length: 2, vsync: this);
     super.initState();
     _networkImages.addAll(widget.journey.imagesUrls);
-
     titleController = TextEditingController(text: widget.journey.title);
     organizationController =
         TextEditingController(text: widget.journey.organization);
-    startDateController =
-        TextEditingController(text: widget.journey.startDate.toIso8601String());
+
+    startDateController = TextEditingController(
+        text: DateFormat('yyyy-MM-dd').format(DateTime.now()));
     descriptionController =
         TextEditingController(text: widget.journey.description);
+    emojiController = TextEditingController(text: widget.journey.emoji);
   }
 
   @override
   void dispose() {
     tabController.dispose();
+    titleController.dispose();
+    organizationController.dispose();
+    startDateController.dispose();
+    descriptionController.dispose();
+    emojiController.dispose();
     super.dispose();
   }
+  // Default emoji
 
   @override
   Widget build(BuildContext context) {
@@ -365,7 +396,34 @@ class _EditJourneyModalState extends State<EditJourneyModal>
                   shrinkWrap: true,
                   padding: EdgeInsets.all(0),
                   children: [
+                    GestureDetector(
+                      onTap: () async {
+                        final emoji = await showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return EmojiPicker(
+                              onEmojiSelected:
+                                  (Category? category, Emoji emoji) {
+                                Navigator.of(context).pop(emoji.emoji);
+                              },
+                            );
+                          },
+                        );
+
+                        if (emoji != null) {
+                          setState(() {
+                            selectedEmoji = emoji;
+                          });
+                        }
+                      },
+                      child: CircleAvatar(
+                        radius: 40.0,
+                        child:
+                            Text(selectedEmoji, style: TextStyle(fontSize: 30)),
+                      ),
+                    ),
                     SizedBox(height: 20),
+
                     TextFormField(
                       controller: titleController,
                       decoration: kBoxedTextFieldDecoration.copyWith(
@@ -379,15 +437,26 @@ class _EditJourneyModalState extends State<EditJourneyModal>
                     ),
                     SizedBox(height: 20),
 
-                    FormBuilderDateTimePicker(
-                      name: 'start_date',
-                      inputType: InputType.date,
+                    TextFormField(
+                      controller: startDateController,
+                      readOnly: true, // to prevent opening keyboard on tap
                       decoration: kBoxedTextFieldDecoration.copyWith(
                         labelText: 'Start Date',
                       ),
-                      format: DateFormat("EEE, M-d-y"),
-                      controller: startDateController,
+                      onTap: () async {
+                        final DateTime? date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
+                        );
+                        startDateController.text =
+                            DateFormat('yyyy-MM-dd').format(date!);
+                      },
+                      validator: (value) =>
+                          value == null ? 'Field Required' : null,
                     ),
+
                     // Date Picker
 
                     SizedBox(height: 20),
@@ -429,7 +498,7 @@ class _EditJourneyModalState extends State<EditJourneyModal>
               Journey.updateJourney({
                 'title': titleController.text,
                 'organization': organizationController.text,
-                'start_date': DateFormat("EEE, d-M-yyyy")
+                'start_date': DateFormat("dd-MM-yyyy")
                     .parse(startDateController.text)
                     .toIso8601String(),
                 'description': descriptionController.text,

@@ -28,6 +28,11 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _isLoading = true;
     });
+    if (mounted) {
+      setState(() {
+        _isLoading = true;
+      });
+    }
     try {
       await supabase.auth.signInWithPassword(
         email: _emailController.text,
@@ -36,17 +41,15 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.of(context)
           .pushNamedAndRemoveUntil(SplashScreen.id, (route) => false);
     } on AuthException catch (error) {
-      context.showErrorSnackBar(message: error.message);
       setState(() {
         _isLoading = false;
       });
+      context.showErrorSnackBar(message: error.message);
     } catch (e) {
-      context.showErrorSnackBar(message: e.toString());
-    }
-    if (mounted) {
       setState(() {
-        _isLoading = true;
+        _isLoading = false;
       });
+      context.showErrorSnackBar(message: e.toString());
     }
   }
 
