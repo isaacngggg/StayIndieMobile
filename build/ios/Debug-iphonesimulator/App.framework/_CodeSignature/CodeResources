@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		UMZOZ9wO/bzwoBTCTvRsG2ir9rg=
+		UJHybJcXWMISDhv5pJ/m3JfYw7Y=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		kUhiC4ezxAopJ4koshNjSWEUgq4=
+		B/8lsJFwHHv2cE396XRZhb+oKnQ=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,7 +22,11 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		2oshcXASECpn+Za1uH29uQQkCB4=
+		AGLajuGqrAHxe/u3yfFUeW5EAKg=
+		</data>
+		<key>flutter_assets/assets/Greenroom.png</key>
+		<data>
+		fd8fESV1VLyLksh58npPnub2NrA=
 		</data>
 		<key>flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
 		<data>
@@ -84,6 +88,10 @@
 		<data>
 		paycYnVETgrO1YpBdtPE9qCKh6M=
 		</data>
+		<key>flutter_assets/assets/qr.png</key>
+		<data>
+		tS7/6dvd+A/fPFZsXgsCU/zh4HM=
+		</data>
 		<key>flutter_assets/assets/socialIcons/discord.png</key>
 		<data>
 		6s6/vVm2VLJVsIJaCIqA/k44Hks=
@@ -130,7 +138,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		RCZJD1l086jKpo/fxH2X4yQCOFo=
+		cmtxtCYopRM3AtFc2GucZ11bbqY=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -175,14 +183,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			TbqFfBzwHJiTRTrnmloq67Mo/hvu85q4UGzxAwkydgk=
+			o+w/SdR15h353fvJV7WUqRWOWjVH36RTflZKUp4+vN0=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			tpQ37JdaAnZ/bshey0t69YtBk+7S/YQnBjZ52WfxJeU=
+			mRPpu9Sxy4sQDVIRMaSyGTie8J62PhvtmCeKUW5InmY=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -196,7 +204,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			R0Wy9yR+ltiA7dTRDVRX8xxxtoA6q0WzaUns4zcxfv4=
+			C8G4hnxR8KVrQd887LIoB2J4BXZ3ONKqF8a3zIXIJcE=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/Greenroom.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VwVm7cbzGyl8DrMf6X5TVJJh8Ivogktt/GJRxWsjuBo=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
@@ -304,6 +319,13 @@
 			DD7QBHVlczADoNVwwii+yKZdAv26NH/4vZeg0EqE05c=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/qr.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			yQRdeGvDvPJ/o1HWrX8AA2w6nGxiSV9KZSAfusLdEmc=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/socialIcons/discord.png</key>
 		<dict>
 			<key>hash2</key>
@@ -385,7 +407,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			31ZEv5w6ETaECj6AVIsV1wTbG6nzfnjtDEf0AumSVgw=
+			93pE4n8dfLs+8F+/LU9lB5WcFkHInpSzpdlXQsqUmrI=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

@@ -95,7 +95,7 @@ class _StepperFormState extends State<StepperForm> {
   /// Returns the next button.
   Widget nextButton() {
     return IconButton.filled(
-      icon: FaIcon(FontAwesomeIcons.arrowRight),
+      icon: FaIcon(FontAwesomeIcons.arrowRight, color: kBackgroundColour),
       onPressed: () {
         // Increment activeStep, when the next button is tapped. However, check for upper bound.
         if (activeStep < upperBound) {
@@ -269,19 +269,20 @@ class _StepperFormState extends State<StepperForm> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          activeStep == 0 ? SizedBox() : previousButton(),
-                          Spacer(),
-                          activeStep > 0
-                              ? TextButton(
-                                  onPressed: () {},
-                                  child: Text('Restart'),
-                                  style: kSmallDeleteButton,
-                                )
-                              : SizedBox(),
+                          // activeStep == 0 ? SizedBox() : previousButton(),
+                          // Spacer(),
+                          // activeStep > 0
+                          //     ? TextButton(
+                          //         onPressed: () {},
+                          //         child: Text('Restart'),
+                          //         style: kSmallDeleteButton,
+                          //       )
+                          //     : SizedBox(),
                           Spacer(),
                           activeStep == upperBound - 1
                               ? IconButton.filled(
-                                  icon: FaIcon(FontAwesomeIcons.check),
+                                  icon: FaIcon(FontAwesomeIcons.check,
+                                      color: kBackgroundColour),
                                   onPressed: () {
                                     // Decrement activeStep, when the previous button is tapped. However, check for lower bound i.e., must be greater than 0.
                                     List values = [_newProjectId];

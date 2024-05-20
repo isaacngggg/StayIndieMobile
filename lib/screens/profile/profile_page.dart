@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   // late DraggableScrollableController _draggableScrollableController;
   // late Animation<Offset> _animation;
-  final double height = 120;
+  // final double height = 120;
   // final double containerHeight = window.physicalSize.height * 0.9;
 
   late double topBarHeight;
@@ -66,8 +66,8 @@ class _ProfilePageState extends State<ProfilePage>
 
   ValueNotifier<double> _opacityNotifier = ValueNotifier<double>(1.0);
 
-  double _initialChildSize = 0.15;
-  double _minChildSize = 0.15;
+  late double _initialChildSize;
+  // double _minChildSize = 0.15;
   double _maxChildSize = 0.85;
 
   void _onRefresh() async {
@@ -81,6 +81,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   void initState() {
+    _initialChildSize = widget.isProfilePage ? 0.22 : 0.15;
     _controller = AnimationController(
       duration: const Duration(milliseconds: 250),
       vsync: this,
@@ -170,7 +171,9 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                         GradientShadowOverlay(),
                         Container(
-                          margin: EdgeInsets.only(bottom: height),
+                          margin: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height *
+                                  _initialChildSize),
                           clipBehavior: Clip.none,
                           padding:
                               EdgeInsets.only(left: 20, right: 20, bottom: 0),
@@ -270,7 +273,7 @@ class _ProfilePageState extends State<ProfilePage>
                           // controller: _draggableScrollableController,
                           snap: true,
                           initialChildSize: _initialChildSize,
-                          minChildSize: _minChildSize,
+                          minChildSize: _initialChildSize,
                           maxChildSize: _maxChildSize,
                           builder: (BuildContext context,
                               ScrollController scrollController) {
@@ -451,24 +454,18 @@ class _ProfilePageState extends State<ProfilePage>
                       ],
                     ),
                   ),
-                  // _opacity <= 0.9 && widget.isProfilePage
-                  //     ? Positioned(
-                  //         bottom: 0,
-                  //         right: 0,
-                  //         left: 0,
-                  //         child: Column(
-                  //           children: [
-                  //             AnimatedOpacity(
-                  //               opacity: 1 - _opacity,
-                  //               duration: Duration(
-                  //                   milliseconds: 100), // Adjust duration
-                  //               curve: Curves.easeInOut, // Adjust curve
-                  //               child: NewNavBar(pageIndex: 2),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       )
-                  //     : Container(),
+                  widget.isProfilePage
+                      ? Positioned(
+                          bottom: 0,
+                          right: 0,
+                          left: 0,
+                          child: Column(
+                            children: [
+                              NewNavBar(pageIndex: 2),
+                            ],
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             );
@@ -489,10 +486,8 @@ class GradientShadowOverlay extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment(0, -0.5),
           end: Alignment.bottomCenter,
-          stops: [0.2, 0.8, 1.0],
           colors: [
             kBackgroundColour.withOpacity(0.0),
-            kBackgroundColour.withOpacity(0.8),
             kBackgroundColour.withOpacity(1),
           ],
         ),
