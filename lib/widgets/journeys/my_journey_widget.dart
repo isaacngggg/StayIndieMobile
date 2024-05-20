@@ -59,12 +59,7 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
         SizedBox(height: 10),
         Container(
           clipBehavior: Clip.antiAlias,
-          decoration: kOutlineBorder.copyWith(
-              color: kPrimaryColour60.withOpacity(0.1),
-              border: Border.all(
-                color: kPrimaryColour50.withOpacity(0.5),
-                width: 1,
-              )),
+          decoration: kOutlineBorder,
           child: Stack(
             children: [
               Positioned(
@@ -73,8 +68,9 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                 child: CustomPaint(
                   size: Size(0, MediaQuery.of(context).size.height - 400),
                   painter: LinePainter(
-                      height: MediaQuery.of(context).size.height - 400,
-                      color: kPrimaryColour50.withOpacity(0.5)),
+                    height: MediaQuery.of(context).size.height - 400,
+                    color: kBackgroundColour30,
+                  ),
                 ),
               ),
               Container(
@@ -117,12 +113,11 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                     children: [
                                       CircleAvatar(
                                         radius: 20.0, // or the size you want
-                                        backgroundColor:
-                                            kPrimaryColour50.withOpacity(0.5),
+                                        backgroundColor: kBackgroundColour30,
                                         child: CircleAvatar(
                                           radius:
                                               19.0, // slightly smaller to create a border effect
-                                          backgroundColor: kPrimaryColour80,
+                                          backgroundColor: kBackgroundColour10,
 
                                           child: Center(
                                             child: IconButton(

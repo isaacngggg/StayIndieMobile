@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		jK3fv0YGoZ58MeD35N60bGmk5V8=
+		BWCIAek934wqJrsLDp3/y2OxFLY=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		LZnIuyd+Lz6QfhJDPzf+2tuQSUY=
+		Ka8DQrlLtX7Cs5/5EvBBR5I82EI=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		RY6hGKtKZW3CYKStLVCGHXjpraM=
+		TGp/GKaLLhMLrIIFDBLa+2/FBlI=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
 		<data>
@@ -174,7 +174,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		URhxT9eSLZhVKQ+2x3HdcUBoz0k=
+		EJe/jyBF6QDhN/8CXalKZeRA0iY=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -876,6 +876,18 @@
 		<data>
 		W859JDVykxWZ0aYvnTEJCgiAYio=
 		</data>
+		<key>Frameworks/emoji_picker_flutter.framework/Info.plist</key>
+		<data>
+		CaUdoYck830wrl+9GNzRiQJeWn4=
+		</data>
+		<key>Frameworks/emoji_picker_flutter.framework/_CodeSignature/CodeResources</key>
+		<data>
+		Nn/v+DMT41ZROp8Su9AVAB0bsnc=
+		</data>
+		<key>Frameworks/emoji_picker_flutter.framework/emoji_picker_flutter</key>
+		<data>
+		rCq3xv/5RfaaxQM0onUoXWDlRUo=
+		</data>
 		<key>Frameworks/flutter_keyboard_visibility.framework/Info.plist</key>
 		<data>
 		6Sw1nP+erZNb9sWpU/CH4hpJZpo=
@@ -1149,7 +1161,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/DraVxMgFKIfiprZGNzhgTgBi06oJ080nawwdAsDrNI=
+			T1bpGJdfRUGz7VY0Mgec0IjM5SHh1uE0UCVSRFSFiKA=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -1163,7 +1175,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			nbGdaor9TDAwwdp/Ll8LxwpVbzbV+36beJhw+fKCYD0=
+			OJwULOO/MSnv9hkblQ6GgNGaaoKpOww9Ok6hc0HivO4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -1191,7 +1203,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PK5IV9HBcHZP2kx0eBwnxstT2kKbk+b66xHdABuulQg=
+			sW5F74ft+YC4e7qu5j3suRo71jAD4rRtsGR54vj4Fuk=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
@@ -1373,7 +1385,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bGhn6n2rGATHoxIRl5lwxRE1zylgSWfQJPRxR8emNi4=
+			RfVZGuTP9bkhmdmH2ezORR20//13CQ3q0VWCSVr68sU=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -2302,6 +2314,27 @@
 			<key>hash2</key>
 			<data>
 			3wG/jzEbezUNAdVa/lBZ6tm6KwBpxUIeadm0BffKvqI=
+			</data>
+		</dict>
+		<key>Frameworks/emoji_picker_flutter.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			oAyFQ4GPIOd07weYR4XV+UQg+jLX88LquRiVHtCjBI8=
+			</data>
+		</dict>
+		<key>Frameworks/emoji_picker_flutter.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DtEX+sEzbj/+rr2+RP+KuFC+dEo1VP4b3AUjkQn6Dv4=
+			</data>
+		</dict>
+		<key>Frameworks/emoji_picker_flutter.framework/emoji_picker_flutter</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			O3uM+CfgburucD0sgmZvPn2kS/OK4FO/JcMex5kjXJU=
 			</data>
 		</dict>
 		<key>Frameworks/flutter_keyboard_visibility.framework/Info.plist</key>

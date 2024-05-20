@@ -22,15 +22,14 @@ class PagesButton extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(right: 10),
             decoration: BoxDecoration(
-              color: kPrimaryColour60.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(30),
+              color: kBackgroundColour10.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(15),
               border: Border.all(
-                color: kPrimaryColour50.withOpacity(0.4),
-                width: 1,
+                color: kBackgroundColour30,
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

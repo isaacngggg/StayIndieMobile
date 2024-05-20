@@ -1,0 +1,51 @@
+{
+  "main_library": {
+    "exported_symbols": [
+      {
+        "data": {
+          "global": [
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCfD",
+            "_emoji_picker_flutterVersionNumber",
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCACycfc",
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC6handle_6resultySo0F10MethodCallC_yypSgctFTq",
+            "_emoji_picker_flutterVersionString",
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC6handle_6resultySo0F10MethodCallC_yypSgctF",
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCACycfC",
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCMa",
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCMn",
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC8register4withySo0fG9Registrar_p_tFZ",
+            "_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCN"
+          ],
+          "objc_class": [
+            "PodsDummy_emoji_picker_flutter",
+            "_TtC20emoji_picker_flutter24EmojiPickerFlutterPlugin"
+          ]
+        }
+      }
+    ],
+    "flags": [
+      {
+        "attributes": [
+          "not_app_extension_safe"
+        ]
+      }
+    ],
+    "install_names": [
+      {
+        "name": "@rpath/emoji_picker_flutter.framework/Versions/A/emoji_picker_flutter"
+      }
+    ],
+    "swift_abi": [
+      {
+        "abi": 7
+      }
+    ],
+    "target_info": [
+      {
+        "min_deployment": "11",
+        "target": "arm64-macos"
+      }
+    ]
+  },
+  "tapi_tbd_version": 5
+}

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:ui';
 
@@ -44,9 +45,10 @@ class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   late Future<Profile> userProfile;
   late ScrollController _scrollController;
-  bool _mainPage = false;
 
   late AnimationController _controller;
+
+  late DraggableScrollableController _draggableScrollableController;
   // late Animation<Offset> _animation;
   final double height = 120;
   // final double containerHeight = window.physicalSize.height * 0.9;
@@ -60,7 +62,12 @@ class _ProfilePageState extends State<ProfilePage>
       RefreshController(initialRefresh: false);
   Key _journeyWidgetKey = UniqueKey();
   late Animation<double> _opacityAnimation;
-  double _initialDragPosition = 0.0;
+
+  ValueNotifier<double> _opacityNotifier = ValueNotifier<double>(1.0);
+
+  double _initialChildSize = 0.15;
+  double _minChildSize = 0.15;
+  double _maxChildSize = 0.85;
 
   void _onRefresh() async {
     setState(() {
@@ -77,18 +84,8 @@ class _ProfilePageState extends State<ProfilePage>
       duration: const Duration(milliseconds: 250),
       vsync: this,
     );
+    _draggableScrollableController = DraggableScrollableController();
 
-    _controller.addListener(() {
-      if (_controller.value >= 0.5) {
-        setState(() {
-          _mainPage = true;
-        });
-      } else {
-        setState(() {
-          _mainPage = false;
-        });
-      }
-    });
     _opacityAnimation = Tween<double>(begin: 1, end: 0).animate(_controller)
       ..addListener(() {
         setState(() {
@@ -97,16 +94,11 @@ class _ProfilePageState extends State<ProfilePage>
       });
 
     _scrollController = ScrollController();
-    // _scrollController.addListener(() {
-    //   _controller.value =
-    //       _scrollController.offset / _scrollController.position.maxScrollExtent;
-    // });
-    _scrollController.addListener(_scrollListener);
 
     userProfile = Profile.getProfileData(widget.profileId);
-
     if (widget.isProfilePage) {
-      _controller.forward();
+      _draggableScrollableController.animateTo(1,
+          duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
 
     super.initState();
@@ -121,10 +113,10 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   void dispose() {
-    _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     _controller.dispose();
-
+    _opacityNotifier.dispose();
+    _draggableScrollableController.dispose();
     super.dispose();
   }
 
@@ -148,7 +140,6 @@ class _ProfilePageState extends State<ProfilePage>
               coverButton: coverButton,
             );
 
-            ;
             return Scaffold(
               body: Stack(
                 children: [
@@ -269,238 +260,209 @@ class _ProfilePageState extends State<ProfilePage>
                           ),
                         ),
                         topBarInstance,
-                        Positioned(
-                            top: (MediaQuery.of(context).size.height - height),
-                            left: 0,
-                            right: 0,
-                            child: SlideTransition(
-                              position: Tween<Offset>(
-                                begin: Offset.zero,
-                                end: Offset(
-                                    0.0,
-                                    -(MediaQuery.of(context).size.height -
-                                            height -
-                                            topBarInstance.topBarHeight) /
-                                        (MediaQuery.of(context).size.height -
-                                            topBarInstance
-                                                .topBarHeight)), // Change this to your desired offset
-                              ).animate(
-                                CurvedAnimation(
-                                  parent: _controller,
-                                  curve: Curves
-                                      .easeOut, // or Curves.bounceIn for a different effect
+                        DraggableScrollableSheet(
+                          controller: _draggableScrollableController,
+                          snap: true,
+                          initialChildSize: _initialChildSize,
+                          minChildSize: _minChildSize,
+                          maxChildSize: _maxChildSize,
+                          builder: (BuildContext context,
+                              ScrollController scrollController) {
+                            scrollController.addListener(() {
+                              double newOpacity = 1.0 -
+                                  scrollController.position.pixels /
+                                      (scrollController
+                                              .position.maxScrollExtent /
+                                          2);
+                              _opacityNotifier.value =
+                                  newOpacity.clamp(0.0, 1.0);
+                            });
+                            print(
+                                'Drag.position.pixels: ${_draggableScrollableController.size}');
+                            return Container(
+                              // Main Container for the content
+
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: kTransparent,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30),
                                 ),
                               ),
-                              child: Opacity(
-                                opacity: (1 - _opacity) * 0.3 + 0.7,
-                                child: GestureDetector(
-                                  onVerticalDragUpdate: (details) {
-                                    double dragPercentage = 1 -
-                                        (details.globalPosition.dy /
-                                            MediaQuery.of(context).size.height);
-                                    print(dragPercentage);
-
-                                    _controller.value =
-                                        dragPercentage.clamp(0.0, 1.0);
-                                    print(_controller.value);
-                                  },
-                                  onVerticalDragEnd: (details) {
-                                    print(_controller.value);
-                                    if (_controller.value > 0.5) {
-                                      _controller.animateTo(1.0,
-                                          duration: Duration(milliseconds: 200),
-                                          curve: Curves.easeOut);
-                                    } else {
-                                      _controller.animateTo(0.0,
-                                          duration: Duration(milliseconds: 200),
-                                          curve: Curves.easeOut);
-                                    }
-                                  },
-                                  child: Container(
-                                    // Main Container for the content
-
+                              child: BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                                child: Container(
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(
-                                      color: kTransparent,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30),
-                                      ),
-                                    ),
-                                    child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                          sigmaX: 15, sigmaY: 15),
-                                      child: Container(
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Color(0x60000000),
-                                                  kBackgroundColour
-                                                ],
-                                                begin: Alignment.topCenter,
-                                                end: Alignment.center,
-                                              ),
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(30),
-                                                topRight: Radius.circular(30),
-                                              ),
-                                              border: Border(
-                                                top: BorderSide(
-                                                  color: Colors.white
-                                                      .withOpacity(0.1),
-                                                  width: 2,
-                                                ),
-                                              )),
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height -
-                                              topBarInstance
-                                                  .topBarHeight, // Adjust height
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10.0),
-                                                child: CustomPaint(
-                                                  painter:
-                                                      LinePainterHoriztonal(
-                                                          width: 20,
-                                                          colour:
-                                                              kPrimaryColour60),
-                                                ),
-                                              ),
-                                              // Page Pills
-                                              GestureDetector(
-                                                onVerticalDragStart: (details) {
-                                                  _initialDragPosition = details
-                                                      .globalPosition
-                                                      .dy; // Store initial position
-                                                },
-                                                onVerticalDragUpdate:
-                                                    (details) {
-                                                  double dragPercentage = ((details
-                                                              .globalPosition
-                                                              .dy -
-                                                          _initialDragPosition) /
-                                                      (MediaQuery.of(context)
-                                                          .size
-                                                          .height));
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            kBackgroundColour.withOpacity(0.9),
+                                            kBackgroundColour
+                                          ],
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.center,
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(30),
+                                          topRight: Radius.circular(30),
+                                        ),
+                                        border: Border(
+                                          top: BorderSide(
+                                            color:
+                                                Colors.white.withOpacity(0.1),
+                                            width: 2,
+                                          ),
+                                        )),
+                                    // height: MediaQuery.of(context).size.height -
+                                    //     topBarInstance
+                                    //         .topBarHeight, // Adjust height
+                                    child: CustomScrollView(
+                                        controller: scrollController,
+                                        slivers: [
+                                          SliverPersistentHeader(
+                                            delegate: _SliverAppBarDelegate(
+                                              minHeight: 100.0,
+                                              maxHeight: 100.0,
+                                              child: Container(
+                                                // Main Container for the content
 
-                                                  print((details
-                                                          .globalPosition.dy -
-                                                      _initialDragPosition));
-                                                  print(
-                                                      'Top: ${(details.globalPosition.dy - _initialDragPosition)}');
-                                                  print(
-                                                      'bottom: ${MediaQuery.of(context).size.height}');
-
-                                                  print(
-                                                      'Drag %: ${dragPercentage}');
-                                                  _controller.value = 1 -
-                                                      dragPercentage.clamp(
-                                                          0.0, 1);
-                                                  print(
-                                                      'Controller Value: ${_controller.value}');
-                                                },
-                                                onVerticalDragEnd: (details) {
-                                                  // print(_controller.value);
-                                                  if (_controller.value > 0.5 ||
-                                                      details.primaryVelocity! <
-                                                          0) {
-                                                    _controller.animateTo(
-                                                        1.0); // Animate to fully open if past halfway or flinging up
-                                                  } else {
-                                                    _controller.animateTo(
-                                                        0.0); // Animate to close otherwise
-                                                  }
-                                                },
-                                                child: Container(
-                                                  color: Colors.transparent,
-                                                  padding: EdgeInsets.only(
-                                                      left: 20,
-                                                      top: 20,
-                                                      bottom: 10),
-                                                  height: 90,
-                                                  child: ListView(
-                                                    clipBehavior: Clip.none,
-                                                    padding: EdgeInsets.all(0),
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    children: [
-                                                      PagesButton(
-                                                        title: 'Projects',
-                                                        icon: FontAwesomeIcons
-                                                            .recordVinyl,
-                                                        pageId: 'projects',
-                                                      ),
-                                                      PagesButton(
-                                                        title: 'Discography',
-                                                        icon: FontAwesomeIcons
-                                                            .recordVinyl,
-                                                        pageId: 'discography',
-                                                      ),
-                                                      PagesButton(
-                                                        title: 'Socials',
-                                                        icon: FontAwesomeIcons
-                                                            .circleNodes,
-                                                        pageId: 'socials',
-                                                      ),
-                                                      PagesButton(
-                                                        title: 'EPK',
-                                                        icon: FontAwesomeIcons
-                                                            .file,
-                                                        pageId: 'epk_page',
-                                                      ),
-                                                    ],
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  color: kTransparent,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(30),
+                                                    topRight:
+                                                        Radius.circular(30),
+                                                  ),
+                                                ),
+                                                child: BackdropFilter(
+                                                  filter: ImageFilter.blur(
+                                                      sigmaX: 15, sigmaY: 15),
+                                                  child: Container(
+                                                    color: kBackgroundColour
+                                                        .withOpacity(0.9),
+                                                    child: Column(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 10.0),
+                                                          child: CustomPaint(
+                                                            painter:
+                                                                LinePainterHoriztonal(
+                                                                    width: 20,
+                                                                    colour:
+                                                                        kPrimaryColour60),
+                                                          ),
+                                                        ),
+                                                        // Page Pills
+                                                        Container(
+                                                          color: Colors
+                                                              .transparent,
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 20,
+                                                                  top: 20,
+                                                                  bottom: 10),
+                                                          height: 90,
+                                                          child: ListView(
+                                                            clipBehavior:
+                                                                Clip.none,
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    0),
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            children: [
+                                                              PagesButton(
+                                                                title:
+                                                                    'Projects',
+                                                                icon: FontAwesomeIcons
+                                                                    .recordVinyl,
+                                                                pageId:
+                                                                    'projects',
+                                                              ),
+                                                              PagesButton(
+                                                                title:
+                                                                    'Discography',
+                                                                icon: FontAwesomeIcons
+                                                                    .recordVinyl,
+                                                                pageId:
+                                                                    'discography',
+                                                              ),
+                                                              PagesButton(
+                                                                title:
+                                                                    'Socials',
+                                                                icon: FontAwesomeIcons
+                                                                    .circleNodes,
+                                                                pageId:
+                                                                    'socials',
+                                                              ),
+                                                              PagesButton(
+                                                                title: 'EPK',
+                                                                icon:
+                                                                    FontAwesomeIcons
+                                                                        .file,
+                                                                pageId:
+                                                                    'epk_page',
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: ListView(
-                                                  physics: _mainPage
-                                                      ? AlwaysScrollableScrollPhysics()
-                                                      : NeverScrollableScrollPhysics(),
-                                                  padding: EdgeInsets.only(
-                                                      right: 16,
-                                                      left: 16,
-                                                      bottom: 150),
-                                                  children: [
-                                                    SizedBox(height: 0),
-                                                    MyJourneyWidget(
-                                                        key: _journeyWidgetKey,
-                                                        profileId: profile.id),
-                                                  ],
-                                                ),
+                                            ),
+                                            pinned: true,
+                                          ),
+                                          SliverToBoxAdapter(
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  right: 16,
+                                                  left: 16,
+                                                  bottom: 150),
+                                              child: Column(
+                                                children: [
+                                                  MyJourneyWidget(
+                                                      key: _journeyWidgetKey,
+                                                      profileId: profile.id),
+                                                ],
                                               ),
-                                            ],
-                                          )),
-                                    ),
-                                  ),
-                                ),
+                                            ),
+                                          ),
+                                        ])),
                               ),
-                            )),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
-                  _opacity <= 0.9 && widget.isProfilePage
-                      ? Positioned(
-                          bottom: 0,
-                          right: 0,
-                          left: 0,
-                          child: Column(
-                            children: [
-                              AnimatedOpacity(
-                                opacity: 1 - _opacity,
-                                duration: Duration(
-                                    milliseconds: 100), // Adjust duration
-                                curve: Curves.easeInOut, // Adjust curve
-                                child: NewNavBar(pageIndex: 2),
-                              ),
-                            ],
-                          ),
-                        )
-                      : Container(),
+                  // _opacity <= 0.9 && widget.isProfilePage
+                  //     ? Positioned(
+                  //         bottom: 0,
+                  //         right: 0,
+                  //         left: 0,
+                  //         child: Column(
+                  //           children: [
+                  //             AnimatedOpacity(
+                  //               opacity: 1 - _opacity,
+                  //               duration: Duration(
+                  //                   milliseconds: 100), // Adjust duration
+                  //               curve: Curves.easeInOut, // Adjust curve
+                  //               child: NewNavBar(pageIndex: 2),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       )
+                  //     : Container(),
                 ],
               ),
             );
@@ -615,5 +577,142 @@ class TopBar extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// Stack(
+//                                       children: [
+//                                         Expanded(
+//                                           child: ListView(
+//                                             controller: scrollController,
+//                                             padding: EdgeInsets.only(
+//                                                 top: 100,
+//                                                 right: 16,
+//                                                 left: 16,
+//                                                 bottom: 150),
+//                                             children: [
+//                                               SizedBox(height: 0),
+//                                               MyJourneyWidget(
+//                                                   key: _journeyWidgetKey,
+//                                                   profileId: profile.id),
+//                                             ],
+//                                           ),
+//                                         ),
+//                                         Column(
+//                                           children: [
+//                                             Padding(
+//                                               padding: const EdgeInsets.only(
+//                                                   top: 10.0),
+//                                               child: CustomPaint(
+//                                                 painter: LinePainterHoriztonal(
+//                                                     width: 20,
+//                                                     colour: kPrimaryColour60),
+//                                               ),
+//                                             ),
+//                                             // Page Pills
+//                                             Container(
+//                                               color: Colors.transparent,
+//                                               padding: EdgeInsets.only(
+//                                                   left: 20,
+//                                                   top: 20,
+//                                                   bottom: 10),
+//                                               height: 90,
+//                                               child: ListView(
+//                                                 clipBehavior: Clip.none,
+//                                                 padding: EdgeInsets.all(0),
+//                                                 scrollDirection:
+//                                                     Axis.horizontal,
+//                                                 children: [
+//                                                   PagesButton(
+//                                                     title: 'Projects',
+//                                                     icon: FontAwesomeIcons
+//                                                         .recordVinyl,
+//                                                     pageId: 'projects',
+//                                                   ),
+//                                                   PagesButton(
+//                                                     title: 'Discography',
+//                                                     icon: FontAwesomeIcons
+//                                                         .recordVinyl,
+//                                                     pageId: 'discography',
+//                                                   ),
+//                                                   PagesButton(
+//                                                     title: 'Socials',
+//                                                     icon: FontAwesomeIcons
+//                                                         .circleNodes,
+//                                                     pageId: 'socials',
+//                                                   ),
+//                                                   PagesButton(
+//                                                     title: 'EPK',
+//                                                     icon: FontAwesomeIcons.file,
+//                                                     pageId: 'epk_page',
+//                                                   ),
+//                                                 ],
+//                                               ),
+//                                             ),
+//                                           ],
+//                                         ),
+
+//                                         // Column(
+//                                         //   children: [
+//                                         //     Padding(
+//                                         //       padding: const EdgeInsets.only(
+//                                         //           top: 10.0),
+//                                         //       child: CustomPaint(
+//                                         //         painter: LinePainterHoriztonal(
+//                                         //             width: 20,
+//                                         //             colour: kPrimaryColour60),
+//                                         //       ),
+//                                         //     ),
+//                                         //
+//                                         //     Expanded(
+//                                         //       child: ListView(
+//                                         //         physics: _mainPage
+//                                         //             ? AlwaysScrollableScrollPhysics()
+//                                         //             : NeverScrollableScrollPhysics(),
+//                                         //         padding: EdgeInsets.only(
+//                                         //             right: 16,
+//                                         //             left: 16,
+//                                         //             bottom: 150),
+//                                         //         children: [
+//                                         //           SizedBox(height: 0),
+//                                         //           MyJourneyWidget(
+//                                         //               key: _journeyWidgetKey,
+//                                         //               profileId: profile.id),
+//                                         //         ],
+//                                         //       ),
+//                                         //     ),
+//                                         //   ],
+//                                         // ),
+//                                       ],
+//                                     )
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  double get maxExtent => maxHeight;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
   }
 }

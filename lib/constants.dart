@@ -307,7 +307,7 @@ TextStyle kCaption1 = TextStyle(
 );
 
 BoxDecoration kOutlineBorder = BoxDecoration(
-  color: kBackgroundColour10,
+  color: kBackgroundColour10.withOpacity(0.7),
   border: kOutlineLight,
   borderRadius: BorderRadius.all(Radius.circular(20)),
 );
@@ -317,9 +317,9 @@ BoxDecoration kSelectedOutlineBorder = BoxDecoration(
   borderRadius: BorderRadius.all(Radius.circular(20)),
 );
 
-Border kOutlineLight = Border.all(color: kPrimaryColour90, width: 1);
+Border kOutlineLight = Border.all(color: kBackgroundColour30, width: 1);
 
-Border kOutlineBold = Border.all(color: kPrimaryColour90, width: 2);
+Border kOutlineBold = Border.all(color: kBackgroundColour30, width: 2);
 
 extension ShowSnackBar on BuildContext {
   /// Displays a basic snackbar
