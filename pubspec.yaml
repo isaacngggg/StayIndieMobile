@@ -21,7 +21,11 @@ dependencies:
   easy_image_viewer: ^1.4.1
   cupertino_icons: ^1.0.6
   font_awesome_flutter: ^10.7.0
-  im_stepper: ^1.0.1+1
+  # im_stepper: ^1.0.1+1
+  im_stepper: 
+    git:
+      url: https://github.com/isaacngggg/gr_package_im_stepper.git
+      ref: master
   uuid: ^3.0.5
   easy_stepper: ^0.8.3
   google_fonts: ^6.2.1

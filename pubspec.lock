@@ -387,10 +387,11 @@ packages:
   im_stepper:
     dependency: "direct main"
     description:
-      name: im_stepper
-      sha256: "84ca411f7c4666cb8762a6dd6eec0353c96c67f674124614263875d0570ca634"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: "98d961627ad9bb08f07e93861f78248b0648a23c"
+      url: "https://github.com/isaacngggg/gr_package_im_stepper.git"
+    source: git
     version: "1.0.1+1"
   image_picker:
     dependency: "direct main"
