@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:stay_indie/constants.dart';
+import 'package:stay_indie/utilities/input_fields.dart';
 
 import 'SplashScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'testRegisterPage.dart';
+import 'signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -69,15 +70,16 @@ class _LoginPageState extends State<LoginPage> {
             top: 50,
             right: 0,
             left: 0,
-            child: Image.asset(
-              'assets/greenroom_logo_dark.png',
-              fit: BoxFit.cover,
+            child: Container(
+              margin: EdgeInsets.all(10.0),
+              child: Container(),
             ),
           ),
           Positioned(
             bottom: 0,
             right: 0,
             left: 0,
+            top: 0,
             child: Container(
               // clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
@@ -92,30 +94,39 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      'Login',
-                      style: kHeading1,
+                    Image.asset(
+                      'assets/gr-logo-long.png',
+                      fit: BoxFit.contain,
+                      height: 50,
+                      alignment: Alignment.topLeft,
                     ),
                     formSpacer,
-                    Container(
-                      decoration: kMultiInputBoxDecoraction,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            controller: _emailController,
-                            decoration: kPlainTextFieldDecoration.copyWith(
-                                labelText: 'Email'),
-                            keyboardType: TextInputType.emailAddress,
-                          ),
-                          kDivider,
-                          TextFormField(
-                            controller: _passwordController,
-                            decoration: kPlainTextFieldDecoration.copyWith(
-                                labelText: 'Password'),
-                            obscureText: true,
-                          ),
-                        ],
-                      ),
+                    Text(
+                      'Hey, welcome to Greenroom 🌱',
+                      style: kHeading3,
+                    ),
+                    formSpacer,
+                    Text(
+                      'Greenroom is the social network for indie creators.',
+                      style: kBody1,
+                    ),
+                    formSpacer,
+                    InputFields(
+                      children: [
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: kPlainTextFieldDecoration.copyWith(
+                              labelText: 'Log in with email'),
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        kDivider,
+                        TextFormField(
+                          controller: _passwordController,
+                          decoration: kPlainTextFieldDecoration.copyWith(
+                              labelText: 'Password'),
+                          obscureText: true,
+                        ),
+                      ],
                     ),
                     formSpacer,
                     TextButton(

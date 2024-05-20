@@ -44,6 +44,10 @@
 		<data>
 		kI/Q5XKyjxY19Tph/lUMaOC09ZE=
 		</data>
+		<key>Headers/GULNSData+zlib.h</key>
+		<data>
+		kFWywRhiZKZSTElPxadV/AaoVqA=
+		</data>
 		<key>Headers/GULNetworkInfo.h</key>
 		<data>
 		WsAAfsEiwFkuHGHVl5YZZPx/y7g=
@@ -62,7 +66,7 @@
 		</data>
 		<key>Headers/GoogleUtilities-umbrella.h</key>
 		<data>
-		8oo0UajacJTYxC9fyqteyIbckqE=
+		mboIYYo2v6Dv/J8bhecVbZcL6BI=
 		</data>
 		<key>Headers/NSURLSession+GULPromises.h</key>
 		<data>
@@ -189,6 +193,17 @@
 			LiP2jwqqzSGdPL/LiTSObUXRHghVvIJYdV2SXCW8M+k=
 			</data>
 		</dict>
+		<key>Headers/GULNSData+zlib.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			kFWywRhiZKZSTElPxadV/AaoVqA=
+			</data>
+			<key>hash2</key>
+			<data>
+			QD8Y96XnfDAahzjrGk4My5T2g8CL4crH1xVR4Hu0PRU=
+			</data>
+		</dict>
 		<key>Headers/GULNetworkInfo.h</key>
 		<dict>
 			<key>hash</key>
@@ -237,11 +252,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8oo0UajacJTYxC9fyqteyIbckqE=
+			mboIYYo2v6Dv/J8bhecVbZcL6BI=
 			</data>
 			<key>hash2</key>
 			<data>
-			5IKXzm0Vn73cN2nW9Vp/O8zpUrI4tE6VfG44kDO1w/Y=
+			MZe3AbI8yiDfOTAdgHxxKc6F6x2kuwLSvI1ssbPhUeU=
 			</data>
 		</dict>
 		<key>Headers/NSURLSession+GULPromises.h</key>

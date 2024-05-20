@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		uAA+uB8i+mu/Jsjv6tvbXar0k6M=
+		UMZOZ9wO/bzwoBTCTvRsG2ir9rg=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		T2d1yHScRRbdOtKDezZzsD8V7o4=
+		kUhiC4ezxAopJ4koshNjSWEUgq4=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		TGp/GKaLLhMLrIIFDBLa+2/FBlI=
+		2oshcXASECpn+Za1uH29uQQkCB4=
 		</data>
 		<key>flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
 		<data>
@@ -47,6 +47,10 @@
 		<key>flutter_assets/assets/goodnotes_profile.jpeg</key>
 		<data>
 		lRunAs7AiuM5miPMql63stAUaPY=
+		</data>
+		<key>flutter_assets/assets/gr-logo-long.png</key>
+		<data>
+		lnR6LwSuq9T4FLVr+JDNHbccljo=
 		</data>
 		<key>flutter_assets/assets/greenroom_logo_dark.png</key>
 		<data>
@@ -126,7 +130,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		EJe/jyBF6QDhN/8CXalKZeRA0iY=
+		RCZJD1l086jKpo/fxH2X4yQCOFo=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -171,14 +175,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5gVZsu1mgHdYLPi/1YkgLNAe0nByK9vAhAZlKQ3uiCg=
+			TbqFfBzwHJiTRTrnmloq67Mo/hvu85q4UGzxAwkydgk=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Lzl7QnD9v2KdTQTE/SxRwrIsU4HwFjH+4sXt2quZZBs=
+			tpQ37JdaAnZ/bshey0t69YtBk+7S/YQnBjZ52WfxJeU=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -192,7 +196,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sW5F74ft+YC4e7qu5j3suRo71jAD4rRtsGR54vj4Fuk=
+			R0Wy9yR+ltiA7dTRDVRX8xxxtoA6q0WzaUns4zcxfv4=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/WhatsApp%20Jan%2024%20Image.jpeg</key>
@@ -235,6 +239,13 @@
 			<key>hash2</key>
 			<data>
 			/f3BrR9NFtsz9nSIrC+hQbv4gW8GHeu9oPNtqaTE4QA=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/gr-logo-long.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			cpd/aiEPhBi1m0Kvh8XZTX3FNCrR4gO89RWKkrCikEI=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/greenroom_logo_dark.png</key>
@@ -374,7 +385,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RfVZGuTP9bkhmdmH2ezORR20//13CQ3q0VWCSVr68sU=
+			31ZEv5w6ETaECj6AVIsV1wTbG6nzfnjtDEf0AumSVgw=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

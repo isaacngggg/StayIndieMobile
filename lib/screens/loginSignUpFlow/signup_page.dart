@@ -8,7 +8,8 @@ import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
 import 'package:stay_indie/screens/templates/stepper_form.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../archive/HomeScreen.dart';
-import 'testLoginPage.dart';
+import 'package:stay_indie/utilities/input_fields.dart';
+import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key, required this.isRegistering}) : super(key: key);
@@ -80,57 +81,54 @@ class _RegisterPageState extends State<RegisterPage> {
         child: ListView(
           padding: formPadding,
           children: [
-            Container(
-              decoration: kMultiInputBoxDecoraction,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _emailController,
-                    decoration:
-                        kPlainTextFieldDecoration.copyWith(labelText: 'Email'),
-                    validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        return 'Required';
-                      }
-                      return null;
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  kDivider,
-                  TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: kPlainTextFieldDecoration.copyWith(
-                        labelText: 'Password'),
-                    validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        return 'Required';
-                      }
-                      if (val.length < 6) {
-                        return '6 characters minimum';
-                      }
-                      return null;
-                    },
-                  ),
-                ],
+            InputFields(children: [
+              TextFormField(
+                controller: _emailController,
+                decoration:
+                    kPlainTextFieldDecoration.copyWith(labelText: 'Email'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Required';
+                  }
+                  return null;
+                },
+                keyboardType: TextInputType.emailAddress,
               ),
-            ),
+              kDivider,
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration:
+                    kPlainTextFieldDecoration.copyWith(labelText: 'Password'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Required';
+                  }
+                  if (val.length < 6) {
+                    return '6 characters minimum';
+                  }
+                  return null;
+                },
+              ),
+            ]),
             formSpacer,
-            TextFormField(
-              controller: _usernameController,
-              decoration:
-                  kGreyTextFieldDecoration.copyWith(labelText: 'Username'),
-              validator: (val) {
-                if (val == null || val.isEmpty) {
-                  return 'Required';
-                }
-                final isValid = RegExp(r'^[A-Za-z0-9_]{3,24}$').hasMatch(val);
-                if (!isValid) {
-                  return '3-24 long with alphanumeric or underscore';
-                }
-                return null;
-              },
-            ),
+            InputFields(children: [
+              TextFormField(
+                controller: _usernameController,
+                decoration:
+                    kPlainTextFieldDecoration.copyWith(labelText: 'Username'),
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'Required';
+                  }
+                  final isValid = RegExp(r'^[A-Za-z0-9_]{3,24}$').hasMatch(val);
+                  if (!isValid) {
+                    return '3-24 long with alphanumeric or underscore';
+                  }
+                  return null;
+                },
+              ),
+            ]),
             formSpacer,
             TextButton(
               style: kPrimaryButtonStyle,

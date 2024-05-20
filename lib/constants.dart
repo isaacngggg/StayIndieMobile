@@ -34,6 +34,10 @@ ThemeData theme = ThemeData.dark().copyWith(
       primary: kPrimaryColour,
       secondary: kPrimaryColour90,
       tertiary: kAccentColour),
+  iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+    iconColor: MaterialStateProperty.all<Color>(kPrimaryColour30),
+  )),
   primaryColor: kAccentColour,
   scaffoldBackgroundColor: kBackgroundColour,
   highlightColor: kAccentColour,
@@ -62,14 +66,14 @@ const Color kPrimaryColour70 = Color(0xFF808080);
 const Color kPrimaryColour80 = Color(0xFF666666);
 const Color kPrimaryColour90 = Color(0xFF313131);
 
-const Color kBackgroundColour = Color(0xFF0D0D0D);
-const Color kBackgroundColour10 = Color(0xFF181818);
+const Color kBackgroundColour = Color(0xFF181818);
+const Color kBackgroundColour10 = Color(0xFF1C1C1C);
 const Color kBackgroundColour20 = Color(0xFF212121);
 const Color kBackgroundColour30 = Color(0xFF333333);
 
-Color kAccentColour = Color(0xFF81C657);
-Color kAccentColour10 = Color(0xFFC6EAB0);
-Color kAccentColour20 = Color(0xFFE6F4D6);
+Color kAccentColour = Color(0xFFFAFAFA);
+Color kAccentColour10 = Color(0xFF181818);
+Color kAccentColour20 = Color(0xFF212121);
 
 const Color kTransparent = Color(0x00000000);
 
@@ -79,21 +83,21 @@ const Color kTransparent = Color(0x00000000);
 
 ButtonStyle kPrimaryButtonStyle = ButtonStyle(
   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-    EdgeInsets.symmetric(vertical: 20.0),
+    EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
   ),
   foregroundColor: MaterialStateProperty.all<Color>(kBackgroundColour),
   backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColour),
   overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour80),
   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
     RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
+      borderRadius: BorderRadius.circular(15.0),
     ),
   ),
 );
 
 ButtonStyle kOutlinedButtonStyle = ButtonStyle(
   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-    EdgeInsets.symmetric(vertical: 20.0),
+    EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
   ),
   foregroundColor: MaterialStateProperty.all<Color>(kPrimaryColour),
   overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour20),
@@ -106,7 +110,7 @@ ButtonStyle kOutlinedButtonStyle = ButtonStyle(
 
 ButtonStyle kTextButtonStyle = ButtonStyle(
   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-    EdgeInsets.symmetric(vertical: 20.0),
+    EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
   ),
   foregroundColor: MaterialStateProperty.all<Color>(kPrimaryColour70),
   backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
@@ -141,11 +145,12 @@ ButtonStyle kSmallPrimaryButtonStyle = ButtonStyle(
 );
 
 ButtonStyle kSmallSecondaryButtonStyle = ButtonStyle(
-  backgroundColor: MaterialStateProperty.all(kBackgroundColour20),
+  backgroundColor: MaterialStateProperty.all(kBackgroundColour),
   foregroundColor: MaterialStateProperty.all(kPrimaryColour20),
   shape: MaterialStateProperty.all(
     RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10),
+      // side: BorderSide(color: k, width: 1),
     ),
   ),
 );
@@ -184,13 +189,14 @@ ButtonStyle kSmallDeleteButton = ButtonStyle(
 // Input Fields
 
 BoxDecoration kMultiInputBoxDecoraction = BoxDecoration(
-  border: Border.all(color: kPrimaryColour50, width: 2),
+  color: kPrimaryColour80.withOpacity(0.1),
+  border: Border.all(color: kBackgroundColour30, width: 2),
   borderRadius: BorderRadius.circular(15),
 );
 
 Divider kDivider = Divider(
   height: 1,
-  color: kPrimaryColour80,
+  color: kBackgroundColour30,
   thickness: 1,
 );
 

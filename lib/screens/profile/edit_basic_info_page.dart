@@ -6,6 +6,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:stay_indie/models/Profile.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:stay_indie/utilities/input_fields.dart';
 
 class EditBasicInfoPage extends StatefulWidget {
   static const String id = 'edit_basic_info_page';
@@ -54,27 +55,37 @@ class _EditBasicInfoPageState extends State<EditBasicInfoPage> {
                         currentUserProfile.profileImageUrl = url;
                       });
                     }),
-                FormBuilderTextField(
-                  name: 'name',
-                  decoration: InputDecoration(labelText: 'Name'),
-                  controller: nameController,
-                ),
-                FormBuilderTextField(
-                  name: 'bio',
-                  decoration: InputDecoration(labelText: 'Bio'),
-                  controller: bioController,
-                  maxLines: 3,
-                ),
-                FormBuilderTextField(
-                  name: 'headline',
-                  decoration: InputDecoration(labelText: 'Headline'),
-                  controller: headlineController,
-                ),
-                FormBuilderTextField(
-                  name: 'location',
-                  decoration: InputDecoration(labelText: 'Location'),
-                  controller: locationController,
-                ),
+                formSpacer,
+                InputFields(children: [
+                  FormBuilderTextField(
+                    name: 'name',
+                    decoration:
+                        kPlainTextFieldDecoration.copyWith(labelText: 'Name'),
+                    controller: nameController,
+                  ),
+                  kDivider,
+                  FormBuilderTextField(
+                    name: 'bio',
+                    decoration:
+                        kPlainTextFieldDecoration.copyWith(labelText: 'Bio'),
+                    controller: bioController,
+                    maxLines: 3,
+                  ),
+                  kDivider,
+                  FormBuilderTextField(
+                    name: 'headline',
+                    decoration: kPlainTextFieldDecoration.copyWith(
+                        labelText: 'Headline'),
+                    controller: headlineController,
+                  ),
+                  kDivider,
+                  FormBuilderTextField(
+                    name: 'location',
+                    decoration: kPlainTextFieldDecoration.copyWith(
+                        labelText: 'Location'),
+                    controller: locationController,
+                  ),
+                ]),
                 Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),

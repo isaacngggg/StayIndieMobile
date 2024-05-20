@@ -31,6 +31,7 @@ class _InboxScreenState extends State<InboxScreen> {
 
   @override
   void initState() {
+    pageController = PageController(initialPage: 1);
     super.initState();
     print(currentUserProfile.chatIds);
     _initChatsStream();
@@ -62,8 +63,14 @@ class _InboxScreenState extends State<InboxScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    pageController = PageController(initialPage: 1);
     return PageView(
       controller: pageController,
       scrollDirection: Axis.horizontal,
@@ -72,11 +79,20 @@ class _InboxScreenState extends State<InboxScreen> {
         Scaffold(
           // bottomNavigationBar: BottomNavBar(pageIndex: 0),
           appBar: AppBar(
-            title: Text('Inbox'),
-            actions: <Widget>[
-              SizedBox(
-                width: 10,
+            leading: IconButton(
+              icon: Image.asset(
+                'assets/qr.png',
+                width: 26,
               ),
+              onPressed: () {
+                pageController.animateToPage(0,
+                    duration: Duration(milliseconds: 100),
+                    curve: Curves.easeIn);
+              },
+            ),
+            title: Text('Inbox'),
+            centerTitle: true,
+            actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.add_circle),
                 onPressed: () {
@@ -155,12 +171,20 @@ class _InboxScreenState extends State<InboxScreen> {
                                                     )));
                                       },
                                       subtitle: chat.lastMessage != null
-                                          ? Text(chat.lastMessage!.content)
-                                          : Text('Hey, how are you?'),
+                                          ? Text(
+                                              chat.lastMessage!.content,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            )
+                                          : Text('No messages yet.',
+                                              style: TextStyle(
+                                                  color: kPrimaryColour90)),
                                       trailing: chat.lastMessage != null
-                                          ? Text(format(
-                                              chat.lastMessage!.createdAt,
-                                              locale: 'en_short'))
+                                          ? Text(
+                                              format(
+                                                  chat.lastMessage!.createdAt,
+                                                  locale: 'en_short'),
+                                            )
                                           : Text('Time error'),
                                     ),
                                 ],

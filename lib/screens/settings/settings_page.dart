@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stay_indie/models/Profile.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
+import 'package:stay_indie/screens/loginSignUpFlow/login_page.dart';
 import 'package:stay_indie/screens/profile/edit_basic_info_page.dart';
 import 'package:stay_indie/screens/socials/connect_social_page.dart';
 

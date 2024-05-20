@@ -15,8 +15,8 @@ import 'package:stay_indie/screens/archive/LoginScreen.dart';
 import 'package:stay_indie/screens/archive/SignUpScreen.dart';
 import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/testRegisterPage.dart';
+import 'package:stay_indie/screens/loginSignUpFlow/login_page.dart';
+import 'package:stay_indie/screens/loginSignUpFlow/signup_page.dart';
 import 'package:stay_indie/screens/archive/MainProfilePage.dart';
 import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/screens/archive/profile_edit_page.dart';
@@ -30,12 +30,18 @@ import 'package:stay_indie/screens/profile/epk/epk_page.dart';
 import 'package:stay_indie/models/ProfileProvider.dart';
 import 'package:stay_indie/screens/project/project_page.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
     url: 'https://egawjjsxibcluqdgfyvd.supabase.co',
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYXdqanN4aWJjbHVxZGdmeXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDYyODMyNjIsImV4cCI6MjAyMTg1OTI2Mn0.O1P24fO0gGhLF2-T5XVcl256x_AHiR-eXn-K8Tko2Ng',
+  );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   try {
     runApp(const MainApp());

@@ -1,0 +1,25 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/isaacng/Library/Developer/Xcode/DerivedData/Runner-dxvqxmhdbqvciuajmbesssxpovoj/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/emoji_picker_flutter.framework/emoji_picker_flutter'
+relocations:
+  - { offsetInCU: 0x34, offset: 0x57C4A, size: 0x8, addend: 0x0, symName: _emoji_picker_flutterVersionString, symObjAddr: 0x0, symBinAddr: 0xABB0, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x57C7F, size: 0x8, addend: 0x0, symName: _emoji_picker_flutterVersionNumber, symObjAddr: 0x38, symBinAddr: 0xABE8, symSize: 0x0 }
+  - { offsetInCU: 0x27, offset: 0x57CBC, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC8register4withySo0fG9Registrar_p_tFZ', symObjAddr: 0x0, symBinAddr: 0x8000, symSize: 0x4 }
+  - { offsetInCU: 0x7A, offset: 0x57D0F, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC8register4withySo0fG9Registrar_p_tFZTo', symObjAddr: 0x24, symBinAddr: 0x8024, symSize: 0x30 }
+  - { offsetInCU: 0xDB, offset: 0x57D70, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC6handle_6resultySo0F10MethodCallC_yypSgctFTo', symObjAddr: 0x1EC, symBinAddr: 0x81EC, symSize: 0x78 }
+  - { offsetInCU: 0x123, offset: 0x57DB8, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCACycfcTo', symObjAddr: 0x294, symBinAddr: 0x8294, symSize: 0x3C }
+  - { offsetInCU: 0x174, offset: 0x57E09, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC8register4withySo0fG9Registrar_p_tFZTf4nd_n', symObjAddr: 0x300, symBinAddr: 0x8300, symSize: 0xD4 }
+  - { offsetInCU: 0x207, offset: 0x57E9C, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC6handle_6resultySo0F10MethodCallC_yypSgctF015$syXlSgIeyBy_ypN7Iegn_TRyXlSgIeyBy_Tf1ncn_nTf4ndg_n', symObjAddr: 0x4B0, symBinAddr: 0x84B0, symSize: 0x2CC }
+  - { offsetInCU: 0x2A3, offset: 0x57F38, size: 0x8, addend: 0x0, symName: '_$sSo8NSObjectCMa', symObjAddr: 0x3D4, symBinAddr: 0x83D4, symSize: 0x3C }
+  - { offsetInCU: 0x2B7, offset: 0x57F4C, size: 0x8, addend: 0x0, symName: '_$sypSgWOh', symObjAddr: 0x410, symBinAddr: 0x8410, symSize: 0x40 }
+  - { offsetInCU: 0x2CB, offset: 0x57F60, size: 0x8, addend: 0x0, symName: ___swift_instantiateConcreteTypeFromMangledName, symObjAddr: 0x450, symBinAddr: 0x8450, symSize: 0x40 }
+  - { offsetInCU: 0x2DF, offset: 0x57F74, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCMa', symObjAddr: 0x490, symBinAddr: 0x8490, symSize: 0x20 }
+  - { offsetInCU: 0x2FE, offset: 0x57F93, size: 0x8, addend: 0x0, symName: '_$sypSgWOc', symObjAddr: 0x77C, symBinAddr: 0x877C, symSize: 0x48 }
+  - { offsetInCU: 0x312, offset: 0x57FA7, size: 0x8, addend: 0x0, symName: ___swift_project_boxed_opaque_existential_0, symObjAddr: 0x7C4, symBinAddr: 0x87C4, symSize: 0x24 }
+  - { offsetInCU: 0x326, offset: 0x57FBB, size: 0x8, addend: 0x0, symName: ___swift_destroy_boxed_opaque_existential_0, symObjAddr: 0x7E8, symBinAddr: 0x87E8, symSize: 0x20 }
+  - { offsetInCU: 0x484, offset: 0x58119, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC8register4withySo0fG9Registrar_p_tFZ', symObjAddr: 0x0, symBinAddr: 0x8000, symSize: 0x4 }
+  - { offsetInCU: 0x498, offset: 0x5812D, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCACycfC', symObjAddr: 0x4, symBinAddr: 0x8004, symSize: 0x20 }
+  - { offsetInCU: 0x4D3, offset: 0x58168, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginC6handle_6resultySo0F10MethodCallC_yypSgctF', symObjAddr: 0x54, symBinAddr: 0x8054, symSize: 0x198 }
+  - { offsetInCU: 0x53B, offset: 0x581D0, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCACycfc', symObjAddr: 0x264, symBinAddr: 0x8264, symSize: 0x30 }
+  - { offsetInCU: 0x571, offset: 0x58206, size: 0x8, addend: 0x0, symName: '_$s20emoji_picker_flutter24EmojiPickerFlutterPluginCfD', symObjAddr: 0x2D0, symBinAddr: 0x82D0, symSize: 0x30 }
+...

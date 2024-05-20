@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -48,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   late AnimationController _controller;
 
-  late DraggableScrollableController _draggableScrollableController;
+  // late DraggableScrollableController _draggableScrollableController;
   // late Animation<Offset> _animation;
   final double height = 120;
   // final double containerHeight = window.physicalSize.height * 0.9;
@@ -84,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage>
       duration: const Duration(milliseconds: 250),
       vsync: this,
     );
-    _draggableScrollableController = DraggableScrollableController();
+    // _draggableScrollableController = DraggableScrollableController();
 
     _opacityAnimation = Tween<double>(begin: 1, end: 0).animate(_controller)
       ..addListener(() {
@@ -97,8 +98,8 @@ class _ProfilePageState extends State<ProfilePage>
 
     userProfile = Profile.getProfileData(widget.profileId);
     if (widget.isProfilePage) {
-      _draggableScrollableController.animateTo(1,
-          duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+      // _draggableScrollableController.animateTo(1,
+      //     duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
 
     super.initState();
@@ -116,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage>
     _scrollController.dispose();
     _controller.dispose();
     _opacityNotifier.dispose();
-    _draggableScrollableController.dispose();
+    // _draggableScrollableController.dispose();
     super.dispose();
   }
 
@@ -189,18 +190,23 @@ class _ProfilePageState extends State<ProfilePage>
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: kPrimaryColour,
+                                        color: kPrimaryColour30,
                                       ),
                                     )
                                   : Container(),
                               profile.bio != null
-                                  ? Text(
+                                  ? ExpandableText(
                                       profile.bio!,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal,
-                                        color: kPrimaryColour,
-                                      ),
+                                      expandText: 'show more',
+                                      collapseText: 'show less',
+                                      maxLines: 2,
+                                      linkColor: kPrimaryColour,
+                                      linkStyle: kBody1.copyWith(
+                                          color: kPrimaryColour,
+                                          fontWeight: FontWeight.bold),
+                                      style: kBody1,
+                                      expandOnTextTap: true,
+                                      collapseOnTextTap: true,
                                     )
                                   : Container(),
                               SizedBox(height: 20),
@@ -261,7 +267,7 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                         topBarInstance,
                         DraggableScrollableSheet(
-                          controller: _draggableScrollableController,
+                          // controller: _draggableScrollableController,
                           snap: true,
                           initialChildSize: _initialChildSize,
                           minChildSize: _minChildSize,
@@ -277,8 +283,8 @@ class _ProfilePageState extends State<ProfilePage>
                               _opacityNotifier.value =
                                   newOpacity.clamp(0.0, 1.0);
                             });
-                            print(
-                                'Drag.position.pixels: ${_draggableScrollableController.size}');
+                            // print(
+                            //     'Drag.position.pixels: ${_draggableScrollableController.size}');
                             return Container(
                               // Main Container for the content
 

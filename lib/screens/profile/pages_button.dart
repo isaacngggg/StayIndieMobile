@@ -36,7 +36,7 @@ class PagesButton extends StatelessWidget {
                   Text(
                     title,
                     style: kHeading4.copyWith(
-                      color: kPrimaryColour,
+                      color: kPrimaryColour30,
                     ),
                   ),
                   // SizedBox(width: 15),

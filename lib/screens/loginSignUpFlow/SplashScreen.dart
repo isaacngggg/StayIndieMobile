@@ -7,7 +7,7 @@ import 'package:stay_indie/screens/archive/SignUpScreen.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'package:stay_indie/models/Profile.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/testLoginPage.dart';
+import 'package:stay_indie/screens/loginSignUpFlow/login_page.dart';
 import 'package:stay_indie/screens/templates/stepper_form.dart';
 import 'package:stay_indie/models/SingleFormPage.dart';
 
@@ -74,6 +74,31 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return preloader;
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: Image.asset(
+                  'assets/Greenroom.png',
+                  width: 100,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Greenroom',
+              style: kHeading4.copyWith(color: kPrimaryColour),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
