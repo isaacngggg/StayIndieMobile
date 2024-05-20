@@ -153,36 +153,38 @@ class _StepperFormState extends State<StepperForm> {
               children: [
                 Positioned(
                   left: activeStep == 0 ? -15 : 0,
-                  child: Container(
-                    width: double.maxFinite,
-                    child: IconStepper(
-                      alignment: Alignment.topLeft,
-                      enableNextPreviousButtons: false,
-                      lineLength: 10,
-                      lineColor: Colors.transparent,
-                      stepColor: kPrimaryColour,
-                      stepRadius: 5,
-                      stepPadding: 0,
-                      // stepReachedAnimationEffect: Curves.bounceOut,
-                      // stepReachedAnimationDuration: Duration(milliseconds: 600),
-                      activeStepRadius: 30,
-                      activeStepBorderWidth: 0,
-                      activeStepBorderPadding: 0,
-                      activeStepBorderColor: Colors.transparent,
-                      activeStepColor: kBackgroundColour,
-                      icons: icons,
+                  child: Container(),
 
-                      // activeStep property set to activeStep variable defined above.
-                      activeStep: activeStep,
+                  // Container(
+                  //   width: double.maxFinite,
+                  //   child: IconStepper(
+                  //     alignment: Alignment.topLeft,
+                  //     enableNextPreviousButtons: false,
+                  //     lineLength: 10,
+                  //     lineColor: Colors.transparent,
+                  //     stepColor: kPrimaryColour,
+                  //     stepRadius: 5,
+                  //     stepPadding: 0,
+                  //     // stepReachedAnimationEffect: Curves.bounceOut,
+                  //     // stepReachedAnimationDuration: Duration(milliseconds: 600),
+                  //     // activeStepRadius: 30,
+                  //     activeStepBorderWidth: 0,
+                  //     activeStepBorderPadding: 0,
+                  //     activeStepBorderColor: Colors.transparent,
+                  //     activeStepColor: kBackgroundColour,
+                  //     icons: icons,
 
-                      // This ensures step-tapping updates the activeStep.
-                      onStepReached: (index) {
-                        setState(() {
-                          activeStep = index;
-                        });
-                      },
-                    ),
-                  ),
+                  //     // activeStep property set to activeStep variable defined above.
+                  //     activeStep: activeStep,
+
+                  //     // This ensures step-tapping updates the activeStep.
+                  //     onStepReached: (index) {
+                  //       setState(() {
+                  //         activeStep = index;
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
                 ),
               ],
             ),
