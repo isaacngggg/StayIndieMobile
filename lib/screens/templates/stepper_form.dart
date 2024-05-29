@@ -12,7 +12,7 @@ import 'package:im_stepper/stepper.dart';
 import 'package:stay_indie/models/SingleFormPage.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
+import 'package:stay_indie/widgets/projects/media_carousel.dart';
 import 'package:stay_indie/widgets/images/ImageTile.dart';
 import 'package:intl/intl.dart';
 
@@ -225,7 +225,9 @@ class _StepperFormState extends State<StepperForm> {
                           updateNetworkImagesFunc: (url) => setState(() {
                                 networkImages.add(url);
                               })),
-                      ProjectMediaCarousel(networkImages: networkImages),
+                      MediaCarousel(
+                        networkImages: networkImages,
+                      ),
                     ],
                     if (currentPage.inputType == FormInputFieldType.date)
                       FormBuilderDateTimePicker(

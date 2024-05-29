@@ -5,17 +5,19 @@ import 'package:uuid/uuid.dart';
 
 class Journey {
   final String id;
-  final String title;
-  final String organization;
-  final String description;
-  final DateTime startDate;
-  final DateTime? endDate;
+  String title;
+  String organization;
+  String description;
+  DateTime startDate;
+  DateTime? endDate;
   List<String> imagesUrls;
-  final List<String>? collaborators;
-  final List<String>? tags;
+  List<String>? collaborators;
+  List<String>? tags;
 
-  final String emoji;
-  final Color emojiBgColor;
+  String emoji;
+  Color emojiBgColor;
+
+  static Map<String, Future<List<Journey>>> _journeyCache = {};
 
   Journey({
     required this.id,
@@ -47,8 +49,8 @@ class Journey {
         collaborators = map['collaborators'],
         tags = map['tags'],
         emoji = map['emoji'] ?? '🚀',
-        emojiBgColor = map['emoji_bg_colo'] != null
-            ? Color(int.parse(map['color'].toString()))
+        emojiBgColor = map['emoji_bg_color'] != null
+            ? Color(int.parse(map['emoji_bg_color'].toString()))
             : kPrimaryColour,
         imagesUrls =
             []; // Add an initializer expression for the imagesUrls field
@@ -60,7 +62,11 @@ class Journey {
   }
 
   static Future<List<Journey>> getUserJourneys(String userId) async {
+    print('Supabase pull for journeys ' + userId);
     try {
+      if (_journeyCache[userId] != null) {
+        return _journeyCache[userId]!;
+      }
       final response = await supabase
           .from('journey_entries')
           .select()
@@ -77,6 +83,7 @@ class Journey {
         await newJourney.initializeImagesUrls(userId);
         journeys.add(newJourney);
       }
+      _journeyCache[userId] = Future.value(journeys);
       return journeys;
     } catch (e) {
       print('Error' + e.toString());
@@ -99,6 +106,10 @@ class Journey {
         'start_date': journey.startDate.toIso8601String(),
         'profile_id': currentUser.id,
       });
+
+      var cachedJourneys = await _journeyCache[currentUserId]!;
+      cachedJourneys.add(journey);
+      _journeyCache[currentUserId] = Future.value(cachedJourneys);
     } catch (e) {
       print('Error' + e.toString());
     }
@@ -131,12 +142,15 @@ class Journey {
     }
     try {
       await supabase.from('journey_entries').delete().eq('id', journeyId);
+      var cachedJourneys = await _journeyCache[currentUserId]!;
+      cachedJourneys.removeWhere((element) => element.id == journeyId);
+      _journeyCache[currentUserId] = Future.value(cachedJourneys);
     } catch (e) {
       print('Error' + e.toString());
     }
   }
 
-  static Future<void> updateJourney(Map updatedJourney, String id) async {
+  static Future<void> updateJourney(Map updatedJourney, Journey journey) async {
     // Update the profiles
     final user = supabase.auth.currentUser;
     if (user == null) {
@@ -150,8 +164,15 @@ class Journey {
           .update(
             updatedJourney,
           )
-          .eq('id', id);
+          .eq('id', journey.id);
       // await saveToPrefs();
+      var cachedJourneys = await _journeyCache[currentUserId]!;
+
+      var index =
+          cachedJourneys.indexWhere((element) => element.id == journey.id);
+      if (index != -1) {
+        cachedJourneys[index] = journey;
+      }
     } catch (e) {
       print('Error' + e.toString());
     }
@@ -175,5 +196,9 @@ class Journey {
     } catch (e) {
       print('Error removing Image Url: ' + e.toString());
     }
+  }
+
+  static void clearCache() {
+    _journeyCache = {};
   }
 }

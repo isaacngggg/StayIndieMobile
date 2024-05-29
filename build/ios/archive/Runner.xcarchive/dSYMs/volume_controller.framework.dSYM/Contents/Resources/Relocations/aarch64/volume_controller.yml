@@ -1,0 +1,81 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/isaacng/Library/Developer/Xcode/DerivedData/Runner-dxvqxmhdbqvciuajmbesssxpovoj/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/volume_controller.framework/volume_controller'
+relocations:
+  - { offsetInCU: 0x34, offset: 0x73126, size: 0x8, addend: 0x0, symName: _volume_controllerVersionString, symObjAddr: 0x0, symBinAddr: 0xD120, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x7315B, size: 0x8, addend: 0x0, symName: _volume_controllerVersionNumber, symObjAddr: 0x30, symBinAddr: 0xD150, symSize: 0x0 }
+  - { offsetInCU: 0x27, offset: 0x73198, size: 0x8, addend: 0x0, symName: '+[VolumeControllerPlugin registerWithRegistrar:]', symObjAddr: 0x0, symBinAddr: 0x8000, symSize: 0xC }
+  - { offsetInCU: 0x91, offset: 0x73202, size: 0x8, addend: 0x0, symName: '+[VolumeControllerPlugin registerWithRegistrar:]', symObjAddr: 0x0, symBinAddr: 0x8000, symSize: 0xC }
+  - { offsetInCU: 0x9A, offset: 0x73309, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginC0A8Observer33_770C30BD81090C0762EA3091C2B0A0AELLAA0dG0Cvpfi', symObjAddr: 0x0, symBinAddr: 0x800C, symSize: 0x20 }
+  - { offsetInCU: 0x103, offset: 0x73372, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginC8register4withySo07FlutterF9Registrar_p_tFZTo', symObjAddr: 0x44, symBinAddr: 0x8050, symSize: 0x30 }
+  - { offsetInCU: 0x164, offset: 0x733D3, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctFTo', symObjAddr: 0x4EC, symBinAddr: 0x84F8, symSize: 0x78 }
+  - { offsetInCU: 0x1AC, offset: 0x7341B, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginCACycfcTo', symObjAddr: 0x5BC, symBinAddr: 0x85C8, symSize: 0x5C }
+  - { offsetInCU: 0x212, offset: 0x73481, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginC8register4withySo07FlutterF9Registrar_p_tFZTf4nd_n', symObjAddr: 0xBF8, symBinAddr: 0x8BF0, symSize: 0x198 }
+  - { offsetInCU: 0x2DC, offset: 0x7354B, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF015$syXlSgIeyBy_ypN7Iegn_TRyXlSgIeyBy_Tf1ncn_nTf4ndg_n', symObjAddr: 0xEB4, symBinAddr: 0x8EAC, symSize: 0x51C }
+  - { offsetInCU: 0x48B, offset: 0x736FA, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginCfETo', symObjAddr: 0x648, symBinAddr: 0x8654, symSize: 0x10 }
+  - { offsetInCU: 0x4BA, offset: 0x73729, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC12audioSession33_BD9FCBD597980676A3758FF7AAA4C9B3LLSo07AVAudioF0Cvpfi', symObjAddr: 0x658, symBinAddr: 0x8664, symSize: 0x2C }
+  - { offsetInCU: 0x4D2, offset: 0x73741, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC12notification33_BD9FCBD597980676A3758FF7AAA4C9B3LLSo20NSNotificationCenterCvpfi', symObjAddr: 0x684, symBinAddr: 0x8690, symSize: 0x2C }
+  - { offsetInCU: 0x4EA, offset: 0x73759, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC9eventSink33_BD9FCBD597980676A3758FF7AAA4C9B3LLyypSgcSgvpfi', symObjAddr: 0x6B0, symBinAddr: 0x86BC, symSize: 0xC }
+  - { offsetInCU: 0x502, offset: 0x73771, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC11isObserving33_BD9FCBD597980676A3758FF7AAA4C9B3LLSbvpfi', symObjAddr: 0x6BC, symBinAddr: 0x86C8, symSize: 0x8 }
+  - { offsetInCU: 0x51A, offset: 0x73789, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC0A3Key33_BD9FCBD597980676A3758FF7AAA4C9B3LLSSvpfi', symObjAddr: 0x6C4, symBinAddr: 0x86D0, symSize: 0x20 }
+  - { offsetInCU: 0x639, offset: 0x738A8, size: 0x8, addend: 0x0, symName: '_$sypSgWOb', symObjAddr: 0xD90, symBinAddr: 0x8D88, symSize: 0x48 }
+  - { offsetInCU: 0x64D, offset: 0x738BC, size: 0x8, addend: 0x0, symName: ___swift_instantiateConcreteTypeFromMangledName, symObjAddr: 0xDD8, symBinAddr: 0x8DD0, symSize: 0x40 }
+  - { offsetInCU: 0x661, offset: 0x738D0, size: 0x8, addend: 0x0, symName: '_$sypSgWOh', symObjAddr: 0xE18, symBinAddr: 0x8E10, symSize: 0x40 }
+  - { offsetInCU: 0x675, offset: 0x738E4, size: 0x8, addend: 0x0, symName: '_$sypWOc', symObjAddr: 0xE58, symBinAddr: 0x8E50, symSize: 0x3C }
+  - { offsetInCU: 0x689, offset: 0x738F8, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginCMa', symObjAddr: 0xE94, symBinAddr: 0x8E8C, symSize: 0x20 }
+  - { offsetInCU: 0x6A8, offset: 0x73917, size: 0x8, addend: 0x0, symName: '_$sypSgWOc', symObjAddr: 0x13D0, symBinAddr: 0x93C8, symSize: 0x48 }
+  - { offsetInCU: 0x6BC, offset: 0x7392B, size: 0x8, addend: 0x0, symName: ___swift_project_boxed_opaque_existential_0, symObjAddr: 0x1418, symBinAddr: 0x9410, symSize: 0x24 }
+  - { offsetInCU: 0x6D0, offset: 0x7393F, size: 0x8, addend: 0x0, symName: ___swift_destroy_boxed_opaque_existential_0, symObjAddr: 0x143C, symBinAddr: 0x9434, symSize: 0x20 }
+  - { offsetInCU: 0x6E4, offset: 0x73953, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyaMa', symObjAddr: 0x145C, symBinAddr: 0x9454, symSize: 0x54 }
+  - { offsetInCU: 0x6F8, offset: 0x73967, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyas20_SwiftNewtypeWrapperSCSYWb', symObjAddr: 0x14B0, symBinAddr: 0x94A8, symSize: 0x24 }
+  - { offsetInCU: 0x70C, offset: 0x7397B, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyas20_SwiftNewtypeWrapperSCs35_HasCustomAnyHashableRepresentationPWb', symObjAddr: 0x14D4, symBinAddr: 0x94CC, symSize: 0x24 }
+  - { offsetInCU: 0x720, offset: 0x7398F, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyaSHSCSQWb', symObjAddr: 0x14F8, symBinAddr: 0x94F0, symSize: 0x24 }
+  - { offsetInCU: 0x7E6, offset: 0x73A55, size: 0x8, addend: 0x0, symName: '_$ss20_SwiftNewtypeWrapperPss21_ObjectiveCBridgeable8RawValueRpzrlE016_forceBridgeFromD1C_6resultyAD_01_D5CTypeQZ_xSgztFZSo05NSKeyG9ChangeKeya_Tgmq5', symObjAddr: 0x6EC, symBinAddr: 0x86F0, symSize: 0x80 }
+  - { offsetInCU: 0x877, offset: 0x73AE6, size: 0x8, addend: 0x0, symName: '_$ss20_SwiftNewtypeWrapperPss21_ObjectiveCBridgeable8RawValueRpzrlE024_conditionallyBridgeFromD1C_6resultSbAD_01_D5CTypeQZ_xSgztFZSo05NSKeyG9ChangeKeya_Tgmq5', symObjAddr: 0x76C, symBinAddr: 0x8770, symSize: 0x90 }
+  - { offsetInCU: 0x927, offset: 0x73B96, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyaSHSCSH4hash4intoys6HasherVz_tFTW', symObjAddr: 0x808, symBinAddr: 0x880C, symSize: 0x40 }
+  - { offsetInCU: 0x9B5, offset: 0x73C24, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyaSHSCSH08_rawHashB04seedS2i_tFTW', symObjAddr: 0x848, symBinAddr: 0x884C, symSize: 0x70 }
+  - { offsetInCU: 0xA39, offset: 0x73CA8, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyas21_ObjectiveCBridgeableSCsACP016_forceBridgeFromE1C_6resulty01_E5CTypeQz_xSgztFZTW', symObjAddr: 0x900, symBinAddr: 0x8904, symSize: 0x4 }
+  - { offsetInCU: 0xA55, offset: 0x73CC4, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyas21_ObjectiveCBridgeableSCsACP024_conditionallyBridgeFromE1C_6resultSb01_E5CTypeQz_xSgztFZTW', symObjAddr: 0x904, symBinAddr: 0x8908, symSize: 0x4 }
+  - { offsetInCU: 0xA80, offset: 0x73CEF, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyas21_ObjectiveCBridgeableSCsACP026_unconditionallyBridgeFromE1Cyx01_E5CTypeQzSgFZTW', symObjAddr: 0x908, symBinAddr: 0x890C, symSize: 0x40 }
+  - { offsetInCU: 0xAFE, offset: 0x73D6D, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyaSQSCSQ2eeoiySbx_xtFZTW', symObjAddr: 0x954, symBinAddr: 0x894C, symSize: 0x88 }
+  - { offsetInCU: 0xBA8, offset: 0x73E17, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyas35_HasCustomAnyHashableRepresentationSCsACP03_tofgH0s0gH0VSgyFTW', symObjAddr: 0xA48, symBinAddr: 0x8A40, symSize: 0x6C }
+  - { offsetInCU: 0xDF4, offset: 0x74063, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyaSYSCSY03rawB0xSg03RawB0Qz_tcfCTW', symObjAddr: 0x9DC, symBinAddr: 0x89D4, symSize: 0x44 }
+  - { offsetInCU: 0xE1D, offset: 0x7408C, size: 0x8, addend: 0x0, symName: '_$sSo19NSKeyValueChangeKeyaSYSCSY03rawB003RawB0QzvgTW', symObjAddr: 0xA20, symBinAddr: 0x8A18, symSize: 0x28 }
+  - { offsetInCU: 0xEB1, offset: 0x74120, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginC8register4withySo07FlutterF9Registrar_p_tFZ', symObjAddr: 0x20, symBinAddr: 0x802C, symSize: 0x4 }
+  - { offsetInCU: 0xEC5, offset: 0x74134, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginCACycfC', symObjAddr: 0x24, symBinAddr: 0x8030, symSize: 0x20 }
+  - { offsetInCU: 0xF71, offset: 0x741E0, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginC6handle_6resultySo17FlutterMethodCallC_yypSgctF', symObjAddr: 0x74, symBinAddr: 0x8080, symSize: 0x478 }
+  - { offsetInCU: 0x110D, offset: 0x7437C, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginCACycfc', symObjAddr: 0x564, symBinAddr: 0x8570, symSize: 0x58 }
+  - { offsetInCU: 0x115B, offset: 0x743CA, size: 0x8, addend: 0x0, symName: '_$s17volume_controller27SwiftVolumeControllerPluginCfD', symObjAddr: 0x618, symBinAddr: 0x8624, symSize: 0x30 }
+  - { offsetInCU: 0x11BA, offset: 0x74429, size: 0x8, addend: 0x0, symName: '_$ss22__RawDictionaryStorageC4findys10_HashTableV6BucketV6bucket_Sb5foundtxSHRzlFSS_Tg5', symObjAddr: 0xAB4, symBinAddr: 0x8AAC, symSize: 0x64 }
+  - { offsetInCU: 0x11F8, offset: 0x74467, size: 0x8, addend: 0x0, symName: '_$ss22__RawDictionaryStorageC4find_9hashValues10_HashTableV6BucketV6bucket_Sb5foundtx_SitSHRzlFSS_Tg5', symObjAddr: 0xB18, symBinAddr: 0x8B10, symSize: 0xE0 }
+  - { offsetInCU: 0xCC, offset: 0x74606, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC8onListen13withArguments9eventSinkSo12FlutterErrorCSgypSg_yAJctFTo', symObjAddr: 0x34C, symBinAddr: 0x98A0, symSize: 0xBC }
+  - { offsetInCU: 0x134, offset: 0x7466E, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC8onCancel13withArgumentsSo12FlutterErrorCSgypSg_tFTo', symObjAddr: 0x4C0, symBinAddr: 0x9A14, symSize: 0x78 }
+  - { offsetInCU: 0x17C, offset: 0x746B6, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC20audioSessionObserveryyFTo', symObjAddr: 0x738, symBinAddr: 0x9C8C, symSize: 0x28 }
+  - { offsetInCU: 0x1C0, offset: 0x746FA, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC12observeValue10forKeyPath2of6change7contextySSSg_ypSgSDySo05NSKeyf6ChangeH0aypGSgSvSgtFTo', symObjAddr: 0x764, symBinAddr: 0x9CB8, symSize: 0x134 }
+  - { offsetInCU: 0x208, offset: 0x74742, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerCACycfcTo', symObjAddr: 0x994, symBinAddr: 0x9EE8, symSize: 0x20 }
+  - { offsetInCU: 0x25B, offset: 0x74795, size: 0x8, addend: 0x0, symName: '_$syXlSgIeyBy_ypSgIegn_TR', symObjAddr: 0x20, symBinAddr: 0x9574, symSize: 0xD0 }
+  - { offsetInCU: 0x2DF, offset: 0x74819, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeObserverC03setC00A012showSystemUIySf_SbtFTf4nnd_n', symObjAddr: 0xC38, symBinAddr: 0xA18C, symSize: 0x56C }
+  - { offsetInCU: 0x53F, offset: 0x74A79, size: 0x8, addend: 0x0, symName: '_$sIeg_IeyB_TR', symObjAddr: 0x21C, symBinAddr: 0x9770, symSize: 0x2C }
+  - { offsetInCU: 0x587, offset: 0x74AC1, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerCfETo', symObjAddr: 0x9E4, symBinAddr: 0x9F38, symSize: 0x60 }
+  - { offsetInCU: 0x6D5, offset: 0x74C0F, size: 0x8, addend: 0x0, symName: '_$sypSgIegn_SgWOe', symObjAddr: 0x11A4, symBinAddr: 0xA6F8, symSize: 0x10 }
+  - { offsetInCU: 0x6F4, offset: 0x74C2E, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerCMa', symObjAddr: 0x12F4, symBinAddr: 0xA7C8, symSize: 0x20 }
+  - { offsetInCU: 0x708, offset: 0x74C42, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeObserverCMa', symObjAddr: 0x1314, symBinAddr: 0xA7E8, symSize: 0x20 }
+  - { offsetInCU: 0x71C, offset: 0x74C56, size: 0x8, addend: 0x0, symName: '_$syXlSgIeyBy_ypSgIegn_TRTA', symObjAddr: 0x1358, symBinAddr: 0xA82C, symSize: 0x8 }
+  - { offsetInCU: 0x730, offset: 0x74C6A, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeObserverC03setC00A012showSystemUIySf_SbtFyyScMYccfU0_TA', symObjAddr: 0x1450, symBinAddr: 0xA898, symSize: 0x3C }
+  - { offsetInCU: 0x778, offset: 0x74CB2, size: 0x8, addend: 0x0, symName: _block_copy_helper, symObjAddr: 0x148C, symBinAddr: 0xA8D4, symSize: 0x10 }
+  - { offsetInCU: 0x78C, offset: 0x74CC6, size: 0x8, addend: 0x0, symName: _block_destroy_helper, symObjAddr: 0x149C, symBinAddr: 0xA8E4, symSize: 0x8 }
+  - { offsetInCU: 0x7A0, offset: 0x74CDA, size: 0x8, addend: 0x0, symName: '_$sSay8Dispatch0A13WorkItemFlagsVGMa', symObjAddr: 0x14E4, symBinAddr: 0xA92C, symSize: 0x54 }
+  - { offsetInCU: 0xA54, offset: 0x74F8E, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerCACycfC', symObjAddr: 0x0, symBinAddr: 0x9554, symSize: 0x20 }
+  - { offsetInCU: 0xA68, offset: 0x74FA2, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeObserverC03getC0SfSgyF', symObjAddr: 0xF0, symBinAddr: 0x9644, symSize: 0x128 }
+  - { offsetInCU: 0xAA6, offset: 0x74FE0, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeObserverC03setC00A012showSystemUIySf_SbtF', symObjAddr: 0x218, symBinAddr: 0x976C, symSize: 0x4 }
+  - { offsetInCU: 0xB13, offset: 0x7504D, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeObserverCfd', symObjAddr: 0x248, symBinAddr: 0x979C, symSize: 0x8 }
+  - { offsetInCU: 0xB38, offset: 0x75072, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeObserverCfD', symObjAddr: 0x250, symBinAddr: 0x97A4, symSize: 0x10 }
+  - { offsetInCU: 0xBBC, offset: 0x750F6, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC8onListen13withArguments9eventSinkSo12FlutterErrorCSgypSg_yAJctF', symObjAddr: 0x260, symBinAddr: 0x97B4, symSize: 0xEC }
+  - { offsetInCU: 0xC93, offset: 0x751CD, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC8onCancel13withArgumentsSo12FlutterErrorCSgypSg_tF', symObjAddr: 0x408, symBinAddr: 0x995C, symSize: 0xB8 }
+  - { offsetInCU: 0xD4E, offset: 0x75288, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC20audioSessionObserveryyF', symObjAddr: 0x538, symBinAddr: 0x9A8C, symSize: 0x200 }
+  - { offsetInCU: 0xE13, offset: 0x7534D, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC12observeValue10forKeyPath2of6change7contextySSSg_ypSgSDySo05NSKeyf6ChangeH0aypGSgSvSgtF', symObjAddr: 0x760, symBinAddr: 0x9CB4, symSize: 0x4 }
+  - { offsetInCU: 0xE2E, offset: 0x75368, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerCACycfc', symObjAddr: 0x898, symBinAddr: 0x9DEC, symSize: 0xFC }
+  - { offsetInCU: 0xE53, offset: 0x7538D, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerCfD', symObjAddr: 0x9B4, symBinAddr: 0x9F08, symSize: 0x30 }
+  - { offsetInCU: 0xE97, offset: 0x753D1, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV19_getElementSlowPathyyXlSiFSo6UIViewC_Tg5', symObjAddr: 0xA44, symBinAddr: 0x9F98, symSize: 0x1F4 }
+  - { offsetInCU: 0xFBC, offset: 0x754F6, size: 0x8, addend: 0x0, symName: '_$s17volume_controller14VolumeListenerC12observeValue10forKeyPath2of6change7contextySSSg_ypSgSDySo05NSKeyf6ChangeH0aypGSgSvSgtFTf4nnddn_n', symObjAddr: 0x1234, symBinAddr: 0xA708, symSize: 0xC0 }
+...

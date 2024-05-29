@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/profile/profile_page.dart';
+import 'package:go_router/go_router.dart';
 
 class ContactTile extends StatelessWidget {
   const ContactTile({
@@ -15,7 +16,8 @@ class ContactTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(connection.profileImageUrl),
+        foregroundImage: NetworkImage(connection.profileImageUrl),
+        child: Text(connection.name.substring(0, 2)),
         radius: 24,
       ),
       title: Text(connection.name),
@@ -26,11 +28,7 @@ class ContactTile extends StatelessWidget {
             )
           : Container(),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ProfilePage(
-            profileId: connection.id,
-          );
-        }));
+        context.push(ProfilePage.id + '/${connection.id}');
       },
       contentPadding: EdgeInsets.symmetric(horizontal: 5.0),
     );

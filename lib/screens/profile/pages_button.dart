@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stay_indie/constants.dart';
 
 class PagesButton extends StatelessWidget {
@@ -50,7 +51,7 @@ class PagesButton extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () => Navigator.pushNamed(context, pageId),
+      onTap: () => context.go(pageId),
     );
   }
 }

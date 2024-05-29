@@ -6,7 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 class ConnectSocialPage extends StatelessWidget {
-  static const id = 'connect_social_page';
+  static const id = '/connect_social_page';
   final fb = FacebookLogin();
 
   Future<void> _loginWithFacebook() async {

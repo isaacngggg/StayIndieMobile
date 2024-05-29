@@ -1,37 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
-import 'package:stay_indie/screens/archive/AddScreen.dart';
-import 'package:stay_indie/screens/chat/InboxScreen.dart';
-import 'package:stay_indie/screens/archive/ConnectionsScreen.dart';
-import 'package:stay_indie/screens/archive/OpportunitiesScreen.dart';
-import 'package:stay_indie/screens/archive/HomeScreen.dart';
-import 'package:stay_indie/screens/connections_page.dart';
-import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
-import 'package:stay_indie/screens/project/manage_story_screen.dart';
 
-import 'package:stay_indie/screens/archive/LoginScreen.dart';
-import 'package:stay_indie/screens/archive/SignUpScreen.dart';
-import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:youtube_shorts/youtube_shorts.dart';
+import 'firebase_options.dart';
+
+import 'package:go_router/go_router.dart';
+import 'package:stay_indie/router.dart';
+
+import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/login_page.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/signup_page.dart';
-import 'package:stay_indie/screens/archive/MainProfilePage.dart';
 import 'package:stay_indie/screens/settings/settings_page.dart';
-import 'package:stay_indie/screens/archive/profile_edit_page.dart';
 import 'package:stay_indie/screens/project/addProjectFlow/add_project_screen.dart';
 import 'package:stay_indie/screens/socials/connect_social_page.dart';
 import 'package:stay_indie/screens/notification/notification_page.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/offline_screen.dart';
 import 'package:stay_indie/screens/profile/epk/epk_page.dart';
-import 'package:stay_indie/models/ProfileProvider.dart';
 import 'package:stay_indie/screens/project/project_page.dart';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:stay_indie/screens/contacts_page.dart';
+import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
+import 'package:stay_indie/screens/data_deletion_page.dart';
+import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
+import 'package:stay_indie/screens/chat/InboxScreen.dart';
+import 'package:stay_indie/test_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,11 +37,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  try {
-    runApp(const MainApp());
-  } catch (e) {
-    runApp(OfflineApp());
-  }
+  MediaKit.ensureInitialized();
+  runApp(const ProviderScope(child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -55,33 +46,25 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: theme,
-      initialRoute: SplashScreen.id, // Set the initial route to LoginScreen
-      routes: {
-        HomeScreen.id: (context) => HomeScreen(),
-        OpportunityScreen.id: (context) => OpportunityScreen(),
-        // MainProfilePage.id: (context) => MainProfilePage(
-        //       profileId: currentUserId,
-        //     ),
-        AddScreen.id: (context) => AddScreen(),
-        ConnectionsScreen.id: (context) => ConnectionsScreen(),
-        LoginScreen.id: (context) => LoginScreen(),
-        SignUpScreen.id: (context) => SignUpScreen(),
-        IndustryScreen.id: (context) => IndustryScreen(),
-        InboxScreen.id: (context) => InboxScreen(),
-        ConnectionsScreen.id: (context) => ConnectionsScreen(),
-        SplashScreen.id: (context) => SplashScreen(),
-        LoginPage.id: (context) => LoginPage(),
-        RegisterPage.id: (context) => RegisterPage(isRegistering: false),
-        SettingPage.id: (context) => SettingPage(),
-        ProfileEditPage.id: (context) => ProfileEditPage(),
-        AddProjectPage.id: (context) => AddProjectPage(),
-        ConnectSocialPage.id: (context) => ConnectSocialPage(),
-        NotificationsPage.id: (context) => NotificationsPage(),
-        EpkPage.id: (context) => EpkPage(),
-        ProjectsPage.id: (context) => ProjectsPage(),
-      },
+      routerConfig: router,
+
+      // initialRoute: SplashScreen.id, // Set the initial route to LoginScreen
+      // routes: {
+      //   IndustryScreen.id: (context) => IndustryScreen(),
+      //   InboxScreen.id: (context) => InboxScreen(),
+      //   SplashScreen.id: (context) => SplashScreen(),
+      //   LoginPage.id: (context) => LoginPage(),
+      //   RegisterPage.id: (context) => RegisterPage(isRegistering: false),
+      //   SettingPage.id: (context) => SettingPage(),
+      //   AddProjectPage.id: (context) => AddProjectPage(),
+      //   ConnectSocialPage.id: (context) => ConnectSocialPage(),
+      //   NotificationsPage.id: (context) => NotificationsPage(),
+      //   EpkPage.id: (context) => EpkPage(),
+      //   ProjectsPage.id: (context) => ProjectsPage(),
+      //   DataDeletionPage.id: (context) => DataDeletionPage(),
+      //   TestPage.id: (context) => TestPage(),
     );
   }
 }

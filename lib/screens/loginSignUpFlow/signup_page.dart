@@ -9,11 +9,12 @@ import 'package:stay_indie/screens/templates/stepper_form.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../archive/HomeScreen.dart';
 import 'package:stay_indie/utilities/input_fields.dart';
+import 'package:go_router/go_router.dart';
 import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key, required this.isRegistering}) : super(key: key);
-  static const String id = 'registerpage';
+  static const String id = '/register';
 
   static Route<void> route({bool isRegistering = false}) {
     return MaterialPageRoute(
@@ -55,10 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
               onSubmit: (formValues) async {
                 Profile.updateProfile(
                     supabase.auth.currentUser!.id, formValues);
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
+                context.go(HomeScreen.id);
               },
             ),
           ),

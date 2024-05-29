@@ -3,7 +3,7 @@ import 'package:stay_indie/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:stay_indie/screens/archive/MainProfilePage.dart';
-import 'package:stay_indie/screens/connections_page.dart';
+import 'package:stay_indie/screens/contacts_page.dart';
 
 import 'package:stay_indie/screens/chat/InboxScreen.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';

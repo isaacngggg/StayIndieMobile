@@ -4,6 +4,22 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>GoogleToolboxForMac_Logger_Privacy.bundle/Info.plist</key>
+		<data>
+		ImBf7fDd8/c5RyNoawoQC+BkWEE=
+		</data>
+		<key>GoogleToolboxForMac_Logger_Privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		GqeAMkwbcNQeG0K4qQhQh2vHhHo=
+		</data>
+		<key>GoogleToolboxForMac_Privacy.bundle/Info.plist</key>
+		<data>
+		VpqKgreN6iJwL9CDerKzFx3vLIk=
+		</data>
+		<key>GoogleToolboxForMac_Privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		ZajnvEs/MYRS3X4TPLAhBWi8mc4=
+		</data>
 		<key>Headers/GTMDebugSelectorValidation.h</key>
 		<data>
 		AOmwXwdRzqyU9zBaOz6AZ/j3HUs=
@@ -14,11 +30,11 @@
 		</data>
 		<key>Headers/GTMDefines.h</key>
 		<data>
-		t+OQv3r6RomF13NLLJ9WpN5Vrz8=
+		75SDSZivfSbhTT2ZlHTYRQ9fp3s=
 		</data>
 		<key>Headers/GTMLogger.h</key>
 		<data>
-		EnWCozMyfVvwXG9Vo1Bw0V+1mYU=
+		pZyU64kRr6L4YqDMRb5krzczObU=
 		</data>
 		<key>Headers/GTMMethodCheck.h</key>
 		<data>
@@ -26,7 +42,7 @@
 		</data>
 		<key>Headers/GTMNSData+zlib.h</key>
 		<data>
-		k1bO1+UoC/bV7fbU0JReGfE4qmo=
+		KB7xY7irohfeDhFCTyic7melJOw=
 		</data>
 		<key>Headers/GTMNSDictionary+URLArguments.h</key>
 		<data>
@@ -38,11 +54,11 @@
 		</data>
 		<key>Headers/GoogleToolboxForMac-umbrella.h</key>
 		<data>
-		QBKh/w7BGyfIXjdy9CILJn4LV+I=
+		XcXiPqicvCJxhr3RSoqcg+AqV8s=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		WW8w1mqT+JDOVeNarxXGA2UDuuM=
+		xuHFG9Hm+8Vw3GeoUcyOwr0dfSs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -51,6 +67,50 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>GoogleToolboxForMac_Logger_Privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ImBf7fDd8/c5RyNoawoQC+BkWEE=
+			</data>
+			<key>hash2</key>
+			<data>
+			GL0K3+sAt6gONPlaSzhI61/NrMEC8uqy9zyI3JOj+sE=
+			</data>
+		</dict>
+		<key>GoogleToolboxForMac_Logger_Privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GqeAMkwbcNQeG0K4qQhQh2vHhHo=
+			</data>
+			<key>hash2</key>
+			<data>
+			PkqTy+hqzvfdfgY6KMhJmS9Vbn9SytxfN8HosOG1RoY=
+			</data>
+		</dict>
+		<key>GoogleToolboxForMac_Privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VpqKgreN6iJwL9CDerKzFx3vLIk=
+			</data>
+			<key>hash2</key>
+			<data>
+			P0uhwwzy6nEPZYOqg4p3QA+szuFwz4XVr0Kpk6IWcxI=
+			</data>
+		</dict>
+		<key>GoogleToolboxForMac_Privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZajnvEs/MYRS3X4TPLAhBWi8mc4=
+			</data>
+			<key>hash2</key>
+			<data>
+			dLDNcvwjwe8wLyLuJ1P2GBfNxa8P96fy0GMrUk+4rOo=
+			</data>
+		</dict>
 		<key>Headers/GTMDebugSelectorValidation.h</key>
 		<dict>
 			<key>hash</key>
@@ -77,22 +137,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			t+OQv3r6RomF13NLLJ9WpN5Vrz8=
+			75SDSZivfSbhTT2ZlHTYRQ9fp3s=
 			</data>
 			<key>hash2</key>
 			<data>
-			dNQuieS+GnBgjjeI/PADalRe3lVmH4AoMQ/54krmHK4=
+			yLrmRl1FgAevEA3s4J8OetnuwcqPFrrEphekbK5ey9c=
 			</data>
 		</dict>
 		<key>Headers/GTMLogger.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EnWCozMyfVvwXG9Vo1Bw0V+1mYU=
+			pZyU64kRr6L4YqDMRb5krzczObU=
 			</data>
 			<key>hash2</key>
 			<data>
-			yFvkPUc0WouzJtD9DCKRRfaD8n8QRqUcwqA2DNhP9KU=
+			fxkkKpKPszIeMKC0x984XKLIQvo3+dP3QkaXwwIhYkw=
 			</data>
 		</dict>
 		<key>Headers/GTMMethodCheck.h</key>
@@ -110,11 +170,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			k1bO1+UoC/bV7fbU0JReGfE4qmo=
+			KB7xY7irohfeDhFCTyic7melJOw=
 			</data>
 			<key>hash2</key>
 			<data>
-			SOeeKCPkAEVtIlAI7+B/lUNYLKeDMVmuDfaSk4RR3Mo=
+			D5vUNPqHnvM+ZbwFgLOgaAFBTBaQZLgXCEph8jRCumo=
 			</data>
 		</dict>
 		<key>Headers/GTMNSDictionary+URLArguments.h</key>
@@ -143,11 +203,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QBKh/w7BGyfIXjdy9CILJn4LV+I=
+			XcXiPqicvCJxhr3RSoqcg+AqV8s=
 			</data>
 			<key>hash2</key>
 			<data>
-			H7ZCYY5gygj0C8NMtSOBRXv5h0lCcqY8+Q8IyPPXvN8=
+			1Njf4Vn1+rqD7RUxH1T5w41+kRuUd2dluTvaPWahzIk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

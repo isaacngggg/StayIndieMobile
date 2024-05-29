@@ -1,0 +1,15 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/isaacng/Library/Developer/Xcode/DerivedData/Runner-dxvqxmhdbqvciuajmbesssxpovoj/Build/Intermediates.noindex/ArchiveIntermediates/Runner/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/media_kit_libs_ios_video.framework/media_kit_libs_ios_video'
+relocations:
+  - { offsetInCU: 0x34, offset: 0x57C4A, size: 0x8, addend: 0x0, symName: _media_kit_libs_ios_videoVersionString, symObjAddr: 0x0, symBinAddr: 0xA310, symSize: 0x0 }
+  - { offsetInCU: 0x69, offset: 0x57C7F, size: 0x8, addend: 0x0, symName: _media_kit_libs_ios_videoVersionNumber, symObjAddr: 0x38, symBinAddr: 0xA348, symSize: 0x0 }
+  - { offsetInCU: 0x27, offset: 0x57CBC, size: 0x8, addend: 0x0, symName: '_$s24media_kit_libs_ios_video26MediaKitLibsIosVideoPluginC8register4withySo07FlutterK9Registrar_p_tFZ', symObjAddr: 0x0, symBinAddr: 0x8000, symSize: 0x4 }
+  - { offsetInCU: 0x67, offset: 0x57CFC, size: 0x8, addend: 0x0, symName: '_$s24media_kit_libs_ios_video26MediaKitLibsIosVideoPluginC8register4withySo07FlutterK9Registrar_p_tFZTo', symObjAddr: 0x4, symBinAddr: 0x8004, symSize: 0x4 }
+  - { offsetInCU: 0xB0, offset: 0x57D45, size: 0x8, addend: 0x0, symName: '_$s24media_kit_libs_ios_video26MediaKitLibsIosVideoPluginCACycfcTo', symObjAddr: 0x78, symBinAddr: 0x8078, symSize: 0x3C }
+  - { offsetInCU: 0x102, offset: 0x57D97, size: 0x8, addend: 0x0, symName: '_$s24media_kit_libs_ios_video26MediaKitLibsIosVideoPluginCMa', symObjAddr: 0x58, symBinAddr: 0x8058, symSize: 0x20 }
+  - { offsetInCU: 0x1E1, offset: 0x57E76, size: 0x8, addend: 0x0, symName: '_$s24media_kit_libs_ios_video26MediaKitLibsIosVideoPluginC8register4withySo07FlutterK9Registrar_p_tFZ', symObjAddr: 0x0, symBinAddr: 0x8000, symSize: 0x4 }
+  - { offsetInCU: 0x20E, offset: 0x57EA3, size: 0x8, addend: 0x0, symName: '_$s24media_kit_libs_ios_video26MediaKitLibsIosVideoPluginCACycfC', symObjAddr: 0x8, symBinAddr: 0x8008, symSize: 0x20 }
+  - { offsetInCU: 0x222, offset: 0x57EB7, size: 0x8, addend: 0x0, symName: '_$s24media_kit_libs_ios_video26MediaKitLibsIosVideoPluginCACycfc', symObjAddr: 0x28, symBinAddr: 0x8028, symSize: 0x30 }
+  - { offsetInCU: 0x258, offset: 0x57EED, size: 0x8, addend: 0x0, symName: '_$s24media_kit_libs_ios_video26MediaKitLibsIosVideoPluginCfD', symObjAddr: 0xB4, symBinAddr: 0x80B4, symSize: 0x30 }
+...

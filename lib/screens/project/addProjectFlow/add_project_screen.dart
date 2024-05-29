@@ -5,10 +5,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stay_indie/models/Project.dart';
-import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
+import 'package:stay_indie/widgets/projects/media_carousel.dart';
 
 class AddProjectPage extends StatefulWidget {
-  static const id = 'add_project_page';
+  static const id = '/add_project_page';
   const AddProjectPage({super.key});
 
   @override
@@ -48,7 +48,9 @@ class _AddProjectPageState extends State<AddProjectPage> {
                   decoration: InputDecoration(labelText: 'Start Date'),
                   format: DateFormat("EEE, M-d-y"),
                 ),
-                ProjectMediaCarousel(networkImages: _networkImages),
+                MediaCarousel(
+                  networkImages: _networkImages,
+                ),
                 TextButton(
                     onPressed: () async {
                       final ImagePicker picker = ImagePicker();

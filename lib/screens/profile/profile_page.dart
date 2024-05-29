@@ -1,20 +1,25 @@
 import 'dart:async';
 
 import 'package:expandable_text/expandable_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:googleapis/youtube/v3.dart';
 import 'dart:ui';
 
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/ChatInfo.dart';
+import 'package:stay_indie/models/ProfileProvider.dart';
+import 'package:stay_indie/models/connections/Spotify/spotify_signin_helper.dart';
 
 import 'package:stay_indie/screens/chat/ChatScreen.dart';
 
-import 'package:stay_indie/screens/profile/edit_basic_info_page.dart';
+import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/models/Profile.dart';
+import 'package:stay_indie/screens/project/project_page.dart';
 import 'package:stay_indie/utilities/LinePainter.dart';
 import 'package:stay_indie/widgets/social/SocialMetricList.dart';
 import 'package:stay_indie/models/connections/Spotify/Track.dart';
@@ -23,15 +28,18 @@ import 'package:stay_indie/widgets/profile/CoverButton.dart';
 import 'package:stay_indie/screens/profile/pages_button.dart';
 import 'package:stay_indie/widgets/journeys/my_journey_widget.dart';
 
+//youtube player
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_shorts/youtube_shorts.dart';
 // import for topbar
 import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
 import 'package:stay_indie/widgets/navigation/new_nav_bar.dart';
-import 'package:palette_generator/palette_generator.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class ProfilePage extends StatefulWidget {
-  static const String id = 'new_profile_page';
+class ProfilePage extends ConsumerStatefulWidget {
+  static const String id = '/profile';
   final String profileId;
   final bool isProfilePage;
   var key = UniqueKey();
@@ -39,14 +47,13 @@ class ProfilePage extends StatefulWidget {
       : super(key: UniqueKey());
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  ConsumerState<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage>
+class _ProfilePageState extends ConsumerState<ProfilePage>
     with SingleTickerProviderStateMixin {
   late Future<Profile> userProfile;
   late ScrollController _scrollController;
-
   late AnimationController _controller;
 
   // late DraggableScrollableController _draggableScrollableController;
@@ -70,10 +77,11 @@ class _ProfilePageState extends State<ProfilePage>
   // double _minChildSize = 0.15;
   double _maxChildSize = 0.85;
 
+  late final ShortsController shortsController;
   void _onRefresh() async {
+    await Profile.removeProfileFromPrefs();
     setState(() {
-      userProfile = Profile.fetchProfileFromDatabase(widget.profileId);
-
+      userProfile = Profile.getProfileData(widget.profileId);
       //UI work
       setState(() {});
     });
@@ -81,13 +89,12 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   void initState() {
-    _initialChildSize = widget.isProfilePage ? 0.22 : 0.15;
+    _initialChildSize = widget.isProfilePage ? 0.15 : 0.20;
     _controller = AnimationController(
       duration: const Duration(milliseconds: 250),
       vsync: this,
     );
     // _draggableScrollableController = DraggableScrollableController();
-
     _opacityAnimation = Tween<double>(begin: 1, end: 0).animate(_controller)
       ..addListener(() {
         setState(() {
@@ -102,6 +109,21 @@ class _ProfilePageState extends State<ProfilePage>
       // _draggableScrollableController.animateTo(1,
       //     duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
+    _scrollController.addListener(() {
+      if (_scrollController.position.userScrollDirection ==
+              ScrollDirection.reverse &&
+          _scrollController.position.pixels < 0) {
+        // If the user is trying to scroll upwards, set the scroll position to 0
+        _scrollController.jumpTo(0);
+      }
+    });
+
+    shortsController = ShortsController(
+      startVideoMuted: false,
+      youtubeVideoSourceController: VideosSourceController.fromUrlList(
+        videoIds: [],
+      ),
+    );
 
     super.initState();
   }
@@ -118,6 +140,7 @@ class _ProfilePageState extends State<ProfilePage>
     _scrollController.dispose();
     _controller.dispose();
     _opacityNotifier.dispose();
+    shortsController.dispose();
     // _draggableScrollableController.dispose();
     super.dispose();
   }
@@ -141,6 +164,12 @@ class _ProfilePageState extends State<ProfilePage>
               opacity: _opacity,
               coverButton: coverButton,
             );
+            shortsController = ShortsController(
+              startVideoMuted: false,
+              youtubeVideoSourceController: VideosSourceController.fromUrlList(
+                videoIds: [profile.ytShortUrl!],
+              ),
+            );
 
             return Scaffold(
               body: Stack(
@@ -151,6 +180,7 @@ class _ProfilePageState extends State<ProfilePage>
                     enablePullDown: true,
                     enablePullUp: false,
                     onRefresh: _onRefresh,
+                    physics: ClampingScrollPhysics(),
                     child: Stack(
                       // Main Stack of build Content
                       children: [
@@ -169,6 +199,25 @@ class _ProfilePageState extends State<ProfilePage>
                             ),
                           ),
                         ),
+                        profile.ytShortUrl != null
+                            ? Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              1.778,
+                                      child: YoutubeShortsPage(
+                                        initialVolume: 80,
+                                        controller: shortsController,
+                                        loadingWidget: null,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(),
                         GradientShadowOverlay(),
                         Container(
                           margin: EdgeInsets.only(
@@ -226,11 +275,7 @@ class _ProfilePageState extends State<ProfilePage>
                                       child: _isCurrentUser
                                           ? TextButton(
                                               onPressed: () {
-                                                Navigator.push(context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) {
-                                                  return EditBasicInfoPage();
-                                                }));
+                                                context.push('/myprofile/edit');
                                               },
                                               style: kSmallSecondaryButtonStyle,
                                               child: Text(
@@ -239,29 +284,34 @@ class _ProfilePageState extends State<ProfilePage>
                                             )
                                           : coverButton), // Add this
                                   SizedBox(width: 10),
-                                  IconButton(
-                                      icon: FaIcon(FontAwesomeIcons.paperPlane),
-                                      onPressed: () {
-                                        print('Chat button pressed');
-                                        ChatInfo.dmBehaviour(
-                                                [profile.id, currentUserId])
-                                            .then((value) {
-                                          if (value != null) {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                              return ChatScreen(
-                                                chatInfo: value,
-                                              );
-                                            }));
-                                          }
-                                        });
-                                      }),
+                                  _isCurrentUser
+                                      ? Container()
+                                      : IconButton(
+                                          icon: FaIcon(
+                                              FontAwesomeIcons.paperPlane),
+                                          onPressed: () {
+                                            ChatInfo.dmBehaviour(
+                                                    [profile.id, currentUserId])
+                                                .then((value) {
+                                              if (value != null) {
+                                                Navigator.push(context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) {
+                                                  return ChatPage(
+                                                    chatInfo: value,
+                                                  );
+                                                }));
+                                              }
+                                            });
+                                          }),
                                   SizedBox(width: 10),
                                   IconButton(
                                       icon: FaIcon(
                                           FontAwesomeIcons.arrowUpFromBracket),
-                                      onPressed: () {}),
+                                      onPressed: () {
+                                        shortsController
+                                            .setCurrentVideoVolume(80);
+                                      }),
                                 ],
                               ),
                               SizedBox(height: 20),
@@ -307,7 +357,8 @@ class _ProfilePageState extends State<ProfilePage>
                                     decoration: BoxDecoration(
                                         gradient: LinearGradient(
                                           colors: [
-                                            kBackgroundColour.withOpacity(0.9),
+                                            kBackgroundColour.withOpacity(
+                                                1), // change it to 0.9 to see the effect again
                                             kBackgroundColour
                                           ],
                                           begin: Alignment.topCenter,
@@ -394,16 +445,17 @@ class _ProfilePageState extends State<ProfilePage>
                                                                 icon: FontAwesomeIcons
                                                                     .recordVinyl,
                                                                 pageId:
-                                                                    'projects',
+                                                                    ProjectsPage
+                                                                        .id,
                                                               ),
-                                                              PagesButton(
-                                                                title:
-                                                                    'Discography',
-                                                                icon: FontAwesomeIcons
-                                                                    .recordVinyl,
-                                                                pageId:
-                                                                    'discography',
-                                                              ),
+                                                              // PagesButton(
+                                                              //   title:
+                                                              //       'Discography',
+                                                              //   icon: FontAwesomeIcons
+                                                              //       .recordVinyl,
+                                                              //   pageId:
+                                                              //       'discography',
+                                                              // ),
                                                               PagesButton(
                                                                 title:
                                                                     'Socials',
@@ -454,18 +506,18 @@ class _ProfilePageState extends State<ProfilePage>
                       ],
                     ),
                   ),
-                  widget.isProfilePage
-                      ? Positioned(
-                          bottom: 0,
-                          right: 0,
-                          left: 0,
-                          child: Column(
-                            children: [
-                              NewNavBar(pageIndex: 2),
-                            ],
-                          ),
-                        )
-                      : Container(),
+                  // widget.isProfilePage
+                  //     ? Positioned(
+                  //         bottom: 0,
+                  //         right: 0,
+                  //         left: 0,
+                  //         child: Column(
+                  //           children: [
+                  //             NewNavBar(pageIndex: 2),
+                  //           ],
+                  //         ),
+                  //       )
+                  //     : Container(),
                 ],
               ),
             );
@@ -566,7 +618,7 @@ class TopBar extends StatelessWidget {
                 _isCurrentUser
                     ? IconButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, SettingPage.id);
+                          context.push(SettingPage.id);
                         },
                         icon: Icon(Icons.settings))
                     : opacity == 0

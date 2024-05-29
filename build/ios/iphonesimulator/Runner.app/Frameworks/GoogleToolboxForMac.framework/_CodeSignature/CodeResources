@@ -4,13 +4,74 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>GoogleToolboxForMac_Logger_Privacy.bundle/Info.plist</key>
+		<data>
+		ImBf7fDd8/c5RyNoawoQC+BkWEE=
+		</data>
+		<key>GoogleToolboxForMac_Logger_Privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		GqeAMkwbcNQeG0K4qQhQh2vHhHo=
+		</data>
+		<key>GoogleToolboxForMac_Privacy.bundle/Info.plist</key>
+		<data>
+		VpqKgreN6iJwL9CDerKzFx3vLIk=
+		</data>
+		<key>GoogleToolboxForMac_Privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		ZajnvEs/MYRS3X4TPLAhBWi8mc4=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		WW8w1mqT+JDOVeNarxXGA2UDuuM=
+		xuHFG9Hm+8Vw3GeoUcyOwr0dfSs=
 		</data>
 	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>GoogleToolboxForMac_Logger_Privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ImBf7fDd8/c5RyNoawoQC+BkWEE=
+			</data>
+			<key>hash2</key>
+			<data>
+			GL0K3+sAt6gONPlaSzhI61/NrMEC8uqy9zyI3JOj+sE=
+			</data>
+		</dict>
+		<key>GoogleToolboxForMac_Logger_Privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GqeAMkwbcNQeG0K4qQhQh2vHhHo=
+			</data>
+			<key>hash2</key>
+			<data>
+			PkqTy+hqzvfdfgY6KMhJmS9Vbn9SytxfN8HosOG1RoY=
+			</data>
+		</dict>
+		<key>GoogleToolboxForMac_Privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VpqKgreN6iJwL9CDerKzFx3vLIk=
+			</data>
+			<key>hash2</key>
+			<data>
+			P0uhwwzy6nEPZYOqg4p3QA+szuFwz4XVr0Kpk6IWcxI=
+			</data>
+		</dict>
+		<key>GoogleToolboxForMac_Privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZajnvEs/MYRS3X4TPLAhBWi8mc4=
+			</data>
+			<key>hash2</key>
+			<data>
+			dLDNcvwjwe8wLyLuJ1P2GBfNxa8P96fy0GMrUk+4rOo=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^.*</key>

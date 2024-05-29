@@ -5,15 +5,17 @@ import 'package:stay_indie/screens/chat/InboxScreen.dart';
 import 'package:stay_indie/screens/archive/LoginScreen.dart';
 import 'package:stay_indie/screens/archive/SignUpScreen.dart';
 import 'package:stay_indie/constants.dart';
-
+import 'package:stay_indie/router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/login_page.dart';
 import 'package:stay_indie/screens/templates/stepper_form.dart';
 import 'package:stay_indie/models/SingleFormPage.dart';
+import 'package:stay_indie/test_page.dart';
 
 /// Page to redirect users to the appropriate page depending on the initial auth state
 class SplashScreen extends StatefulWidget {
-  static const id = 'splashscreen';
+  static const id = '/';
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -33,8 +35,9 @@ class SplashScreenState extends State<SplashScreen> {
 
     final session = supabase.auth.currentSession;
     if (session == null) {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(LoginPage.id, (route) => false);
+      context.go(LoginPage.id);
+      // Navigator.of(context)
+      //     .pushNamedAndRemoveUntil(LoginPage.id, (route) => false);
     } else {
       clearAllCache(context);
       try {
@@ -43,12 +46,12 @@ class SplashScreenState extends State<SplashScreen> {
         });
         bool isProfileSetUp = await Profile.checkIfProfileIsSetUp();
         if (isProfileSetUp) {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(InboxScreen.id, (route) => false);
+          context.go(InboxScreen.id);
+
           return;
         } else {
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(InboxScreen.id, (route) => false);
+          context.go(InboxScreen.id);
+
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => StepperForm(
@@ -58,7 +61,8 @@ class SplashScreenState extends State<SplashScreen> {
                   formValues['id'] = supabase.auth.currentUser!.id;
                   Profile.updateProfile(
                       supabase.auth.currentUser!.id, formValues);
-                  Navigator.popAndPushNamed(context, InboxScreen.id);
+
+                  context.go(InboxScreen.id);
                 },
               ),
             ),
@@ -85,6 +89,16 @@ class SplashScreenState extends State<SplashScreen> {
                   width: 100,
                 ),
               ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              style: kSmallPrimaryButtonStyle,
+              onPressed: () {
+                context.go(TestPage.id);
+              },
+              child: const Text('Test Page'),
             ),
             SizedBox(
               height: 20,

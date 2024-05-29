@@ -1,0 +1,11 @@
+framework module keyboard_emoji_picker {
+  umbrella header "keyboard_emoji_picker-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module keyboard_emoji_picker.Swift {
+  header "keyboard_emoji_picker-Swift.h"
+  requires objc
+}

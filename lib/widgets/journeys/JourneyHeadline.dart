@@ -6,7 +6,7 @@ import 'package:stay_indie/utilities/LinePainter.dart';
 import 'package:stay_indie/models/Journey.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
+import 'package:stay_indie/widgets/projects/media_carousel.dart';
 import 'package:timeago/timeago.dart';
 
 class JourneyHeadline extends StatelessWidget {
@@ -34,11 +34,14 @@ class JourneyHeadline extends StatelessWidget {
                   backgroundColor: journey.emojiBgColor,
                   radius: 19.0, // slightly smaller to create a border effect
                   // backgroundImage: AssetImage('assets/amazon.png'),
-                  child: Text(
-                    journey.emoji,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
+                  child: Center(
+                    child: Text(
+                      journey.emoji,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -78,7 +81,7 @@ class JourneyHeadline extends StatelessWidget {
           ),
         ),
         journey.imagesUrls.isNotEmpty
-            ? ProjectMediaCarousel(
+            ? MediaCarousel(
                 leftMargin: 80,
                 networkImages: journey.imagesUrls,
                 height: 100,

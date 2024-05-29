@@ -37,6 +37,7 @@ class Profile {
   final String? spotifyArtistId;
   final List<Profile> connectionsProfiles;
   List<String> chatIds = [];
+  String? ytShortUrl;
 
   static Map<String, Profile> _profileCache = {};
 
@@ -64,9 +65,9 @@ class Profile {
         profileColor = map['profile_color'] != null
             ? Color(int.parse(map['profile_color']))
             : kBackgroundColour10,
-        spotifyArtistId = map['spotify_artist_id'],
-        profileImageUrl = map['profile_image_url'] ??
-            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+        spotifyArtistId = map['spotify_artist_id'] ?? '',
+        profileImageUrl = map['profile_image_url'] ?? '',
+        ytShortUrl = map['yt_short_url'];
 
   static Map<String, dynamic> toJson(Profile profile) {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -82,6 +83,7 @@ class Profile {
     data['spotify_artist_id'] = profile.spotifyArtistId;
     data['profile_image_url'] = profile.profileImageUrl;
     data['chats'] = profile.chatIds;
+    data['yt_short_url'] = profile.ytShortUrl;
     return data;
   }
 
@@ -103,6 +105,7 @@ class Profile {
   }
 
   static Future<Profile> fetchProfileFromDatabase(userId) async {
+    print('Supabase Pull for profiles' + userId);
     final response =
         await supabase.from('profiles').select().eq('id', userId).single();
 
@@ -136,6 +139,7 @@ class Profile {
       userProfile.profileImageUrl = supabase.storage
           .from('profile_images')
           .getPublicUrl(userId + '/profile' + '.png');
+
       _profileCache[userId] = userProfile;
       print('Profile cache stored ' + userId);
       return userProfile;
@@ -168,7 +172,7 @@ class Profile {
           )
           .eq('id', id);
 
-      await getProfileData(id);
+      await fetchProfileFromDatabase(id);
     } catch (e) {
       print('Error' + e.toString());
     }

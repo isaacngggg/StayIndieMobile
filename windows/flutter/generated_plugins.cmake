@@ -4,13 +4,16 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links
-  emoji_picker_flutter
   file_selector_windows
   firebase_core
+  media_kit_libs_windows_video
+  media_kit_video
+  screen_brightness_windows
   url_launcher_windows
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  media_kit_native_event_loop
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

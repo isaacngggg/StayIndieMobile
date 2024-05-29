@@ -12,7 +12,7 @@
 			<key>bitcode</key>
 			<false/>
 			<key>buildNumber</key>
-			<string>16</string>
+			<string>18</string>
 			<key>certificate</key>
 			<dict>
 				<key>SHA1</key>
@@ -44,6 +44,230 @@
 					</dict>
 					<key>name</key>
 					<string>App.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>AppAuth.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.7.5</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Ass.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Avcodec.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Avfilter.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Avformat.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Avutil.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Dav1d.framework</string>
 					<key>symbols</key>
 					<true/>
 					<key>team</key>
@@ -320,6 +544,102 @@
 					<key>bitcode</key>
 					<false/>
 					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Freetype.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Fribidi.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>GTMAppAuth.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>4.1.1</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
 					<string>1</string>
 					<key>certificate</key>
 					<dict>
@@ -342,7 +662,7 @@
 						<string>Hon Chung Isaac Ng</string>
 					</dict>
 					<key>versionNumber</key>
-					<string>2.3.0</string>
+					<string>3.4.1</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -395,6 +715,38 @@
 						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
+					<string>GoogleSignIn.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>7.1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
 					<string>GoogleToolboxForMac.framework</string>
 					<key>symbols</key>
 					<true/>
@@ -406,7 +758,7 @@
 						<string>Hon Chung Isaac Ng</string>
 					</dict>
 					<key>versionNumber</key>
-					<string>2.3.2</string>
+					<string>4.2.1</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -448,6 +800,166 @@
 					<key>bitcode</key>
 					<false/>
 					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Harfbuzz.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Mbedcrypto.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Mbedtls.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Mbedx509.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Mpv.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
 					<string>1</string>
 					<key>certificate</key>
 					<dict>
@@ -459,7 +971,7 @@
 						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
-					<string>MTBBarcodeScanner.framework</string>
+					<string>OrderedSet.framework</string>
 					<key>symbols</key>
 					<true/>
 					<key>team</key>
@@ -470,7 +982,167 @@
 						<string>Hon Chung Isaac Ng</string>
 					</dict>
 					<key>versionNumber</key>
-					<string>5.0.11</string>
+					<string>5.0.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Png16.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Swresample.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Swscale.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Uchardet.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1.0</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Xml2.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -523,39 +1195,7 @@
 						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
-					<string>emoji_picker_flutter.framework</string>
-					<key>symbols</key>
-					<true/>
-					<key>team</key>
-					<dict>
-						<key>id</key>
-						<string>K7SKBQ54H2</string>
-						<key>name</key>
-						<string>Hon Chung Isaac Ng</string>
-					</dict>
-					<key>versionNumber</key>
-					<string>0.0.1</string>
-				</dict>
-				<dict>
-					<key>architectures</key>
-					<array>
-						<string>arm64</string>
-					</array>
-					<key>bitcode</key>
-					<false/>
-					<key>buildNumber</key>
-					<string>1</string>
-					<key>certificate</key>
-					<dict>
-						<key>SHA1</key>
-						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
-						<key>dateExpires</key>
-						<string>31/03/2025</string>
-						<key>type</key>
-						<string>Cloud Managed Apple Distribution</string>
-					</dict>
-					<key>name</key>
-					<string>flutter_keyboard_visibility.framework</string>
+					<string>flutter_inappwebview_ios.framework</string>
 					<key>symbols</key>
 					<true/>
 					<key>team</key>
@@ -651,6 +1291,134 @@
 						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
+					<string>keyboard_emoji_picker.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>0.0.1</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>media_kit_libs_ios_video.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0.4</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>media_kit_native_event_loop.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>media_kit_video.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>0.0.1</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
 					<string>nanopb.framework</string>
 					<key>symbols</key>
 					<true/>
@@ -663,6 +1431,38 @@
 					</dict>
 					<key>versionNumber</key>
 					<string>2.30910.0</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>package_info_plus.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>0.4.5</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -715,7 +1515,7 @@
 						<string>Cloud Managed Apple Distribution</string>
 					</dict>
 					<key>name</key>
-					<string>qr_bar_code_scanner_dialog.framework</string>
+					<string>screen_brightness_ios.framework</string>
 					<key>symbols</key>
 					<true/>
 					<key>team</key>
@@ -726,39 +1526,7 @@
 						<string>Hon Chung Isaac Ng</string>
 					</dict>
 					<key>versionNumber</key>
-					<string>0.0.1</string>
-				</dict>
-				<dict>
-					<key>architectures</key>
-					<array>
-						<string>arm64</string>
-					</array>
-					<key>bitcode</key>
-					<false/>
-					<key>buildNumber</key>
-					<string>1</string>
-					<key>certificate</key>
-					<dict>
-						<key>SHA1</key>
-						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
-						<key>dateExpires</key>
-						<string>31/03/2025</string>
-						<key>type</key>
-						<string>Cloud Managed Apple Distribution</string>
-					</dict>
-					<key>name</key>
-					<string>qr_code_scanner.framework</string>
-					<key>symbols</key>
-					<true/>
-					<key>team</key>
-					<dict>
-						<key>id</key>
-						<string>K7SKBQ54H2</string>
-						<key>name</key>
-						<string>Hon Chung Isaac Ng</string>
-					</dict>
-					<key>versionNumber</key>
-					<string>0.2.0</string>
+					<string>0.1.0</string>
 				</dict>
 				<dict>
 					<key>architectures</key>
@@ -844,6 +1612,70 @@
 					</dict>
 					<key>name</key>
 					<string>url_launcher_ios.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>0.0.1</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>volume_controller.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>K7SKBQ54H2</string>
+						<key>name</key>
+						<string>Hon Chung Isaac Ng</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>0.0.1</string>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<false/>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>51D8E8021AAAF1B64DD1DD6699C417B54A04AEF9</string>
+						<key>dateExpires</key>
+						<string>31/03/2025</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>wakelock_plus.framework</string>
 					<key>symbols</key>
 					<true/>
 					<key>team</key>

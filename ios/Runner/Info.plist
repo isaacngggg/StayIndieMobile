@@ -29,7 +29,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>io.supabase.flutterquickstart</string>
+				<string>app.thegreenroom.flutterquickstart</string>
+				<string>com.googleusercontent.apps.567542751396-2beb1lra7i91ue5slar50uttrtb3bqsh</string>
 				<string>fb1514861569095185</string>
 			</array>
 		</dict>
@@ -76,5 +77,8 @@
 		<string>fbapi</string>
 		<string>fb-messenger-share-api</string>
 	</array>
+
+	<key>GIDClientID</key>
+	<string>567542751396-2beb1lra7i91ue5slar50uttrtb3bqsh.apps.googleusercontent.com</string>
 </dict>
 </plist>

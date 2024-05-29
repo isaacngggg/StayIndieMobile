@@ -9,7 +9,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:stay_indie/screens/project/manage_story_screen.dart';
 import 'package:stay_indie/screens/project/story_screen.dart';
 
-import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
+import 'package:stay_indie/widgets/projects/media_carousel.dart';
 
 import 'package:stay_indie/models/StoryPage.dart';
 import 'package:stay_indie/models/Profile.dart';
@@ -130,7 +130,9 @@ class _ProjectTileState extends State<ProjectTile> {
           SizedBox(height: 10),
           // ImageCarousel(),
           _networkImages.length > 0
-              ? ProjectMediaCarousel(networkImages: _networkImages)
+              ? MediaCarousel(
+                  networkImages: _networkImages,
+                )
               : Container(),
           SizedBox(height: 10),
           Row(

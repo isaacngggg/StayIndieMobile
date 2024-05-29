@@ -7,7 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stay_indie/screens/archive/HomeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const String id = 'loginscreen';
+  static const String id = '/login';
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }

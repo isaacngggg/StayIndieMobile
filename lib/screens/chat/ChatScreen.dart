@@ -11,17 +11,17 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:stay_indie/widgets/chat/ChatBubble.dart';
 import 'package:stay_indie/screens/chat/chat_info_screen.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatPage extends StatefulWidget {
   final ChatInfo chatInfo;
-  const ChatScreen({required this.chatInfo, Key? key}) : super(key: key);
+  const ChatPage({required this.chatInfo, Key? key}) : super(key: key);
 
   static const String id = 'chat_screen';
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatPageState extends State<ChatPage> {
   late final Stream<List<Message>> _messagesStream;
   final Map<String, Profile> _profileCache = {};
 

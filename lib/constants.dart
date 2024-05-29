@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stay_indie/models/Journey.dart';
+import 'package:stay_indie/models/ProfileProvider.dart';
 import 'package:stay_indie/models/Project.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/models/connections/Spotify/Spotify.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:provider/provider.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 enum FormInputFieldType { text, number, date, media, grid }
@@ -26,6 +29,11 @@ String currentUserId = supabase.auth.currentUser != null
 
 late Profile currentUserProfile;
 
+final currentUserProfileProvider =
+    ChangeNotifierProvider<CurrentProfileProvider>((ref) {
+  return CurrentProfileProvider(profile: currentUserProfile);
+});
+
 ThemeData theme = ThemeData.dark().copyWith(
   textTheme: GoogleFonts.dmSansTextTheme(
     ThemeData.dark().textTheme,
@@ -36,12 +44,16 @@ ThemeData theme = ThemeData.dark().copyWith(
       tertiary: kAccentColour),
   iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-    iconColor: MaterialStateProperty.all<Color>(kPrimaryColour30),
+    iconColor: MaterialStateProperty.all<Color>(kPrimaryColour20),
   )),
   primaryColor: kAccentColour,
   scaffoldBackgroundColor: kBackgroundColour,
   highlightColor: kAccentColour,
   appBarTheme: AppBarTheme(
+    titleTextStyle: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+    ),
     iconTheme: IconThemeData(color: Colors.white), // if you want black icons
     elevation: 0,
     backgroundColor: kBackgroundColour,
@@ -85,6 +97,7 @@ ButtonStyle kPrimaryButtonStyle = ButtonStyle(
   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
     EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
   ),
+  textStyle: MaterialStateProperty.all<TextStyle>(kButtonTextStyle),
   foregroundColor: MaterialStateProperty.all<Color>(kBackgroundColour),
   backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColour),
   overlayColor: MaterialStateProperty.all<Color>(kPrimaryColour80),
@@ -258,8 +271,9 @@ InputDecoration kSearchTextFieldDecoration = InputDecoration(
 // Text Styles
 
 TextStyle kButtonTextStyle = TextStyle(
-  fontSize: 20,
-  fontWeight: FontWeight.bold,
+  fontSize: 14,
+  fontWeight: FontWeight.w700,
+  color: kBackgroundColour30,
 );
 
 TextStyle kHeading1 = TextStyle(
@@ -383,6 +397,7 @@ void clearAllCache(context) {
     Profile.removeProfileFromPrefs();
     Profile.clearCache();
     Project.clearCache();
+    Journey.clearCache();
 
     print('Cache Cleared');
     // ShowSnackBar(context)
@@ -392,4 +407,26 @@ void clearAllCache(context) {
         message: 'Cache unable to be clear: ' + e.toString(),
         backgroundColor: Colors.red);
   }
+}
+
+String formatLargeNumber(int number) {
+  if (number < 1000)
+    return number.toString(); // No conversion needed for small numbers
+
+  final units = ['K', 'M', 'B', 'T']; // Suffixes for thousands, millions, etc.
+  int divisor = 1000;
+  int exp = 0; // Exponent for the divisor
+
+  // Find the appropriate unit and divisor
+  while (number >= divisor * 1000 && exp < units.length - 1) {
+    divisor *= 1000;
+    exp++;
+  }
+
+  final formattedNumber = (number / divisor).toStringAsFixed(1);
+
+  // Trim trailing zeros and remove unnecessary decimal point
+  return formattedNumber.endsWith('.0')
+      ? formattedNumber.substring(0, formattedNumber.length - 2)
+      : formattedNumber + units[exp];
 }

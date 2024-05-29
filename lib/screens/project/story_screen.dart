@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
-import 'package:stay_indie/widgets/projects/project_media_carousel.dart';
+import 'package:stay_indie/widgets/projects/media_carousel.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/models/StoryPage.dart';
 
@@ -99,7 +99,7 @@ class _StoryScreenState extends State<StoryScreen> {
             Positioned.fill(
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                ProjectMediaCarousel(
+                MediaCarousel(
                   networkImages: widget.images,
                   height: 350,
                 ),

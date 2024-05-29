@@ -3,14 +3,14 @@ import 'package:stay_indie/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/login_page.dart';
-import 'package:stay_indie/screens/profile/edit_basic_info_page.dart';
+import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:stay_indie/screens/socials/connect_social_page.dart';
-
-import 'package:stay_indie/screens/archive/profile_edit_page.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:stay_indie/screens/archive/LoginScreen.dart';
 
 class SettingPage extends StatelessWidget {
-  static const id = 'settingpage';
+  static const id = '/settings';
   const SettingPage({super.key});
 
   @override
@@ -50,7 +50,7 @@ class SettingPage extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     CupertinoPageRoute(
-                      builder: (context) => EditBasicInfoPage(),
+                      builder: (context) => ProfileEditPage(),
                     ),
                   );
                 },
@@ -89,8 +89,7 @@ class SettingPage extends StatelessWidget {
                 onTap: () {
                   clearAllCache(context);
                   supabase.auth.signOut();
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil(LoginPage.id, (route) => false);
+                  context.go(LoginPage.id);
                 },
               ),
             ],

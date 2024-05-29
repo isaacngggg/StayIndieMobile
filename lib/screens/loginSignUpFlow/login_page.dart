@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/utilities/input_fields.dart';
-
 import 'SplashScreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'signup_page.dart';
@@ -10,7 +10,7 @@ import 'signup_page.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
-  static const String id = 'loginpage';
+  static const String id = '/login';
 
   static Route<void> route() {
     return MaterialPageRoute(builder: (context) => const LoginPage());
@@ -39,8 +39,9 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(SplashScreen.id, (route) => false);
+      context.go(SplashScreen.id);
+      // Navigator.of(context)
+      //     .pushNamedAndRemoveUntil(SplashScreen.id, (route) => false);
     } on AuthException catch (error) {
       setState(() {
         _isLoading = false;
@@ -134,9 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text('Login'),
                       style: kPrimaryButtonStyle,
                     ),
+                    formSpacer,
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, RegisterPage.id);
+                        context.push(RegisterPage.id);
                       },
                       child: const Text('Register Instead'),
                       style: kTextButtonStyle,

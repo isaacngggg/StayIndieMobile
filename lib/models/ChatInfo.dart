@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'Profile.dart';
@@ -30,6 +32,14 @@ class ChatInfo {
   //       description = map['description'],
   //       imageUrl = map['image_url'],
   //       participantProfiles = [];
+
+  static Map<String, dynamic> toJson(ChatInfo chatInfo) => {
+        'id': chatInfo.id,
+        'participants': chatInfo.participants,
+        'name': chatInfo.name,
+        'description': chatInfo.description,
+        'image_url': chatInfo.imageUrl,
+      };
 
   static Future<ChatInfo?> getConversationContaining(
       List<String> participants) async {
@@ -83,13 +93,15 @@ class ChatInfo {
       });
       print('participantProfiles: ' + participantProfiles.length.toString());
       if (participantProfiles.length > 2) {
-        return ChatInfo(
+        var chatInfo = ChatInfo(
           id: map['id'],
           participants: participantIds,
           name: map['name'] == null ? map['name'] : 'Unnamed group chat',
           participantProfiles: participantProfiles,
           lastMessage: lastMessage,
         );
+        await saveToPrefs(chatInfo);
+        return chatInfo;
       } else {
         print('participantProfiles: ' + participantProfiles.length.toString());
         Profile? dmProfile;
@@ -99,7 +111,7 @@ class ChatInfo {
             print('dmProfile: ' + dmProfile.name);
           }
         }
-        return ChatInfo(
+        var chatInfo = ChatInfo(
           id: map['id'],
           participants: participantIds,
           name: map['name'] == null ? dmProfile!.name : map['name'],
@@ -110,6 +122,8 @@ class ChatInfo {
           participantProfiles: participantProfiles,
           lastMessage: lastMessage,
         );
+        await saveToPrefs(chatInfo);
+        return chatInfo;
       }
     } catch (e) {
       print('Error creating chat info ' + e.toString());
@@ -261,6 +275,35 @@ class ChatInfo {
     } catch (e) {
       print('Error getting last message ' + e.toString());
       return null;
+    }
+  }
+
+  static Future<void> saveToPrefs(ChatInfo chatInfo) async {
+    print('Saving chat info to prefs');
+    final prefs = await SharedPreferences.getInstance();
+    final chatInfoString = jsonEncode(toJson(chatInfo));
+    prefs.setString(chatInfo.id, chatInfoString);
+  }
+
+  static Future<ChatInfo?> loadFromPrefs(String chatId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final chatInfoString = prefs.getString(chatId);
+    if (chatInfoString == null) {
+      return null;
+    }
+    return ChatInfo.createChatInfo(jsonDecode(chatInfoString));
+  }
+
+  static Future<void> removeAllFromPrefs() async {
+    final prefs = SharedPreferences.getInstance();
+    await prefs.then((value) => value.clear());
+  }
+
+  static Future<void> deleteChat(String chatId) async {
+    try {
+      await supabase.from('chats').delete().eq('id', chatId);
+    } catch (e) {
+      print('Error deleting chat ' + e.toString());
     }
   }
 }

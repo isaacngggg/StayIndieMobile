@@ -7,7 +7,7 @@ import 'package:stay_indie/models/ChatInfo.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/chat/ChatScreen.dart';
 
-import 'package:stay_indie/screens/profile/edit_basic_info_page.dart';
+import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:stay_indie/widgets/social/SocialMetricList.dart';
 
 import 'package:stay_indie/widgets/profile/CoverButton.dart';
@@ -113,7 +113,7 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return EditBasicInfoPage();
+                                    return ProfileEditPage();
                                   }));
                                 },
                                 style: kSmallSecondaryButtonStyle,
@@ -134,7 +134,7 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                             if (value != null) {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return ChatScreen(
+                                return ChatPage(
                                   chatInfo: value,
                                 );
                               }));
