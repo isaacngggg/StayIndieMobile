@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:stay_indie/screens/chat/ChatScreen.dart';
+import 'package:stay_indie/screens/chat/chat_page.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -56,15 +56,15 @@ class MessageBarState extends State<MessageBar> {
               IconButton(
                 padding: EdgeInsets.zero,
                 onPressed: () => _submitMessage(),
-                color: kAccentColour,
+                color: kBackgroundColour10,
                 iconSize: 16,
                 icon: CircleAvatar(
                   radius: 16,
-                  backgroundColor: kAccentColour,
+                  backgroundColor: kPrimaryColour20,
                   child: const Icon(
                     Icons.send,
                     size: 16,
-                    color: kPrimaryColour,
+                    color: kBackgroundColour10,
                   ),
                 ),
               ),

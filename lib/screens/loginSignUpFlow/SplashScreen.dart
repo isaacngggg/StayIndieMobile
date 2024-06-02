@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/screens/archive/HomeScreen.dart';
-import 'package:stay_indie/screens/chat/ChatScreen.dart';
-import 'package:stay_indie/screens/chat/InboxScreen.dart';
+import 'package:stay_indie/screens/chat/chat_page.dart';
+import 'package:stay_indie/screens/chat/inbox_page.dart';
 import 'package:stay_indie/screens/archive/LoginScreen.dart';
 import 'package:stay_indie/screens/archive/SignUpScreen.dart';
 import 'package:stay_indie/constants.dart';
@@ -46,11 +46,11 @@ class SplashScreenState extends State<SplashScreen> {
         });
         bool isProfileSetUp = await Profile.checkIfProfileIsSetUp();
         if (isProfileSetUp) {
-          context.go(InboxScreen.id);
+          context.go(InboxPage.id);
 
           return;
         } else {
-          context.go(InboxScreen.id);
+          context.go(InboxPage.id);
 
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -62,7 +62,7 @@ class SplashScreenState extends State<SplashScreen> {
                   Profile.updateProfile(
                       supabase.auth.currentUser!.id, formValues);
 
-                  context.go(InboxScreen.id);
+                  context.go(InboxPage.id);
                 },
               ),
             ),

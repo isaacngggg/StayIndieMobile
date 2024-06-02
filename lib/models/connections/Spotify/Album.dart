@@ -1,4 +1,4 @@
-import 'package:stay_indie/models/connections/Spotify/Spotify.dart';
+import 'package:stay_indie/models/connections/spotify/Spotify.dart';
 
 class Album {
   String id;

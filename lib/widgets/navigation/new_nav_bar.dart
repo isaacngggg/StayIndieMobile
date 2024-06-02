@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:stay_indie/screens/contacts_page.dart';
 
-import 'package:stay_indie/screens/chat/InboxScreen.dart';
+import 'package:stay_indie/screens/chat/inbox_page.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
 
 import 'package:stay_indie/screens/profile/profile_page.dart';
@@ -35,7 +35,7 @@ class NewNavBar extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                context.go(InboxScreen.id);
+                context.go(InboxPage.id);
               },
               icon: FaIcon(
                   pageIndex == 0

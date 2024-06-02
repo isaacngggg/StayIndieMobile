@@ -8,7 +8,7 @@ import 'package:stay_indie/models/Journey.dart';
 import 'package:stay_indie/models/Organisation.dart';
 
 class AddJourneyPage extends StatefulWidget {
-  static const id = 'add_journey_page';
+  static const id = '/add-journey';
   const AddJourneyPage({super.key});
 
   @override

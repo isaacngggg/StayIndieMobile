@@ -9,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uuid/uuid.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stay_indie/models/Profile.dart';
-import 'package:stay_indie/models/connections/Spotify/Spotify.dart';
+import 'package:stay_indie/models/connections/spotify/Spotify.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';

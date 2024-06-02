@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		cCa6EfW3nJp4Yea/Z7A4BDpkVqI=
+		shyQlwl2A7ELDnCa0ybKWgGuO58=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		SXarzaZIekdS32NA6HwUcza9omU=
+		opb9KKqeyqCZ7TU5U9R+VLkDXIM=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		aH0XmqEoV/AK0IQAduP3Le9zmiI=
+		hesSzUlDOi3sZiCzs59ImE6xmbk=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/Greenroom.png</key>
 		<data>
@@ -186,7 +186,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		wgZ0xkbC/Cc6kDsh5U2rOkippl8=
+		JAcEm5dgUH93jjN0zzBFJg7EBk4=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/flex_color_picker/assets/opacity.png</key>
 		<data>
@@ -1622,6 +1622,18 @@
 		<data>
 		W859JDVykxWZ0aYvnTEJCgiAYio=
 		</data>
+		<key>Frameworks/flutter_background_service_ios.framework/Info.plist</key>
+		<data>
+		bQpk5lkj2rMLhsn83QhMJf2MQGM=
+		</data>
+		<key>Frameworks/flutter_background_service_ios.framework/_CodeSignature/CodeResources</key>
+		<data>
+		8BcBzcWTH7XfUf6Z2NAki36Epqs=
+		</data>
+		<key>Frameworks/flutter_background_service_ios.framework/flutter_background_service_ios</key>
+		<data>
+		W/Ms9DQ/cwCBLZyxqhcDvCwxRwc=
+		</data>
 		<key>Frameworks/flutter_inappwebview_ios.framework/Info.plist</key>
 		<data>
 		H5Q0FZ5y7pAWoV6aKKsivejgyRA=
@@ -1837,6 +1849,26 @@
 		<key>Frameworks/screen_brightness_ios.framework/screen_brightness_ios</key>
 		<data>
 		HhmGHhAyRpD8CJIK2iaSDwnhIlc=
+		</data>
+		<key>Frameworks/share_plus.framework/Info.plist</key>
+		<data>
+		WhPcbQM3PTgIZ0OFNgJY0CUqXL8=
+		</data>
+		<key>Frameworks/share_plus.framework/_CodeSignature/CodeResources</key>
+		<data>
+		KYchxdaR1DNwgkJBeO32E+Yhu4w=
+		</data>
+		<key>Frameworks/share_plus.framework/share_plus</key>
+		<data>
+		1/mskrJ0DzcNqAgO7p7gG/3j2QQ=
+		</data>
+		<key>Frameworks/share_plus.framework/share_plus_privacy.bundle/Info.plist</key>
+		<data>
+		5V5ZSbUbCLR+5BIPIrY5yrQMYZc=
+		</data>
+		<key>Frameworks/share_plus.framework/share_plus_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<data>
+		/LX0ZlwxwIAIhjZaDB8EiH5KpXA=
 		</data>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
 		<data>
@@ -2055,7 +2087,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oYRD2+JzVesY2UWZ2bYX629yCUymlbNIT/XBVbRgBDo=
+			ZwCrXuxCuZUHD9gZgWz5a+L5ZA021b2MTyqcDo+b508=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -2069,7 +2101,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/SVOvjPbJjFaOzK+B+oOAy9ysz5CLqtTVBNP7VvqYxI=
+			BUJWmhBz0ZkYnb9J5V7aaX70nobF1xnK1xKMm6518zA=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -2097,7 +2129,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ac7D3m6WIMHQ/CwJF/s+lzH8uD94G7K6ErN8Yveg/Do=
+			gTEOYYaXDEf0X1MIz8hDOAPTk4kb0NZ2k6NMGw6FMTs=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/Greenroom.png</key>
@@ -2300,7 +2332,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1jH/QBcUPVsObcFJGbZx87cooXHqMC2xpOQIcG+7HJY=
+			DiACLcmbUw6iurb9kuSw3mMqTjnTWcDBHZUlRuLJQF8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/flex_color_picker/assets/opacity.png</key>
@@ -4259,6 +4291,27 @@
 			3wG/jzEbezUNAdVa/lBZ6tm6KwBpxUIeadm0BffKvqI=
 			</data>
 		</dict>
+		<key>Frameworks/flutter_background_service_ios.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vIdq668xLOZZfTJqyXDFvXsF0YtsfsT+r1u69WC3v+I=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_background_service_ios.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			6vLUTBBaDkUU5wQ+r2psSS6szlJH9U0k38x3pfr3kfc=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_background_service_ios.framework/flutter_background_service_ios</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YhERCgc/TbFL7iGe2PfotFBSGLo7szlaYkcll5cELJc=
+			</data>
+		</dict>
 		<key>Frameworks/flutter_inappwebview_ios.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -4635,6 +4688,41 @@
 			<key>hash2</key>
 			<data>
 			bVJKUiZ17lihrqbTI64z0us685IBwRDEb9YneuUoPlI=
+			</data>
+		</dict>
+		<key>Frameworks/share_plus.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QX1jeF1dbMHDa1/WvC7EeRjRRaIH398CZJaPviHtZBY=
+			</data>
+		</dict>
+		<key>Frameworks/share_plus.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			6PQqLg3uUZLYM+K9TfFdcU4G4qd8GpCg8E5BiaLgCjE=
+			</data>
+		</dict>
+		<key>Frameworks/share_plus.framework/share_plus</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Fr/xnmfj8MZE/Ni0wCm4KESqcpuib2AviznfsfzMz6o=
+			</data>
+		</dict>
+		<key>Frameworks/share_plus.framework/share_plus_privacy.bundle/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			eFnU6XMiKWXtbAooEqFJykYTZjSDLj5n9H0ABhaNWTM=
+			</data>
+		</dict>
+		<key>Frameworks/share_plus.framework/share_plus_privacy.bundle/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bS2g2NkwIn1CjB2TY7CtbjoS4sm2jFzilxWKdBL8jDE=
 			</data>
 		</dict>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>

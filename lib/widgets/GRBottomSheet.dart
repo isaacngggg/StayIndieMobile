@@ -25,4 +25,25 @@ class GRBottomSheet {
       ),
     );
   }
+
+  static Future buildFixedHeightBottomSheet(
+      BuildContext context, Widget content, double height) {
+    return showMaterialModalBottomSheet(
+      backgroundColor: kBackgroundColour10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      enableDrag: true,
+      context: context,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * height,
+        padding: EdgeInsets.all(20),
+        child: SafeArea(
+          top: false,
+          child: Padding(
+              padding: MediaQuery.of(context).viewInsets, child: content),
+        ),
+      ),
+    );
+  }
 }

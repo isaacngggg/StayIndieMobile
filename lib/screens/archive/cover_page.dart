@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/models/ChatInfo.dart';
+import 'package:stay_indie/models/chat_info.dart';
 
 import 'package:stay_indie/models/Profile.dart';
-import 'package:stay_indie/screens/chat/ChatScreen.dart';
+import 'package:stay_indie/screens/chat/chat_page.dart';
 
 import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:stay_indie/widgets/social/SocialMetricList.dart';
@@ -135,7 +135,7 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return ChatPage(
-                                  chatInfo: value,
+                                  chatId: value.id,
                                 );
                               }));
                             }

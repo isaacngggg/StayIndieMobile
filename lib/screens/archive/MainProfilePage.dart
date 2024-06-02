@@ -14,7 +14,7 @@ import 'package:stay_indie/models/Project.dart';
 
 import 'package:stay_indie/screens/archive/cover_page.dart';
 import 'package:stay_indie/screens/archive/content_page.dart';
-import 'package:stay_indie/models/connections/Spotify/Track.dart';
+import 'package:stay_indie/models/connections/spotify/Track.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class MainProfilePage extends StatefulWidget {

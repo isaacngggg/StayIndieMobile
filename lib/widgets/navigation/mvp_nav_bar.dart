@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:stay_indie/screens/archive/MainProfilePage.dart';
 import 'package:stay_indie/screens/contacts_page.dart';
 
-import 'package:stay_indie/screens/chat/InboxScreen.dart';
+import 'package:stay_indie/screens/chat/inbox_page.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
 import 'package:stay_indie/screens/profile/profile_page.dart';
 
@@ -67,7 +67,7 @@ class BottomNavBar extends StatelessWidget {
       onDestinationSelected: (index) {
         if (index == 0) {
           Navigator.pushReplacement(
-              context, NoAnimationRoute(builder: (context) => InboxScreen()));
+              context, NoAnimationRoute(builder: (context) => InboxPage()));
         } else if (index == 1) {
           Navigator.pushReplacement(
               context, NoAnimationRoute(builder: (context) => ContactsPage()));

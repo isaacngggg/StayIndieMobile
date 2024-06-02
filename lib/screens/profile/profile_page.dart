@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:expandable_text/expandable_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -10,27 +11,27 @@ import 'package:googleapis/youtube/v3.dart';
 import 'dart:ui';
 
 import 'package:stay_indie/constants.dart';
-import 'package:stay_indie/models/ChatInfo.dart';
+import 'package:stay_indie/models/chat_info.dart';
 import 'package:stay_indie/models/ProfileProvider.dart';
-import 'package:stay_indie/models/connections/Spotify/spotify_signin_helper.dart';
+import 'package:stay_indie/models/connections/spotify/spotify_signin_helper.dart';
 
-import 'package:stay_indie/screens/chat/ChatScreen.dart';
-
+import 'package:stay_indie/screens/chat/chat_page.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/project/project_page.dart';
 import 'package:stay_indie/utilities/LinePainter.dart';
+import 'package:stay_indie/widgets/profile/intro_video.dart';
 import 'package:stay_indie/widgets/social/SocialMetricList.dart';
-import 'package:stay_indie/models/connections/Spotify/Track.dart';
+import 'package:stay_indie/models/connections/spotify/Track.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:stay_indie/widgets/profile/CoverButton.dart';
 import 'package:stay_indie/screens/profile/pages_button.dart';
 import 'package:stay_indie/widgets/journeys/my_journey_widget.dart';
 
 //youtube player
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:youtube_shorts/youtube_shorts.dart';
+
 // import for topbar
 import 'package:stay_indie/screens/settings/settings_page.dart';
 import 'package:stay_indie/widgets/avatars/CircleAvatarWBorder.dart';
@@ -53,7 +54,7 @@ class ProfilePage extends ConsumerStatefulWidget {
 class _ProfilePageState extends ConsumerState<ProfilePage>
     with SingleTickerProviderStateMixin {
   late Future<Profile> userProfile;
-  late ScrollController _scrollController;
+  late ScrollController _refresherController;
   late AnimationController _controller;
 
   // late DraggableScrollableController _draggableScrollableController;
@@ -77,7 +78,6 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
   // double _minChildSize = 0.15;
   double _maxChildSize = 0.85;
 
-  late final ShortsController shortsController;
   void _onRefresh() async {
     await Profile.removeProfileFromPrefs();
     setState(() {
@@ -89,58 +89,52 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
 
   @override
   void initState() {
-    _initialChildSize = widget.isProfilePage ? 0.15 : 0.20;
+    _initialChildSize = widget.isProfilePage ? 0.13 : 0.20;
     _controller = AnimationController(
       duration: const Duration(milliseconds: 250),
       vsync: this,
     );
     // _draggableScrollableController = DraggableScrollableController();
-    _opacityAnimation = Tween<double>(begin: 1, end: 0).animate(_controller)
+    _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(_controller)
       ..addListener(() {
         setState(() {
           _opacity = _opacityAnimation.value;
         });
       });
 
-    _scrollController = ScrollController();
+    _refresherController = ScrollController();
 
     userProfile = Profile.getProfileData(widget.profileId);
     if (widget.isProfilePage) {
       // _draggableScrollableController.animateTo(1,
       //     duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
-    _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
+    _refresherController.addListener(() {
+      if (_refresherController.position.userScrollDirection ==
               ScrollDirection.reverse &&
-          _scrollController.position.pixels < 0) {
+          _refresherController.position.pixels < 0) {
         // If the user is trying to scroll upwards, set the scroll position to 0
-        _scrollController.jumpTo(0);
+        _refresherController.jumpTo(0);
       }
     });
-
-    shortsController = ShortsController(
-      startVideoMuted: false,
-      youtubeVideoSourceController: VideosSourceController.fromUrlList(
-        videoIds: [],
-      ),
-    );
 
     super.initState();
   }
 
   void _scrollListener() {
-    if (_scrollController.position.pixels >
-        _scrollController.position.maxScrollExtent) {
-      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    if (_refresherController.position.pixels >
+        _refresherController.position.maxScrollExtent) {
+      _refresherController
+          .jumpTo(_refresherController.position.maxScrollExtent);
     }
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _refresherController.dispose();
     _controller.dispose();
     _opacityNotifier.dispose();
-    shortsController.dispose();
+
     // _draggableScrollableController.dispose();
     super.dispose();
   }
@@ -164,18 +158,12 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
               opacity: _opacity,
               coverButton: coverButton,
             );
-            shortsController = ShortsController(
-              startVideoMuted: false,
-              youtubeVideoSourceController: VideosSourceController.fromUrlList(
-                videoIds: [profile.ytShortUrl!],
-              ),
-            );
 
             return Scaffold(
               body: Stack(
                 children: [
                   SmartRefresher(
-                    scrollController: _scrollController,
+                    scrollController: _refresherController,
                     controller: _refreshController,
                     enablePullDown: true,
                     enablePullUp: false,
@@ -199,26 +187,17 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                             ),
                           ),
                         ),
-                        profile.ytShortUrl != null
-                            ? Container(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.width *
-                                              1.778,
-                                      child: YoutubeShortsPage(
-                                        initialVolume: 80,
-                                        controller: shortsController,
-                                        loadingWidget: null,
-                                      ),
-                                    ),
-                                  ],
+                        profile.ytShortUrl != null && !kIsWeb
+                            ? Positioned(
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                child: IntroVideo(
+                                  videoUrl: profile.ytShortUrl!,
                                 ),
                               )
                             : Container(),
-                        GradientShadowOverlay(),
+                        const GradientShadowOverlay(),
                         Container(
                           margin: EdgeInsets.only(
                               bottom: MediaQuery.of(context).size.height *
@@ -230,18 +209,13 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
-                              Text(profile.name,
-                                  style: TextStyle(
-                                    fontSize: 43,
-                                    fontWeight: FontWeight.bold,
-                                    color: kPrimaryColour,
-                                  )),
+                              Text(profile.name, style: kHeading1),
                               profile.headline != null
                                   ? Text(
                                       profile.headline!,
                                       style: TextStyle(
                                         fontSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w700,
                                         color: kPrimaryColour30,
                                       ),
                                     )
@@ -261,7 +235,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                       collapseOnTextTap: true,
                                     )
                                   : Container(),
-                              SizedBox(height: 20),
+                              SizedBox(height: 10),
                               profile.socialMetrics != null
                                   ? SocialMetricList(
                                       socialMetrics: profile.socialMetrics!,
@@ -298,7 +272,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                                     MaterialPageRoute(
                                                         builder: (context) {
                                                   return ChatPage(
-                                                    chatInfo: value,
+                                                    chatId: value.id,
                                                   );
                                                 }));
                                               }
@@ -309,12 +283,12 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                       icon: FaIcon(
                                           FontAwesomeIcons.arrowUpFromBracket),
                                       onPressed: () {
-                                        shortsController
-                                            .setCurrentVideoVolume(80);
+                                        Share.share(
+                                            'Check out ${profile.name} on Greenroom! https://web.thegreenroom.app/profile/${profile.id}');
                                       }),
                                 ],
                               ),
-                              SizedBox(height: 20),
+                              SizedBox(height: 5),
                             ],
                           ),
                         ),
@@ -336,11 +310,8 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                               _opacityNotifier.value =
                                   newOpacity.clamp(0.0, 1.0);
                             });
-                            // print(
-                            //     'Drag.position.pixels: ${_draggableScrollableController.size}');
-                            return Container(
-                              // Main Container for the content
 
+                            return Container(
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
                                 color: kTransparent,
@@ -375,9 +346,6 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                             width: 2,
                                           ),
                                         )),
-                                    // height: MediaQuery.of(context).size.height -
-                                    //     topBarInstance
-                                    //         .topBarHeight, // Adjust height
                                     child: CustomScrollView(
                                         controller: scrollController,
                                         slivers: [
@@ -421,60 +389,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                                           ),
                                                         ),
                                                         // Page Pills
-                                                        Container(
-                                                          color: Colors
-                                                              .transparent,
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 20,
-                                                                  top: 20,
-                                                                  bottom: 10),
-                                                          height: 90,
-                                                          child: ListView(
-                                                            clipBehavior:
-                                                                Clip.none,
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    0),
-                                                            scrollDirection:
-                                                                Axis.horizontal,
-                                                            children: [
-                                                              PagesButton(
-                                                                title:
-                                                                    'Projects',
-                                                                icon: FontAwesomeIcons
-                                                                    .recordVinyl,
-                                                                pageId:
-                                                                    ProjectsPage
-                                                                        .id,
-                                                              ),
-                                                              // PagesButton(
-                                                              //   title:
-                                                              //       'Discography',
-                                                              //   icon: FontAwesomeIcons
-                                                              //       .recordVinyl,
-                                                              //   pageId:
-                                                              //       'discography',
-                                                              // ),
-                                                              PagesButton(
-                                                                title:
-                                                                    'Socials',
-                                                                icon: FontAwesomeIcons
-                                                                    .circleNodes,
-                                                                pageId:
-                                                                    'socials',
-                                                              ),
-                                                              PagesButton(
-                                                                title: 'EPK',
-                                                                icon:
-                                                                    FontAwesomeIcons
-                                                                        .file,
-                                                                pageId:
-                                                                    'epk_page',
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
+                                                        PagePills(),
                                                       ],
                                                     ),
                                                   ),
@@ -506,23 +421,56 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                       ],
                     ),
                   ),
-                  // widget.isProfilePage
-                  //     ? Positioned(
-                  //         bottom: 0,
-                  //         right: 0,
-                  //         left: 0,
-                  //         child: Column(
-                  //           children: [
-                  //             NewNavBar(pageIndex: 2),
-                  //           ],
-                  //         ),
-                  //       )
-                  //     : Container(),
                 ],
               ),
             );
           }
         });
+  }
+}
+
+class PagePills extends StatelessWidget {
+  const PagePills({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.transparent,
+      padding: EdgeInsets.only(left: 20, top: 20, bottom: 10),
+      height: 90,
+      child: ListView(
+        clipBehavior: Clip.none,
+        padding: EdgeInsets.all(0),
+        scrollDirection: Axis.horizontal,
+        children: [
+          PagesButton(
+            title: 'Projects',
+            icon: FontAwesomeIcons.recordVinyl,
+            pageId: ProjectsPage.id,
+          ),
+          // PagesButton(
+          //   title:
+          //       'Discography',
+          //   icon: FontAwesomeIcons
+          //       .recordVinyl,
+          //   pageId:
+          //       'discography',
+          // ),
+          PagesButton(
+            title: 'Socials',
+            icon: FontAwesomeIcons.circleNodes,
+            pageId: 'socials',
+          ),
+          PagesButton(
+            title: 'EPK',
+            icon: FontAwesomeIcons.file,
+            pageId: 'epk_page',
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -594,12 +542,12 @@ class TopBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Hero(
-                //   tag: 'profilePic',
-                //   child: CircleAvatarWBorder(
-                //       imageUrl: userProfile.profileImageUrl, radius: 18),
-                // ),
-                // Spacer(),
+                Hero(
+                  tag: 'profilePic',
+                  child: CircleAvatarWBorder(
+                      imageUrl: userProfile.profileImageUrl, radius: 18),
+                ),
+                Spacer(),
                 isProfilePage
                     ? SizedBox(
                         width: 0,
@@ -632,112 +580,6 @@ class TopBar extends StatelessWidget {
     );
   }
 }
-
-// Stack(
-//                                       children: [
-//                                         Expanded(
-//                                           child: ListView(
-//                                             controller: scrollController,
-//                                             padding: EdgeInsets.only(
-//                                                 top: 100,
-//                                                 right: 16,
-//                                                 left: 16,
-//                                                 bottom: 150),
-//                                             children: [
-//                                               SizedBox(height: 0),
-//                                               MyJourneyWidget(
-//                                                   key: _journeyWidgetKey,
-//                                                   profileId: profile.id),
-//                                             ],
-//                                           ),
-//                                         ),
-//                                         Column(
-//                                           children: [
-//                                             Padding(
-//                                               padding: const EdgeInsets.only(
-//                                                   top: 10.0),
-//                                               child: CustomPaint(
-//                                                 painter: LinePainterHoriztonal(
-//                                                     width: 20,
-//                                                     colour: kPrimaryColour60),
-//                                               ),
-//                                             ),
-//                                             // Page Pills
-//                                             Container(
-//                                               color: Colors.transparent,
-//                                               padding: EdgeInsets.only(
-//                                                   left: 20,
-//                                                   top: 20,
-//                                                   bottom: 10),
-//                                               height: 90,
-//                                               child: ListView(
-//                                                 clipBehavior: Clip.none,
-//                                                 padding: EdgeInsets.all(0),
-//                                                 scrollDirection:
-//                                                     Axis.horizontal,
-//                                                 children: [
-//                                                   PagesButton(
-//                                                     title: 'Projects',
-//                                                     icon: FontAwesomeIcons
-//                                                         .recordVinyl,
-//                                                     pageId: 'projects',
-//                                                   ),
-//                                                   PagesButton(
-//                                                     title: 'Discography',
-//                                                     icon: FontAwesomeIcons
-//                                                         .recordVinyl,
-//                                                     pageId: 'discography',
-//                                                   ),
-//                                                   PagesButton(
-//                                                     title: 'Socials',
-//                                                     icon: FontAwesomeIcons
-//                                                         .circleNodes,
-//                                                     pageId: 'socials',
-//                                                   ),
-//                                                   PagesButton(
-//                                                     title: 'EPK',
-//                                                     icon: FontAwesomeIcons.file,
-//                                                     pageId: 'epk_page',
-//                                                   ),
-//                                                 ],
-//                                               ),
-//                                             ),
-//                                           ],
-//                                         ),
-
-//                                         // Column(
-//                                         //   children: [
-//                                         //     Padding(
-//                                         //       padding: const EdgeInsets.only(
-//                                         //           top: 10.0),
-//                                         //       child: CustomPaint(
-//                                         //         painter: LinePainterHoriztonal(
-//                                         //             width: 20,
-//                                         //             colour: kPrimaryColour60),
-//                                         //       ),
-//                                         //     ),
-//                                         //
-//                                         //     Expanded(
-//                                         //       child: ListView(
-//                                         //         physics: _mainPage
-//                                         //             ? AlwaysScrollableScrollPhysics()
-//                                         //             : NeverScrollableScrollPhysics(),
-//                                         //         padding: EdgeInsets.only(
-//                                         //             right: 16,
-//                                         //             left: 16,
-//                                         //             bottom: 150),
-//                                         //         children: [
-//                                         //           SizedBox(height: 0),
-//                                         //           MyJourneyWidget(
-//                                         //               key: _journeyWidgetKey,
-//                                         //               profileId: profile.id),
-//                                         //         ],
-//                                         //       ),
-//                                         //     ),
-//                                         //   ],
-//                                         // ),
-//                                       ],
-//                                     )
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({

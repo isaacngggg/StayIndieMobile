@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:stay_indie/screens/chat/ChatScreen.dart';
+import 'package:stay_indie/screens/chat/chat_page.dart';
 
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/widgets/navigation/new_nav_bar.dart';
 import 'package:stay_indie/screens/notification/notification_page.dart';
-import 'package:stay_indie/models/ChatInfo.dart';
+import 'package:stay_indie/models/chat_info.dart';
 import 'package:stay_indie/screens/qr_page.dart';
 import 'package:stay_indie/widgets/GRBottomSheet.dart';
 import 'package:stay_indie/models/Profile.dart';
@@ -17,15 +17,15 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:stay_indie/widgets/profile/contact_tile.dart';
 import 'package:timeago/timeago.dart';
 
-class InboxScreen extends StatefulWidget {
-  InboxScreen({super.key});
+class InboxPage extends StatefulWidget {
+  InboxPage({super.key});
   static String id = '/inbox';
 
   @override
-  State<InboxScreen> createState() => _InboxScreenState();
+  State<InboxPage> createState() => _InboxScreenState();
 }
 
-class _InboxScreenState extends State<InboxScreen> {
+class _InboxScreenState extends State<InboxPage> {
   late PageController pageController;
 
   Stream<List<ChatInfo>>? _chatsStream;
@@ -156,12 +156,8 @@ class _InboxScreenState extends State<InboxScreen> {
                                   title: Text(
                                       chat.name ?? "Unnamed ?? group chat"),
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ChatPage(
-                                                  chatInfo: chat,
-                                                )));
+                                    context.pushNamed(ChatPage.id,
+                                        pathParameters: {'id': chat.id});
                                   },
                                   subtitle: chat.lastMessage != null
                                       ? Text(
@@ -237,16 +233,6 @@ class _InboxScreenState extends State<InboxScreen> {
               ),
             ),
           ),
-          // Positioned(
-          //   bottom: 0,
-          //   right: 0,
-          //   left: 0,
-          //   child: Column(
-          //     children: [
-          //       NewNavBar(pageIndex: 0),
-          //     ],
-          //   ),
-          // )
         ],
       ),
     );

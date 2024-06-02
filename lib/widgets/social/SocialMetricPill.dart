@@ -14,6 +14,7 @@ class SocialMetricPill extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(5),
+      margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.5),
         borderRadius: BorderRadius.circular(30),

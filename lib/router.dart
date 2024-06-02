@@ -4,6 +4,7 @@ import 'package:googleapis/mybusinessbusinessinformation/v1.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/archive/ConnectionsScreen.dart';
+import 'package:stay_indie/screens/chat/chat_page.dart';
 import 'package:stay_indie/screens/profile/profile_edit_page.dart';
 
 import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
@@ -20,7 +21,7 @@ import 'package:stay_indie/screens/contacts_page.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
 import 'package:stay_indie/screens/data_deletion_page.dart';
 import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
-import 'package:stay_indie/screens/chat/InboxScreen.dart';
+import 'package:stay_indie/screens/chat/inbox_page.dart';
 import 'package:stay_indie/screens/profile/profile_page.dart';
 import 'package:stay_indie/test_page.dart';
 import 'package:stay_indie/screens/home.dart';
@@ -49,7 +50,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: '/inbox',
               pageBuilder: (context, state) => NoTransitionPage(
-                child: InboxScreen(),
+                child: InboxPage(),
               ),
             ),
           ],
@@ -147,6 +148,21 @@ final GoRouter router = GoRouter(
       redirect: redirect,
       path: QrPage.id,
       builder: (context, state) => const QrPage(),
+    ),
+    GoRoute(
+      redirect: redirect,
+      path: ChatPage.id + '/:id',
+      name: ChatPage.id,
+      builder: (context, state) {
+        return ChatPage(
+          chatId: state.pathParameters['id'] ?? '',
+        );
+      },
+    ),
+    GoRoute(
+      redirect: redirect,
+      path: AddJourneyPage.id,
+      // builder: (context, state)
     ),
   ],
 );

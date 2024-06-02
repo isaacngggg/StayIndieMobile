@@ -23,8 +23,10 @@ class MyJourneyWidget extends StatefulWidget {
 
 class _MyJourneyWidgetState extends State<MyJourneyWidget> {
   late Future<List<Journey>> journeys;
-  late final Stream<List<Journey>> _JourneyStream;
+
   late final bool _isCurrentUser;
+
+  bool _noJourney = false;
   @override
   void initState() {
     _isCurrentUser = widget.profileId == currentUserId;
@@ -80,107 +82,119 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       var journeys = snapshot.data!;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          for (var entries in journeys.asMap().entries) ...[
-                            GestureDetector(
-                              child: Container(
-                                  color: Colors.transparent,
-                                  child:
-                                      JourneyHeadline(journey: entries.value)),
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return FullStoryPage(
-                                    journeys: journeys,
-                                    initialPage: entries.key,
-                                  );
-                                }));
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                          _isCurrentUser
-                              ? Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 20.0, // or the size you want
-                                        backgroundColor: kBackgroundColour30,
-                                        child: CircleAvatar(
-                                          radius:
-                                              19.0, // slightly smaller to create a border effect
-                                          backgroundColor: kBackgroundColour10,
+                      if (journeys.isEmpty) {
+                        return Container(
+                          height: 200,
+                          child: Center(
+                            child: Text('No journeys found'),
+                          ),
+                        );
+                      } else {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            for (var entries in journeys.asMap().entries) ...[
+                              GestureDetector(
+                                child: Container(
+                                    color: Colors.transparent,
+                                    child: JourneyHeadline(
+                                        journey: entries.value)),
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return FullStoryPage(
+                                      journeys: journeys,
+                                      initialPage: entries.key,
+                                    );
+                                  }));
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                            ],
+                            _isCurrentUser
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 20.0, // or the size you want
+                                          backgroundColor: kBackgroundColour30,
+                                          child: CircleAvatar(
+                                            radius:
+                                                19.0, // slightly smaller to create a border effect
+                                            backgroundColor:
+                                                kBackgroundColour10,
 
-                                          child: Center(
-                                            child: IconButton(
-                                              icon: Icon(
-                                                Icons.add,
-                                                size: 20,
+                                            child: Center(
+                                              child: IconButton(
+                                                icon: Icon(
+                                                  Icons.add,
+                                                  size: 20,
+                                                ),
+                                                color: kPrimaryColour,
+                                                onPressed: () async {
+                                                  var result =
+                                                      await Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              maintainState:
+                                                                  false,
+                                                              allowSnapshotting:
+                                                                  false,
+                                                              barrierDismissible:
+                                                                  false,
+                                                              builder:
+                                                                  (context) {
+                                                                return StepperForm(
+                                                                    title:
+                                                                        'Add a Project',
+                                                                    pages: SingleFormPage
+                                                                        .addJourneyPage,
+                                                                    mediaBucket:
+                                                                        'project_medias',
+                                                                    onSubmit:
+                                                                        (formValue) {
+                                                                      print(
+                                                                          formValue);
+                                                                      var newJourney =
+                                                                          Journey.fromMap(
+                                                                              formValue);
+                                                                      Journey.addJourney(
+                                                                          newJourney);
+                                                                    });
+                                                              }));
+                                                  if (result != null) {
+                                                    setState(() {
+                                                      var newJourney =
+                                                          Journey.fromMap(
+                                                              result);
+                                                      newJourney
+                                                          .initializeImagesUrls(
+                                                              widget.profileId);
+                                                      journeys.add(newJourney);
+                                                    });
+                                                  }
+                                                },
                                               ),
-                                              color: kPrimaryColour,
-                                              onPressed: () async {
-                                                var result =
-                                                    await Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            maintainState:
-                                                                false,
-                                                            allowSnapshotting:
-                                                                false,
-                                                            barrierDismissible:
-                                                                false,
-                                                            builder: (context) {
-                                                              return StepperForm(
-                                                                  title:
-                                                                      'Add a Project',
-                                                                  pages: SingleFormPage
-                                                                      .addJourneyPage,
-                                                                  mediaBucket:
-                                                                      'project_medias',
-                                                                  onSubmit:
-                                                                      (formValue) {
-                                                                    print(
-                                                                        formValue);
-                                                                    var newJourney =
-                                                                        Journey.fromMap(
-                                                                            formValue);
-                                                                    Journey.addJourney(
-                                                                        newJourney);
-                                                                  });
-                                                            }));
-                                                if (result != null) {
-                                                  setState(() {
-                                                    var newJourney =
-                                                        Journey.fromMap(result);
-                                                    newJourney
-                                                        .initializeImagesUrls(
-                                                            widget.profileId);
-                                                    journeys.add(newJourney);
-                                                  });
-                                                }
-                                              },
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(width: 20),
-                                      Expanded(
-                                          child: Text('Add a journey',
-                                              style: kHeading4)),
-                                    ],
-                                  ),
-                                )
-                              : Container(),
-                        ],
-                      );
+                                        SizedBox(width: 20),
+                                        Expanded(
+                                            child: Text('Add a journey',
+                                                style: kHeading4)),
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+                          ],
+                        );
+                      }
                     } else {
                       return Container(
                         height: 200,

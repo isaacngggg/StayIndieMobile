@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stay_indie/constants.dart';
 
-import 'package:stay_indie/models/ChatInfo.dart';
+import 'package:stay_indie/models/chat_info.dart';
 import 'package:stay_indie/models/Profile.dart';
 
 import 'package:stay_indie/screens/archive/content_page.dart';

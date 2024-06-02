@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:googleapis/admin/directory_v1.dart';
 import 'package:stay_indie/constants.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -24,8 +26,9 @@ import 'package:stay_indie/screens/contacts_page.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/SplashScreen.dart';
 import 'package:stay_indie/screens/data_deletion_page.dart';
 import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
-import 'package:stay_indie/screens/chat/InboxScreen.dart';
+import 'package:stay_indie/screens/chat/inbox_page.dart';
 import 'package:stay_indie/test_page.dart';
+import 'package:flutter/foundation.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +40,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // BackgroundIsolateBinaryMessenger.ensureInitialized();
+
   MediaKit.ensureInitialized();
   runApp(const ProviderScope(child: const MainApp()));
 }

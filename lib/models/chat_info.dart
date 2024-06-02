@@ -131,44 +131,33 @@ class ChatInfo {
     }
   }
 
-  static Future<ChatInfo> getConversationById(String chatId) async {
+  static Future<ChatInfo?> getConversationFromSupabaseById(
+      String chatId) async {
     try {
+      print('Supabase Pulling for chat ' + chatId);
       final response =
           await supabase.from('chats').select().eq('id', chatId).single();
-
-      if (response == null) {
-        print('No chat found');
-        return ChatInfo(
-            id: '0',
-            participants: [],
-            name: 'Unnamed group chat',
-            participantProfiles: []);
-      }
-
-      List<String> participentId = (response['participants'] as List<dynamic>)
-          .map((item) => item.toString())
-          .toList();
-      List<Profile> participantProfiles = [];
-      for (var participant in participentId) {
-        await Profile.getProfileData(participant).then((profile) {
-          participantProfiles.add(profile!);
-        });
-      }
-
-      return ChatInfo(
-          id: response['id'],
-          participants: participentId,
-          name: response['name'],
-          description: response['description'],
-          imageUrl: response['image_url'],
-          participantProfiles: participantProfiles);
+      return await ChatInfo.createChatInfo(response);
     } catch (e) {
       print('Error getting chat ' + e.toString());
-      return ChatInfo(
-          id: '0',
-          participants: [],
-          name: 'Unnamed group chat',
-          participantProfiles: []);
+      return null;
+    }
+  }
+
+  static Future<ChatInfo?> getConversationById(String chatId) async {
+    try {
+      ChatInfo? chatInfo = await loadFromPrefs(chatId); // Await the result
+      if (chatInfo != null) {
+        print('Chat info found in prefs');
+        print('Pref Chat Info: ${chatInfo.toString()}');
+        return chatInfo;
+      } else {
+        print('Chat info not found in prefs');
+        return await getConversationFromSupabaseById(chatId); // Await here too
+      }
+    } catch (e) {
+      print('Error getting chat by id: $e');
+      return null;
     }
   }
 
@@ -305,5 +294,9 @@ class ChatInfo {
     } catch (e) {
       print('Error deleting chat ' + e.toString());
     }
+  }
+
+  String toString() {
+    return 'ChatInfo: id: $id, participants: $participants, name: $name, description: $description, imageUrl: $imageUrl, participantProfiles: $participantProfiles, lastMessage: $lastMessage';
   }
 }

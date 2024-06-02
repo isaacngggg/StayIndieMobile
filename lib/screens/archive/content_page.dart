@@ -19,7 +19,7 @@ import 'package:stay_indie/widgets/journeys/my_journey_widget.dart';
 import 'package:stay_indie/models/Project.dart';
 import 'package:stay_indie/screens/archive/MainProfilePage.dart';
 
-import 'package:stay_indie/models/connections/Spotify/Track.dart';
+import 'package:stay_indie/models/connections/spotify/Track.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class ContentPage extends StatefulWidget {

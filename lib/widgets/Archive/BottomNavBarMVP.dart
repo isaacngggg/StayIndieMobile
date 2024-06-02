@@ -6,7 +6,7 @@ import 'package:stay_indie/screens/archive/AddScreen.dart';
 import 'package:stay_indie/screens/archive/MainProfilePage.dart';
 import 'package:stay_indie/screens/contacts_page.dart';
 
-import 'package:stay_indie/screens/chat/InboxScreen.dart';
+import 'package:stay_indie/screens/chat/inbox_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -41,7 +41,7 @@ class BottomNavBar extends StatelessWidget {
               context, NoAnimationRoute(builder: (context) => AddScreen()));
         } else if (index == 3) {
           Navigator.pushReplacement(
-              context, NoAnimationRoute(builder: (context) => InboxScreen()));
+              context, NoAnimationRoute(builder: (context) => InboxPage()));
         } else if (index == 4) {
           Navigator.pushReplacement(
               context,
