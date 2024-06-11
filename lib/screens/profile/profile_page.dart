@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +8,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:googleapis/youtube/v3.dart';
+import 'package:googleapis_auth/googleapis_auth.dart';
 import 'dart:ui';
 
 import 'package:stay_indie/constants.dart';
@@ -55,24 +58,18 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
     with SingleTickerProviderStateMixin {
   late Future<Profile> userProfile;
   late ScrollController _refresherController;
-  late AnimationController _controller;
+  late DraggableScrollableController _draggableScrollableController;
+  late AnimationController _animationController;
 
-  // late DraggableScrollableController _draggableScrollableController;
-  // late Animation<Offset> _animation;
-  // final double height = 120;
-  // final double containerHeight = window.physicalSize.height * 0.9;
+  late ValueNotifier<double> _opacityNotifier;
+  late ValueNotifier<double> _sizeNotifier;
 
   late double topBarHeight;
-  Color _backgroundColor = Colors.transparent;
-  double _opacity = 1.0;
 
   Track? topTrack;
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   Key _journeyWidgetKey = UniqueKey();
-  late Animation<double> _opacityAnimation;
-
-  ValueNotifier<double> _opacityNotifier = ValueNotifier<double>(1.0);
 
   late double _initialChildSize;
   // double _minChildSize = 0.15;
@@ -89,26 +86,15 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
 
   @override
   void initState() {
-    _initialChildSize = widget.isProfilePage ? 0.13 : 0.20;
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 250),
-      vsync: this,
-    );
-    // _draggableScrollableController = DraggableScrollableController();
-    _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(_controller)
-      ..addListener(() {
-        setState(() {
-          _opacity = _opacityAnimation.value;
-        });
-      });
-
     _refresherController = ScrollController();
+    _draggableScrollableController = DraggableScrollableController();
+    _initialChildSize = widget.isProfilePage ? 0.13 : 0.20;
 
     userProfile = Profile.getProfileData(widget.profileId);
-    if (widget.isProfilePage) {
-      // _draggableScrollableController.animateTo(1,
-      //     duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
-    }
+    // if (widget.isProfilePage) {
+    //   _draggableScrollableController.animateTo(1,
+    //       duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+    // }
     _refresherController.addListener(() {
       if (_refresherController.position.userScrollDirection ==
               ScrollDirection.reverse &&
@@ -117,6 +103,25 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
         _refresherController.jumpTo(0);
       }
     });
+
+    _draggableScrollableController.addListener(() {
+      double currentSize = _draggableScrollableController.size;
+      double targetOpacity = (currentSize - _initialChildSize) /
+          (_maxChildSize - _initialChildSize);
+      print("Target opa" + targetOpacity.toString());
+      targetOpacity =
+          targetOpacity.clamp(0.0, 1.0); // Ensure opacity stays between 0 and 1
+      _sizeNotifier.value = currentSize;
+      _opacityNotifier.value = targetOpacity;
+    });
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
+    _sizeNotifier = ValueNotifier<double>(_animationController.value);
+    _opacityNotifier = ValueNotifier<double>(_animationController.value);
+    _opacityNotifier.value = 1;
 
     super.initState();
   }
@@ -132,10 +137,10 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
   @override
   void dispose() {
     _refresherController.dispose();
-    _controller.dispose();
+    _draggableScrollableController.dispose();
+    _animationController.dispose();
     _opacityNotifier.dispose();
 
-    // _draggableScrollableController.dispose();
     super.dispose();
   }
 
@@ -151,14 +156,6 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
             Profile profile = profileSnapshot.data!;
             bool _isCurrentUser = profile.id == currentUserId;
             var coverButton = CoverButton(userProfile: profile);
-            var topBarInstance = TopBar(
-              isProfilePage: widget.isProfilePage,
-              userProfile: profile,
-              animationController: _controller,
-              opacity: _opacity,
-              coverButton: coverButton,
-            );
-
             return Scaffold(
               body: Stack(
                 children: [
@@ -172,11 +169,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                     child: Stack(
                       // Main Stack of build Content
                       children: [
-                        AnimatedContainer(
-                          curve: Curves.easeInOut,
-                          duration: _controller.duration!,
+                        Container(
                           decoration: BoxDecoration(
-                            color: _backgroundColor,
+                            color: kTransparent,
                             image: DecorationImage(
                               image: NetworkImage(profile.profileImageUrl),
                               fit: BoxFit.cover,
@@ -204,59 +199,180 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                   _initialChildSize),
                           clipBehavior: Clip.none,
                           padding:
-                              EdgeInsets.only(left: 20, right: 20, bottom: 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              Text(profile.name, style: kHeading1),
-                              profile.headline != null
-                                  ? Text(
-                                      profile.headline!,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: kPrimaryColour30,
+                              EdgeInsets.only(left: 16, right: 10, bottom: 0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    if (profile.name.length > 20)
+                                      Text(
+                                        profile.name.substring(0, 20) + '...',
+                                        style: kHeading2.copyWith(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w900,
+                                          color: kPrimaryColour30,
+                                        ),
                                       ),
-                                    )
-                                  : Container(),
-                              profile.bio != null
-                                  ? ExpandableText(
-                                      profile.bio!,
-                                      expandText: 'show more',
-                                      collapseText: 'show less',
-                                      maxLines: 2,
-                                      linkColor: kPrimaryColour,
-                                      linkStyle: kBody1.copyWith(
-                                          color: kPrimaryColour,
-                                          fontWeight: FontWeight.bold),
-                                      style: kBody1,
-                                      expandOnTextTap: true,
-                                      collapseOnTextTap: true,
-                                    )
-                                  : Container(),
-                              SizedBox(height: 10),
-                              profile.socialMetrics != null
-                                  ? SocialMetricList(
-                                      socialMetrics: profile.socialMetrics!,
-                                    )
-                                  : Container(),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        if (profile.name.length > 20)
+                                          Text(
+                                            profile.name.substring(
+                                                20, profile.name.length),
+                                            style: kHeading2.copyWith(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w900,
+                                              color: kPrimaryColour30,
+                                            ),
+                                          )
+                                        else
+                                          Text(
+                                            profile.name,
+                                            style: kHeading2.copyWith(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w900,
+                                              color: kPrimaryColour30,
+                                            ),
+                                          ),
+                                        SizedBox(width: 10),
+                                        _isCurrentUser
+                                            ? TextButton(
+                                                onPressed: () {
+                                                  context
+                                                      .push('/myprofile/edit');
+                                                },
+                                                style: ButtonStyle(
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          Size(0, 0)),
+                                                  padding:
+                                                      MaterialStateProperty.all(
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 8,
+                                                              vertical: 4)),
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          kTransparent),
+                                                  foregroundColor:
+                                                      MaterialStateProperty.all(
+                                                          kPrimaryColour40),
+                                                  shape:
+                                                      MaterialStateProperty.all(
+                                                    RoundedRectangleBorder(
+                                                      side: BorderSide(
+                                                        color: kPrimaryColour40,
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                    ),
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'Edit Profile',
+                                                ),
+                                              )
+                                            : coverButton, // Add this
+                                        // Spacer(),
+                                      ],
+                                    ),
+                                    profile.headline != null
+                                        ? Text(
+                                            profile.headline!,
+                                            style: kHeading4.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              color: kPrimaryColour30,
+                                            ),
+                                          )
+                                        : Container(),
+                                    profile.bio != null
+                                        ? ExpandableText(
+                                            profile.bio!,
+                                            expandText: 'show more',
+                                            collapseText: 'show less',
+                                            maxLines: 1,
+                                            linkColor: kPrimaryColour50,
+                                            linkStyle: kBody1.copyWith(
+                                                color: kPrimaryColour50,
+                                                fontWeight: FontWeight.bold),
+                                            style: kBody1,
+                                            expandOnTextTap: true,
+                                            collapseOnTextTap: true,
+                                          )
+                                        : Container(),
+                                    SizedBox(height: 10),
+                                    SocialMetricList(
+                                      userId: profile.id,
+                                    ),
+                                    // Row(
+                                    //   mainAxisAlignment:
+                                    //       MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                    //     Expanded(
+                                    //       child: SocialMetricList(
+                                    //         userId: profile.id,
+                                    //       ),
+                                    //       // child: _isCurrentUser
+                                    //       //     ? TextButton(
+                                    //       //         onPressed: () {
+                                    //       //           context.push('/myprofile/edit');
+                                    //       //         },
+                                    //       //         style: kSmallSecondaryButtonStyle,
+                                    //       //         child: Text(
+                                    //       //           'Edit Profile',
+                                    //       //         ),
+                                    //       //       )
+                                    //       //     : coverButton,
+                                    //     ), // Add this
+                                    //     SizedBox(width: 10),
+                                    //     _isCurrentUser
+                                    //         ? Container()
+                                    //         : IconButton(
+                                    //             icon: FaIcon(
+                                    //                 FontAwesomeIcons.paperPlane),
+                                    //             onPressed: () {
+                                    //               ChatInfo.dmBehaviour(
+                                    //                       [profile.id, currentUserId])
+                                    //                   .then((value) {
+                                    //                 if (value != null) {
+                                    //                   Navigator.push(context,
+                                    //                       MaterialPageRoute(
+                                    //                           builder: (context) {
+                                    //                     return ChatPage(
+                                    //                       chatId: value.id,
+                                    //                     );
+                                    //                   }));
+                                    //                 }
+                                    //               });
+                                    //             }),
+                                    //     SizedBox(width: 10),
+                                    //     IconButton(
+                                    //         icon: FaIcon(
+                                    //             FontAwesomeIcons.arrowUpFromBracket),
+                                    //         onPressed: () {
+                                    //           Share.share(
+                                    //               'Check out ${profile.name} on Greenroom! https://web.thegreenroom.app/profile/${profile.id}');
+                                    //         }),
+                                    //   ],
+                                    // ),
+
+                                    SizedBox(height: 5),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Column(
                                 children: [
-                                  Expanded(
-                                      child: _isCurrentUser
-                                          ? TextButton(
-                                              onPressed: () {
-                                                context.push('/myprofile/edit');
-                                              },
-                                              style: kSmallSecondaryButtonStyle,
-                                              child: Text(
-                                                'Edit Profile',
-                                              ),
-                                            )
-                                          : coverButton), // Add this
+                                  Spacer(),
                                   SizedBox(width: 10),
                                   _isCurrentUser
                                       ? Container()
@@ -278,7 +394,6 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                               }
                                             });
                                           }),
-                                  SizedBox(width: 10),
                                   IconButton(
                                       icon: FaIcon(
                                           FontAwesomeIcons.arrowUpFromBracket),
@@ -286,13 +401,53 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                         Share.share(
                                             'Check out ${profile.name} on Greenroom! https://web.thegreenroom.app/profile/${profile.id}');
                                       }),
+                                  SizedBox(height: 10),
+                                  CircleAvatarWBorder(
+                                    imageUrl: profile.profileImageUrl,
+                                    radius: 16,
+                                  ),
+                                  SizedBox(height: 10),
                                 ],
                               ),
-                              SizedBox(height: 5),
                             ],
                           ),
                         ),
-                        topBarInstance,
+                        // Positioned(
+                        //   child: GestureDetector(
+                        //     onTap: () {
+
+                        //     },
+                        //     child: Container(
+                        //       height: MediaQuery.of(context).size.height * 0.55,
+                        //       width: MediaQuery.of(context).size.width,
+                        //       color: kTransparent,
+                        //     ),
+                        //   ),
+                        // ),
+                        ValueListenableBuilder<double>(
+                          valueListenable: _sizeNotifier,
+                          builder: (context, size, _) {
+                            print('Size: $size');
+                            return Container();
+                          },
+                        ),
+                        ValueListenableBuilder<double>(
+                          valueListenable: _opacityNotifier,
+                          builder: (context, opacity, _) {
+                            return TopBar(
+                              isProfilePage: widget.isProfilePage,
+                              userProfile: profile,
+                              opacity: opacity,
+                              coverButton: coverButton,
+                              ontap: () {
+                                _draggableScrollableController.animateTo(
+                                    _initialChildSize,
+                                    duration: Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut);
+                              },
+                            );
+                          },
+                        ),
                         DraggableScrollableSheet(
                           // controller: _draggableScrollableController,
                           snap: true,
@@ -389,7 +544,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
                                                           ),
                                                         ),
                                                         // Page Pills
-                                                        PagePills(),
+                                                        PagePills(
+                                                          userId: profile.id,
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -430,12 +587,15 @@ class _ProfilePageState extends ConsumerState<ProfilePage>
 }
 
 class PagePills extends StatelessWidget {
+  final String userId;
   const PagePills({
+    required this.userId,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    bool _isCurrentUser = userId == currentUserId;
     return Container(
       color: Colors.transparent,
       padding: EdgeInsets.only(left: 20, top: 20, bottom: 10),
@@ -449,6 +609,13 @@ class PagePills extends StatelessWidget {
             title: 'Projects',
             icon: FontAwesomeIcons.recordVinyl,
             pageId: ProjectsPage.id,
+            onPressed: () {
+              if (_isCurrentUser) {
+                context.push(ProjectsPage.id);
+              } else {
+                context.push('/profile/$userId/projects');
+              }
+            },
           ),
           // PagesButton(
           //   title:
@@ -462,11 +629,25 @@ class PagePills extends StatelessWidget {
             title: 'Socials',
             icon: FontAwesomeIcons.circleNodes,
             pageId: 'socials',
+            onPressed: () {
+              if (_isCurrentUser) {
+                // context.push(SocialsPage.id);
+              } else {
+                context.push('/profile/$userId/socials');
+              }
+            },
           ),
           PagesButton(
             title: 'EPK',
             icon: FontAwesomeIcons.file,
             pageId: 'epk_page',
+            onPressed: () {
+              if (_isCurrentUser) {
+                // context.push(EpkPage.id);
+              } else {
+                context.push('/profile/$userId/epk');
+              }
+            },
           ),
         ],
       ),
@@ -484,11 +665,14 @@ class GradientShadowOverlay extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment(0, -0.5),
+          begin: Alignment.topCenter, // Start at the very top
           end: Alignment.bottomCenter,
+          stops: [0.0, 0.3, 0.7, 1.0],
           colors: [
-            kBackgroundColour.withOpacity(0.0),
-            kBackgroundColour.withOpacity(1),
+            kBackgroundColour.withOpacity(0),
+            kBackgroundColour.withOpacity(0),
+            kBackgroundColour.withOpacity(0.8),
+            kBackgroundColour.withOpacity(1.0),
           ],
         ),
       ),
@@ -500,17 +684,17 @@ class TopBar extends StatelessWidget {
   TopBar({
     super.key,
     required this.userProfile,
-    required this.animationController,
     required this.opacity,
     required this.coverButton,
     required this.isProfilePage,
+    required this.ontap,
   });
 
   final Profile userProfile;
-  final AnimationController animationController;
   final double opacity;
   final CoverButton coverButton;
   final bool isProfilePage;
+  final Function ontap;
 
   double topBarHeight = 130;
 
@@ -519,9 +703,7 @@ class TopBar extends StatelessWidget {
     topBarHeight = MediaQuery.of(context).size.height;
     bool _isCurrentUser = userProfile.id == currentUserId;
     return GestureDetector(
-      onTap: () {
-        animationController.reverse();
-      },
+      onTap: ontap as void Function()?,
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -542,12 +724,12 @@ class TopBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Hero(
-                  tag: 'profilePic',
-                  child: CircleAvatarWBorder(
-                      imageUrl: userProfile.profileImageUrl, radius: 18),
-                ),
-                Spacer(),
+                // Hero(
+                //   tag: 'profilePic',
+                //   child: CircleAvatarWBorder(
+                //       imageUrl: userProfile.profileImageUrl, radius: 18),
+                // ),
+                // Spacer(),
                 isProfilePage
                     ? SizedBox(
                         width: 0,
@@ -559,7 +741,9 @@ class TopBar extends StatelessWidget {
                   opacity: 1 - opacity,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(userProfile.name, style: kHeading2),
+                    child: Text(userProfile.name,
+                        style: kHeading2.copyWith(
+                            fontFamily: GoogleFonts.ebGaramond().fontFamily)),
                   ),
                 ),
                 Spacer(),

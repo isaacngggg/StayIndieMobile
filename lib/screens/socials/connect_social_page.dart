@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:stay_indie/models/SocialMetric.dart';
 import 'package:stay_indie/widgets/GRBottomSheet.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -70,6 +71,8 @@ class _AccordionState extends State<Accordion> {
         return ExpansionPanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ListTile(
+              leading: Icon(SocialMetric.getIcon(
+                  connectSocial.headerValue.toLowerCase())),
               title: Text(connectSocial.headerValue, style: kHeading4),
             );
           },
@@ -102,9 +105,11 @@ class _AccordionState extends State<Accordion> {
                     ),
                   ],
                 ),
+                SizedBox(height: 20),
               ],
             ),
           ),
+          canTapOnHeader: true,
           backgroundColor: kBackgroundColour,
           isExpanded: connectSocial.isExpanded,
         );

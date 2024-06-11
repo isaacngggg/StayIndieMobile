@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/buttons/PrimaryButton.dart';
 import 'package:stay_indie/screens/journeys/add_journey_screen.dart';
-import 'package:stay_indie/screens/journeys/full_story_screen.dart';
+import 'package:stay_indie/screens/journeys/journey_page.dart';
 import 'package:stay_indie/screens/journeys/HighlightsEditPage.dart';
 import 'package:stay_indie/widgets/journeys/JourneyHeadline.dart';
 import 'package:stay_indie/models/Journey.dart';
@@ -102,7 +103,7 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return FullStoryPage(
+                                    return JourneyPage(
                                       journeys: journeys,
                                       initialPage: entries.key,
                                     );
@@ -138,47 +139,48 @@ class _MyJourneyWidgetState extends State<MyJourneyWidget> {
                                                 ),
                                                 color: kPrimaryColour,
                                                 onPressed: () async {
-                                                  var result =
-                                                      await Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              maintainState:
-                                                                  false,
-                                                              allowSnapshotting:
-                                                                  false,
-                                                              barrierDismissible:
-                                                                  false,
-                                                              builder:
-                                                                  (context) {
-                                                                return StepperForm(
-                                                                    title:
-                                                                        'Add a Project',
-                                                                    pages: SingleFormPage
-                                                                        .addJourneyPage,
-                                                                    mediaBucket:
-                                                                        'project_medias',
-                                                                    onSubmit:
-                                                                        (formValue) {
-                                                                      print(
-                                                                          formValue);
-                                                                      var newJourney =
-                                                                          Journey.fromMap(
-                                                                              formValue);
-                                                                      Journey.addJourney(
-                                                                          newJourney);
-                                                                    });
-                                                              }));
-                                                  if (result != null) {
-                                                    setState(() {
-                                                      var newJourney =
-                                                          Journey.fromMap(
-                                                              result);
-                                                      newJourney
-                                                          .initializeImagesUrls(
-                                                              widget.profileId);
-                                                      journeys.add(newJourney);
-                                                    });
-                                                  }
+                                                  context.push('/journey/add');
+                                                  // var result =
+                                                  //     await Navigator.push(
+                                                  //         context,
+                                                  //         MaterialPageRoute(
+                                                  //             maintainState:
+                                                  //                 false,
+                                                  //             allowSnapshotting:
+                                                  //                 false,
+                                                  //             barrierDismissible:
+                                                  //                 false,
+                                                  //             builder:
+                                                  //                 (context) {
+                                                  //               return StepperForm(
+                                                  //                   title:
+                                                  //                       'Add a Project',
+                                                  //                   pages: SingleFormPage
+                                                  //                       .addJourneyPage,
+                                                  //                   mediaBucket:
+                                                  //                       'project_medias',
+                                                  //                   onSubmit:
+                                                  //                       (formValue) {
+                                                  //                     print(
+                                                  //                         formValue);
+                                                  //                     var newJourney =
+                                                  //                         Journey.fromMap(
+                                                  //                             formValue);
+                                                  //                     Journey.addJourney(
+                                                  //                         newJourney);
+                                                  //                   });
+                                                  //             }));
+                                                  // if (result != null) {
+                                                  //   setState(() {
+                                                  //     var newJourney =
+                                                  //         Journey.fromMap(
+                                                  //             result);
+                                                  //     newJourney
+                                                  //         .initializeImagesUrls(
+                                                  //             widget.profileId);
+                                                  //     journeys.add(newJourney);
+                                                  //   });
+                                                  // }
                                                 },
                                               ),
                                             ),

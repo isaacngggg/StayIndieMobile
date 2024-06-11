@@ -41,20 +41,22 @@ class Spotify {
     });
   }
 
-  static Future<SocialMetric?> getSpotifyMetricFromSupabase(String id) async {
+  static Future<SocialMetric?> getFromSupabaseResponse(String id) async {
     final response = await supabase
         .from('spotify_profiles')
         .select()
         .eq('user_id', id)
         .single();
 
-    if (response.isEmpty) {
+    if (response.isNotEmpty) {
+      print('spotify response: not empty');
       return SocialMetric(
-        name: 'Spotify',
+        name: 'spotify',
         value: formatLargeNumber(response['followers']).toString(),
         unit: 'followers',
       );
     } else {
+      print('spotify response: nothing found');
       return null;
     }
   }

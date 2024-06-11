@@ -178,6 +178,16 @@ ButtonStyle kSmallDisableButton = ButtonStyle(
   ),
 );
 
+ButtonStyle kSmallWiredButton = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(kPrimaryColour50),
+  foregroundColor: MaterialStateProperty.all(kBackgroundColour),
+  shape: MaterialStateProperty.all(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
+);
+
 ButtonStyle kSmallAccentButtonStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.all(kAccentColour),
   foregroundColor: MaterialStateProperty.all(kBackgroundColour20),

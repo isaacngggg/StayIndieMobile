@@ -172,7 +172,7 @@ class Profile {
           )
           .eq('id', id);
 
-      await fetchProfileFromDatabase(id);
+      // await fetchProfileFromDatabase(id);
     } catch (e) {
       print('Error' + e.toString());
     }

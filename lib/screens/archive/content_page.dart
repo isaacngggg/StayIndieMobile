@@ -219,24 +219,24 @@ class _ContentPageState extends State<ContentPage> {
                                                   scrollDirection:
                                                       Axis.horizontal,
                                                   children: [
-                                                    PagesButton(
-                                                      title: 'Discography',
-                                                      icon: FontAwesomeIcons
-                                                          .recordVinyl,
-                                                      pageId: 'discography',
-                                                    ),
-                                                    PagesButton(
-                                                      title: 'Socials',
-                                                      icon: FontAwesomeIcons
-                                                          .circleNodes,
-                                                      pageId: 'socials',
-                                                    ),
-                                                    PagesButton(
-                                                      title: 'EPK',
-                                                      icon:
-                                                          FontAwesomeIcons.file,
-                                                      pageId: 'epk_page',
-                                                    ),
+                                                    // PagesButton(
+                                                    //   title: 'Discography',
+                                                    //   icon: FontAwesomeIcons
+                                                    //       .recordVinyl,
+                                                    //   pageId: 'discography',
+                                                    // ),
+                                                    // PagesButton(
+                                                    //   title: 'Socials',
+                                                    //   icon: FontAwesomeIcons
+                                                    //       .circleNodes,
+                                                    //   pageId: 'socials',
+                                                    // ),
+                                                    // PagesButton(
+                                                    //   title: 'EPK',
+                                                    //   icon:
+                                                    //       FontAwesomeIcons.file,
+                                                    //   pageId: 'epk_page',
+                                                    // ),
                                                   ],
                                                 ),
                                               ),

@@ -132,7 +132,7 @@ class _InboxScreenState extends State<InboxPage> {
                           List<ChatInfo> chats =
                               snapshot.data as List<ChatInfo>;
                           return ListView(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(16),
                             children: [
                               // TextFormField(
                               //   decoration: kSearchTextFieldDecoration,

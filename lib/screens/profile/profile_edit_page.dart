@@ -1,12 +1,15 @@
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:stay_indie/constants.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
+import 'dart:io';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stay_indie/utilities/input_fields.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class ProfileEditPage extends StatefulWidget {
   static const String id = '/myprofile/edit';
@@ -100,7 +103,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextButton(
                     style: kPrimaryButtonStyle,
-                    onPressed: () {
+                    onPressed: () async {
                       print(locationController.text);
 
                       Map<String, dynamic> userProfile = {
@@ -111,7 +114,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         'location': locationController.text,
                         'yt_short_url': ytShortUrlController.text,
                       };
-                      Profile.updateProfile(currentUserId, userProfile);
+                      await Profile.updateProfile(currentUserId, userProfile);
+                      currentUserProfile =
+                          await Profile.fetchProfileFromDatabase(currentUserId);
                       print('done');
                       Navigator.pop(context);
                     },
@@ -169,20 +174,21 @@ class _AvaterImageEditorState extends State<AvaterImageEditor> {
       ),
       onTap: () async {
         final ImagePicker picker = ImagePicker();
-        final XFile? image =
+        final XFile? pickedImage =
             await picker.pickImage(source: ImageSource.gallery);
-        if (image == null) return;
-        final imageBytes = await image.readAsBytes();
+        if (pickedImage == null) return;
+
+        // Compression Step
+        File imageFile = File(pickedImage.path); // Convert XFile to File
+        Uint8List compressedImageBytes = await compressFile(imageFile);
 
         final imagePath = '$currentUserId/profile.png';
 
-        await supabase.storage
-            .from(widget.bucket)
-            .remove([imagePath]).whenComplete(() => print('removed'));
+        await supabase.storage.from(widget.bucket).remove([imagePath]);
 
         await supabase.storage
             .from(widget.bucket)
-            .uploadBinary(imagePath, imageBytes)
+            .uploadBinary(imagePath, compressedImageBytes)
             .whenComplete(() async {
           final url = await supabase.storage
               .from(widget.bucket)
@@ -192,5 +198,13 @@ class _AvaterImageEditorState extends State<AvaterImageEditor> {
         });
       },
     );
+  }
+
+  Future<Uint8List> compressFile(File file) async {
+    var result = await FlutterImageCompress.compressWithFile(
+      file.absolute.path,
+      quality: 25, // Adjust quality as needed
+    );
+    return result!;
   }
 }

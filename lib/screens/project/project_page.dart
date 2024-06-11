@@ -10,7 +10,7 @@ import 'package:stay_indie/screens/project/story_screen.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
-  static String id = 'projects';
+  static String id = '/myprojects';
 
   @override
   State<ProjectsPage> createState() => _ProjectsPageState();

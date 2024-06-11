@@ -31,7 +31,7 @@ class JourneyHeadline extends StatelessWidget {
                 radius: 20.0, // or the size you want
                 backgroundColor: kPrimaryColour20,
                 child: CircleAvatar(
-                  backgroundColor: journey.emojiBgColor,
+                  backgroundColor: kPrimaryColour30,
                   radius: 19.0, // slightly smaller to create a border effect
                   // backgroundImage: AssetImage('assets/amazon.png'),
                   child: Center(

@@ -5,7 +5,11 @@ import 'package:stay_indie/constants.dart';
 import 'package:stay_indie/models/Profile.dart';
 import 'package:stay_indie/screens/archive/ConnectionsScreen.dart';
 import 'package:stay_indie/screens/chat/chat_page.dart';
+import 'package:stay_indie/screens/journeys/journey_page.dart';
 import 'package:stay_indie/screens/profile/profile_edit_page.dart';
+
+import 'package:stay_indie/models/SingleFormPage.dart';
+import 'package:stay_indie/screens/templates/stepper_form.dart';
 
 import 'package:stay_indie/screens/welcome/IndustryScreen.dart';
 import 'package:stay_indie/screens/loginSignUpFlow/login_page.dart';
@@ -25,7 +29,7 @@ import 'package:stay_indie/screens/chat/inbox_page.dart';
 import 'package:stay_indie/screens/profile/profile_page.dart';
 import 'package:stay_indie/test_page.dart';
 import 'package:stay_indie/screens/home.dart';
-
+import 'package:stay_indie/models/Journey.dart';
 import 'package:stay_indie/screens/qr_page.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -99,7 +103,8 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           redirect: redirect,
-          path: ProjectsPage.id,
+          path: 'projects',
+          name: ProjectsPage.id,
           pageBuilder: (context, state) => NoTransitionPage(
             child: SplashScreen(),
           ),
@@ -109,6 +114,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: LoginPage.id,
       builder: (context, state) => LoginPage(),
+    ),
+    GoRoute(
+      path: ProjectsPage.id,
+      builder: (context, state) => ProjectsPage(),
     ),
     GoRoute(
       path: RegisterPage.id,
@@ -161,8 +170,18 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       redirect: redirect,
-      path: AddJourneyPage.id,
-      // builder: (context, state)
+      path: '/journey/add',
+      builder: (context, state) {
+        return StepperForm(
+            title: 'Add a Journey',
+            pages: SingleFormPage.addJourneyPage,
+            mediaBucket: 'project_medias',
+            onSubmit: (formValue) {
+              print(formValue);
+              var newJourney = Journey.fromMap(formValue);
+              Journey.addJourney(newJourney);
+            });
+      },
     ),
   ],
 );

@@ -98,12 +98,6 @@ class _ProfileCoverPageState extends State<ProfileCoverPage> {
                       )
                     : Container(),
                 SizedBox(height: 20),
-                widget.userProfile.socialMetrics != null
-                    ? SocialMetricList(
-                        socialMetrics: widget.userProfile.socialMetrics!,
-                      )
-                    : Container(),
-                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

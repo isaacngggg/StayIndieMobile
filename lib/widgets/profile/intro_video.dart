@@ -21,7 +21,7 @@ class _IntroVideoState extends State<IntroVideo> {
   void initState() {
     // TODO: implement initState
     shortsController = ShortsController(
-      startVideoMuted: false,
+      startVideoMuted: true,
       youtubeVideoSourceController: VideosSourceController.fromUrlList(
         videoIds: [
           widget.videoUrl,
@@ -36,7 +36,7 @@ class _IntroVideoState extends State<IntroVideo> {
     return SizedBox(
       height: MediaQuery.of(context).size.width * 1.778,
       child: YoutubeShortsPage(
-        initialVolume: 80,
+        initialVolume: 0,
         controller: shortsController,
         loadingWidget: null,
       ),
